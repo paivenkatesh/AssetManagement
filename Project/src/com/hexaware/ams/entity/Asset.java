@@ -1,4 +1,4 @@
-package com.hexaware.am.entity;
+package com.hexaware.ams.entity;
 
 /*
  * Author: Venkatesh Pai 

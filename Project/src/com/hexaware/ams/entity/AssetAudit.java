@@ -1,4 +1,4 @@
-package com.hexaware.am.entity;
+package com.hexaware.ams.entity;
 
 /*
 * Author: Venkatesh Pai 
@@ -84,6 +84,7 @@ public class AssetAudit {
 		return "AssetAudit [auditID=" + auditID + ", employeeID=" + employeeID + ", assetID=" + assetID
 				+ ", auditStatus=" + auditStatus + ", requestedAt=" + requestedAt + ", updatedAt=" + updatedAt + "]";
 	}
+	
 	
 	
 	
