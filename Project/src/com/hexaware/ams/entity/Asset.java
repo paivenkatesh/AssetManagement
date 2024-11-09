@@ -11,7 +11,7 @@ public class Asset {
 	
 	private int assetID;
 	private String assetName;
-	private String assetCategory;
+	private AssetCategory assetCategory;
 	private String assetModel;
 	private Date manufacturingDate;
 	private Date expiryDate;
@@ -22,7 +22,7 @@ public class Asset {
 		super();
 	}
 
-	public Asset(int assetID, String assetName, String assetCategory, String assetModel, Date manufacturingDate,
+	public Asset(int assetID, String assetName, AssetCategory assetCategory, String assetModel, Date manufacturingDate,
 			Date expiryDate, double assetValue, String status) {
 		super();
 		this.assetID = assetID;
@@ -51,11 +51,11 @@ public class Asset {
 		this.assetName = assetName;
 	}
 
-	public String getAssetCategory() {
+	public AssetCategory getAssetCategory() {
 		return assetCategory;
 	}
 
-	public void setAssetCategory(String assetCategory) {
+	public void setAssetCategory(AssetCategory assetCategory) {
 		this.assetCategory = assetCategory;
 	}
 
@@ -105,6 +105,8 @@ public class Asset {
 				+ ", assetModel=" + assetModel + ", manufacturingDate=" + manufacturingDate + ", expiryDate="
 				+ expiryDate + ", assetValue=" + assetValue + ", status=" + status + "]";
 	}
+
+	
 	
 	
 	

@@ -14,7 +14,7 @@ public class ServiceRequest {
 	private int employeeID;
 	private int assetID;
 	private String description;
-	private String issueType;
+	private IssueType issueType;
 	private String status;
 	private Time requestedAt;
 	
@@ -22,7 +22,7 @@ public class ServiceRequest {
 		super();
 	}
 
-	public ServiceRequest(int serviceRequestID, int employeeID, int assetID, String description, String issueType,
+	public ServiceRequest(int serviceRequestID, int employeeID, int assetID, String description, IssueType issueType,
 			String status, Time requestedAt) {
 		super();
 		this.serviceRequestID = serviceRequestID;
@@ -66,11 +66,11 @@ public class ServiceRequest {
 		this.description = description;
 	}
 
-	public String getIssueType() {
+	public IssueType getIssueType() {
 		return issueType;
 	}
 
-	public void setIssueType(String issueType) {
+	public void setIssueType(IssueType issueType) {
 		this.issueType = issueType;
 	}
 
@@ -96,6 +96,8 @@ public class ServiceRequest {
 				+ assetID + ", description=" + description + ", issueType=" + issueType + ", status=" + status
 				+ ", requestedAt=" + requestedAt + "]";
 	}
+
+	
 	
 	
 	

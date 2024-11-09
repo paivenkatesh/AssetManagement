@@ -11,18 +11,18 @@ public class Employee {
 	private int employeeID;
 	private String name;
 	private String gender;
-	private Double contactNumber;
+	private String contactNumber;
 	private String address;
 	private String email;
 	private String password;
-	private String role;
+	private Role role;
 	
 	public Employee() {
 		super();
 	}
 
-	public Employee(int employeeID, String name, String gender, Double contactNumber, String address, String email,
-			String password, String role) {
+	public Employee(int employeeID, String name, String gender, String contactNumber, String address, String email,
+			String password, Role role) {
 		super();
 		this.employeeID = employeeID;
 		this.name = name;
@@ -58,11 +58,11 @@ public class Employee {
 		this.gender = gender;
 	}
 
-	public Double getContactNumber() {
+	public String getContactNumber() {
 		return contactNumber;
 	}
 
-	public void setContactNumber(Double contactNumber) {
+	public void setContactNumber(String contactNumber) {
 		this.contactNumber = contactNumber;
 	}
 
@@ -90,11 +90,11 @@ public class Employee {
 		this.password = password;
 	}
 
-	public String getRole() {
+	public Role getRole() {
 		return role;
 	}
 
-	public void setRole(String role) {
+	public void setRole(Role role) {
 		this.role = role;
 	}
 
@@ -104,6 +104,8 @@ public class Employee {
 				+ contactNumber + ", address=" + address + ", email=" + email + ", password=" + password + ", role="
 				+ role + "]";
 	}
+
+	
 	
 	
 	
