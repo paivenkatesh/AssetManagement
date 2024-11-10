@@ -7,20 +7,20 @@ import com.hexaware.ams.entity.Asset;
 public class AssetServiceImp implements IAssetService {
 
 	@Override
-	public void addAsset(Asset asset) {
-		// TODO Auto-generated method stub
+	public int addAsset(Asset asset) {
+		return 0;
 
 	}
 
 	@Override
-	public void updateAsset(Asset asset) {
-		// TODO Auto-generated method stub
+	public int updateAsset(Asset asset) {
+		return 0;
 
 	}
 
 	@Override
-	public void deleteAsset(int assetId) {
-		// TODO Auto-generated method stub
+	public int deleteAsset(int assetId) {
+		return 0;
 
 	}
 

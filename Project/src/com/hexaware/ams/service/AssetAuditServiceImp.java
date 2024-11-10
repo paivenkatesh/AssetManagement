@@ -7,14 +7,14 @@ import com.hexaware.ams.entity.AssetAudit;
 public class AssetAuditServiceImp implements IAssetAuditService {
 
 	@Override
-	public void createAuditRequest(int assetId, int employeeId) {
-		// TODO Auto-generated method stub
+	public int createAuditRequest(int assetId, int employeeId) {
+		return 0;
 
 	}
 
 	@Override
-	public void updateAuditStatus(int auditId, String status) {
-		// TODO Auto-generated method stub
+	public int updateAuditStatus(int auditId, String status) {
+		return 0;
 
 	}
 
