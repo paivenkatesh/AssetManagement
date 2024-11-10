@@ -15,14 +15,14 @@ public class Employee {
 	private String address;
 	private String email;
 	private String password;
-	private String role;
+	private Role role;
 	
 	public Employee() {
 		super();
 	}
 
 	public Employee(int employeeID, String name, String gender, Double contactNumber, String address, String email,
-			String password, String role) {
+			String password, Role role) {
 		super();
 		this.employeeID = employeeID;
 		this.name = name;
@@ -90,11 +90,11 @@ public class Employee {
 		this.password = password;
 	}
 
-	public String getRole() {
+	public Role getRole() {
 		return role;
 	}
 
-	public void setRole(String role) {
+	public void setRole(Role role) {
 		this.role = role;
 	}
 
