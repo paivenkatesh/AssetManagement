@@ -7,85 +7,88 @@ package com.hexaware.ams.entity;
  */
 
 import java.sql.Time;
+import java.util.Date;
 
 public class AssetBorrowing {
-	
-	private int borrowingID;
-	private int employeeID;
-	private int assetID;
-	private Time borrowedAt;
-	private Time returnedAt;
-	private String status;
-	
+
+	private int borrowingId;
+	private Employee employee;
+	private Asset asset;
+	private Date borrowedAt;
+	private Date returnedAt;
+	private Status status;
+
 	public AssetBorrowing() {
 		super();
 	}
 
-	public AssetBorrowing(int borrowingID, int employeeID, int assetID, Time borrowedAt, Time returnedAt,
-			String status) {
+	public AssetBorrowing(int borrowingId, Employee employee, Asset asset, Date borrowedAt, Date returnedAt,
+			Status status) {
 		super();
-		this.borrowingID = borrowingID;
-		this.employeeID = employeeID;
-		this.assetID = assetID;
+		this.borrowingId = borrowingId;
+		this.employee = employee;
+		this.asset = asset;
 		this.borrowedAt = borrowedAt;
 		this.returnedAt = returnedAt;
 		this.status = status;
 	}
 
-	public int getBorrowingID() {
-		return borrowingID;
+	public int getBorrowingId() {
+		return borrowingId;
 	}
 
-	public void setBorrowingID(int borrowingID) {
-		this.borrowingID = borrowingID;
+	public void setBorrowingId(int borrowingId) {
+		this.borrowingId = borrowingId;
 	}
 
-	public int getEmployeeID() {
-		return employeeID;
+	public Employee getEmployee() {
+		return employee;
 	}
 
-	public void setEmployeeID(int employeeID) {
-		this.employeeID = employeeID;
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 
-	public int getAssetID() {
-		return assetID;
+	public Asset getAsset() {
+		return asset;
 	}
 
-	public void setAssetID(int assetID) {
-		this.assetID = assetID;
+	public void setAsset(Asset asset) {
+		this.asset = asset;
 	}
 
-	public Time getBorrowedAt() {
+	public Date getBorrowedAt() {
 		return borrowedAt;
 	}
 
-	public void setBorrowedAt(Time borrowedAt) {
+	public void setBorrowedAt(Date borrowedAt) {
 		this.borrowedAt = borrowedAt;
 	}
 
-	public Time getReturnedAt() {
+	public Date getReturnedAt() {
 		return returnedAt;
 	}
 
-	public void setReturnedAt(Time returnedAt) {
+	public void setReturnedAt(Date returnedAt) {
 		this.returnedAt = returnedAt;
 	}
 
-	public String getStatus() {
+	public Status getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(Status status) {
 		this.status = status;
 	}
 
 	@Override
 	public String toString() {
-		return "AssetBorrowing [borrowingID=" + borrowingID + ", employeeID=" + employeeID + ", assetID=" + assetID
+		return "AssetBorrowing [borrowingId=" + borrowingId + ", employee=" + employee + ", asset=" + asset
 				+ ", borrowedAt=" + borrowedAt + ", returnedAt=" + returnedAt + ", status=" + status + "]";
 	}
-	
-	
+
+	public enum Status {
+		Active, Returned
+	}
 
 }

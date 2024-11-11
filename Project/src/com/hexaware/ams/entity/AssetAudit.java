@@ -10,83 +10,130 @@ import java.sql.Time;
 
 public class AssetAudit {
 	
-	private int auditID;
-	private int employeeID;
-	private int assetID;
-	private String auditStatus;
-	private Time requestedAt;
-	private Time updatedAt;
+	private int auditId;
+	private Employee employee;
+	private Asset asset;
+	private AuditStatus auditStatus;
+	private Date requestedAt;
+	private Date updaedAt;
+	
+	
 	
 	public AssetAudit() {
 		super();
 	}
 
-	public AssetAudit(int auditID, int employeeID, int assetID, String auditStatus, Time requestedAt, Time updatedAt) {
+
+	
+
+	public AssetAudit(int auditId, Employee employee, Asset asset, AuditStatus auditStatus, Date requestedAt,
+			Date updaedAt) {
 		super();
-		this.auditID = auditID;
-		this.employeeID = employeeID;
-		this.assetID = assetID;
+		this.auditId = auditId;
+		this.employee = employee;
+		this.asset = asset;
 		this.auditStatus = auditStatus;
 		this.requestedAt = requestedAt;
-		this.updatedAt = updatedAt;
+		this.updaedAt = updaedAt;
 	}
 
-	public int getAuditID() {
-		return auditID;
+
+
+
+	public int getAuditId() {
+		return auditId;
 	}
 
-	public void setAuditID(int auditID) {
-		this.auditID = auditID;
+
+
+
+	public void setAuditId(int auditId) {
+		this.auditId = auditId;
 	}
 
-	public int getEmployeeID() {
-		return employeeID;
+
+
+
+	public Employee getEmployee() {
+		return employee;
 	}
 
-	public void setEmployeeID(int employeeID) {
-		this.employeeID = employeeID;
+
+
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 
-	public int getAssetID() {
-		return assetID;
+
+
+
+	public Asset getAsset() {
+		return asset;
 	}
 
-	public void setAssetID(int assetID) {
-		this.assetID = assetID;
+
+
+
+	public void setAsset(Asset asset) {
+		this.asset = asset;
 	}
 
-	public String getAuditStatus() {
+
+
+
+	public AuditStatus getAuditStatus() {
 		return auditStatus;
 	}
 
-	public void setAuditStatus(String auditStatus) {
+
+
+
+	public void setAuditStatus(AuditStatus auditStatus) {
 		this.auditStatus = auditStatus;
 	}
 
-	public Time getRequestedAt() {
+
+
+
+	public Date getRequestedAt() {
 		return requestedAt;
 	}
 
-	public void setRequestedAt(Time requestedAt) {
+
+
+
+	public void setRequestedAt(Date requestedAt) {
 		this.requestedAt = requestedAt;
 	}
 
-	public Time getUpdatedAt() {
-		return updatedAt;
+
+
+
+	public Date getUpdaedAt() {
+		return updaedAt;
 	}
 
-	public void setUpdatedAt(Time updatedAt) {
-		this.updatedAt = updatedAt;
+
+
+
+	public void setUpdaedAt(Date updaedAt) {
+		this.updaedAt = updaedAt;
 	}
+
+
+
 
 	@Override
 	public String toString() {
-		return "AssetAudit [auditID=" + auditID + ", employeeID=" + employeeID + ", assetID=" + assetID
-				+ ", auditStatus=" + auditStatus + ", requestedAt=" + requestedAt + ", updatedAt=" + updatedAt + "]";
+		return "AssetAudit [auditId=" + auditId + ", employee=" + employee + ", asset=" + asset + ", auditStatus="
+				+ auditStatus + ", requestedAt=" + requestedAt + ", updaedAt=" + updaedAt + "]";
 	}
-	
-	
-	
-	
 
+
+
+
+	public enum AuditStatus{
+		Pending, Verified, Rejected
+	}
 }

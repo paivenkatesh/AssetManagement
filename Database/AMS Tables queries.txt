@@ -63,3 +63,57 @@
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
+
+8. CREATE TABLE `asset_management`.`role` (
+  `role_id` INT NOT NULL AUTO_INCREMENT,
+  `role_name` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`role_id`),
+  UNIQUE INDEX `role_name_UNIQUE` (`role_name` ASC) VISIBLE);
+
+9.ALTER TABLE `asset_management`.`employee` 
+DROP COLUMN `role`,
+ADD COLUMN `role_id` INT NOT NULL AFTER `password`,
+ADD INDEX `role_id_idx` (`role_id` ASC) VISIBLE;
+;
+ALTER TABLE `asset_management`.`employee` 
+ADD CONSTRAINT `role_id`
+  FOREIGN KEY (`role_id`)
+  REFERENCES `asset_management`.`role` (`role_id`)
+  ON DELETE RESTRICT
+  ON UPDATE CASCADE;
+
+10. CREATE TABLE `asset_management`.`asset_category` (
+  `category_id` INT NOT NULL AUTO_INCREMENT,
+  `category_name` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`category_id`),
+  UNIQUE INDEX `category_name_UNIQUE` (`category_name` ASC) VISIBLE);
+
+11. ALTER TABLE `asset_management`.`asset` 
+CHANGE COLUMN `asset_category` `category_id` INT NOT NULL ,
+ADD INDEX `category_id_idx` (`category_id` ASC) VISIBLE;
+;
+ALTER TABLE `asset_management`.`asset` 
+ADD CONSTRAINT `category_id`
+  FOREIGN KEY (`category_id`)
+  REFERENCES `asset_management`.`asset_category` (`category_id`)
+  ON DELETE RESTRICT
+  ON UPDATE CASCADE;
+
+12. CREATE TABLE `asset_management`.`issue_type` (
+  `issue_type_id` INT NOT NULL AUTO_INCREMENT,
+  `issue_type_name` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`issue_type_id`),
+  UNIQUE INDEX `issue_type_name_UNIQUE` (`issue_type_name` ASC) VISIBLE);
+
+13. ALTER TABLE `asset_management`.`service_request` 
+CHANGE COLUMN `issue_type` `issue_type_id` INT NOT NULL ,
+ADD INDEX `issue_type_id_idx` (`issue_type_id` ASC) VISIBLE;
+;
+ALTER TABLE `asset_management`.`service_request` 
+ADD CONSTRAINT `issue_type_id`
+  FOREIGN KEY (`issue_type_id`)
+  REFERENCES `asset_management`.`issue_type` (`issue_type_id`)
+  ON DELETE RESTRICT
+  ON UPDATE CASCADE;
+
+14. 

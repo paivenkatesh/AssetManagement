@@ -7,55 +7,56 @@ package com.hexaware.ams.entity;
  */
 
 import java.sql.Time;
+import java.util.Date;
 
 public class ServiceRequest {
-	
-	private int serviceRequestID;
-	private int employeeID;
-	private int assetID;
+
+	private int serviceRequestId;
+	private Employee employee;
+	private Asset asset;
 	private String description;
-	private String issueType;
-	private String status;
-	private Time requestedAt;
-	
+	private IssueType issueType;
+	private Status status;
+	private Date requestedAt;
+
 	public ServiceRequest() {
 		super();
 	}
 
-	public ServiceRequest(int serviceRequestID, int employeeID, int assetID, String description, String issueType,
-			String status, Time requestedAt) {
+	public ServiceRequest(int serviceRequestId, Employee employee, Asset asset, String description, IssueType issueType,
+			Status status, Date requestedAt) {
 		super();
-		this.serviceRequestID = serviceRequestID;
-		this.employeeID = employeeID;
-		this.assetID = assetID;
+		this.serviceRequestId = serviceRequestId;
+		this.employee = employee;
+		this.asset = asset;
 		this.description = description;
 		this.issueType = issueType;
 		this.status = status;
 		this.requestedAt = requestedAt;
 	}
 
-	public int getServiceRequestID() {
-		return serviceRequestID;
+	public int getServiceRequestId() {
+		return serviceRequestId;
 	}
 
-	public void setServiceRequestID(int serviceRequestID) {
-		this.serviceRequestID = serviceRequestID;
+	public void setServiceRequestId(int serviceRequestId) {
+		this.serviceRequestId = serviceRequestId;
 	}
 
-	public int getEmployeeID() {
-		return employeeID;
+	public Employee getEmployee() {
+		return employee;
 	}
 
-	public void setEmployeeID(int employeeID) {
-		this.employeeID = employeeID;
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 
-	public int getAssetID() {
-		return assetID;
+	public Asset getAsset() {
+		return asset;
 	}
 
-	public void setAssetID(int assetID) {
-		this.assetID = assetID;
+	public void setAsset(Asset asset) {
+		this.asset = asset;
 	}
 
 	public String getDescription() {
@@ -66,38 +67,39 @@ public class ServiceRequest {
 		this.description = description;
 	}
 
-	public String getIssueType() {
+	public IssueType getIssueType() {
 		return issueType;
 	}
 
-	public void setIssueType(String issueType) {
+	public void setIssueType(IssueType issueType) {
 		this.issueType = issueType;
 	}
 
-	public String getStatus() {
+	public Status getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(Status status) {
 		this.status = status;
 	}
 
-	public Time getRequestedAt() {
+	public Date getRequestedAt() {
 		return requestedAt;
 	}
 
-	public void setRequestedAt(Time requestedAt) {
+	public void setRequestedAt(Date requestedAt) {
 		this.requestedAt = requestedAt;
 	}
 
 	@Override
 	public String toString() {
-		return "ServiceRequest [serviceRequestID=" + serviceRequestID + ", employeeID=" + employeeID + ", assetID="
-				+ assetID + ", description=" + description + ", issueType=" + issueType + ", status=" + status
-				+ ", requestedAt=" + requestedAt + "]";
+		return "ServiceRequest [serviceRequestId=" + serviceRequestId + ", employee=" + employee + ", asset=" + asset
+				+ ", description=" + description + ", issueType=" + issueType + ", status=" + status + ", requestedAt="
+				+ requestedAt + "]";
 	}
-	
-	
-	
+
+	public enum Status {
+		Pending, Inprogress, Completed
+	}
 
 }
