@@ -1,5 +1,9 @@
 package com.hexaware.ams.entity;
-
+/*
+ * Author: Venkatesh Pai
+ * Date: 9-11-2024
+ * Entity Classes
+ */
 public class Role {
 	
 	private int roleId;

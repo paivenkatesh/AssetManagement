@@ -1,5 +1,9 @@
 package com.hexaware.ams.entity;
-
+/*
+ * Author: Arghya Mandal
+ * Date: 9-11-2024
+ * Entity classes created
+ */
 public class AssetCategory {
 
 	private int categoryId;

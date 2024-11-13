@@ -1,10 +1,10 @@
 package com.hexaware.ams.entity;
 
 /*
-* Author: Venkatesh Pai 
-* Date: 31-10-2024
-* Entity classes created
-*/
+ * Author: Arghya Mandal
+ * Date: 31-10-2024
+ * Entity classes created
+ */
 import java.util.*;
 import java.sql.Time;
 
