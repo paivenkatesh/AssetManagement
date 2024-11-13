@@ -1,7 +1,7 @@
 package com.hexaware.ams.entity;
 
 /*
- * Author: Venkatesh Pai 
+ * Author: Arghya Mandal
  * Date: 31-10-2024
  * Entity classes created
  */
