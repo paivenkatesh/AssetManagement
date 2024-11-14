@@ -12,42 +12,43 @@ import com.hexaware.ams.repository.IEmployeeRepository;
 public class EmployeeServiceImp implements IEmployeeService {
 
 	@Autowired
-	IEmployeeRepository repo;
+	IEmployeeRepository employeeRepository;
 	
 	@Override
 	public Employee registerEmployee(Employee employee) {
 		
-		return repo.save(employee);
+		return employeeRepository.save(employee);
 	}
 
 	@Override
 	public Employee getEmployeeById(int employeeId) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return employeeRepository.findById(employeeId).orElse(new Employee());
 	}
 
 	@Override
-	public Employee updateEmployee(int employeeId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Employee updateEmployee(Employee employee) {
+		
+		return employeeRepository.save(employee);
 	}
 
 	@Override
 	public void deleteEmployee(int employeeId) {
-		// TODO Auto-generated method stub
+		
+		employeeRepository.deleteById(employeeId);
 
 	}
 
 	@Override
 	public List<Employee> getAllEmployee() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return employeeRepository.findAll();
 	}
 
 	@Override
-	public Employee authenticate(String email, String password) {
-		// TODO Auto-generated method stub
-		return null;
+	public int findEmailandPassword(String email, String password) {
+		
+		return employeeRepository.findByEmailAndPassword(email, password);
 	}
 
 }
