@@ -8,4 +8,5 @@ import com.hexaware.ams.entity.Employee;
 @Repository
 public interface IEmployeeRepository extends JpaRepository<Employee, Integer> {
 
+	int findByEmailAndPassword(String email, String password);
 }

@@ -8,9 +8,9 @@ public interface IEmployeeService {
 	
 	Employee registerEmployee(Employee employee);
 	Employee getEmployeeById(int employeeId);
-	Employee updateEmployee(int employeeId);
+	Employee updateEmployee(Employee employee);
 	void deleteEmployee(int employeeId);
 	List<Employee> getAllEmployee();
-	Employee authenticate(String email, String password);
+	int findEmailandPassword(String email, String password);
 
 }
