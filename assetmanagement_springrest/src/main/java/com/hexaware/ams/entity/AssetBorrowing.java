@@ -1,26 +1,61 @@
 package com.hexaware.ams.entity;
+// Author: Arghya Mandal
+import java.time.LocalDateTime;
 
-import java.sql.Time;
-import java.util.Date;
-
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+
 @Entity
+@Table(name = "asset_borrowing")
 public class AssetBorrowing {
-	@Id
-	private int borrowingId;
-	private Employee employee;
-	private Asset asset;
-	private Date borrowedAt;
-	private Date returnedAt;
-	private Status status;
+
+    public enum Status {
+        Active,
+        Returned
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int borrowingId;
+
+    @NotNull(message = "Employee cannot be null")
+    @ManyToOne
+    @JoinColumn(name = "employee_id", nullable = false)
+    private Employee employee;
+
+    @NotNull(message = "Asset cannot be null")
+    @ManyToOne
+    @JoinColumn(name = "asset_id", nullable = false)
+    private Asset asset;
+
+    @NotNull
+    @Column(name = "borrowed_at", nullable = false)
+    private LocalDateTime borrowedAt = LocalDateTime.now();
+
+    @Column(name = "returned_at")
+    private LocalDateTime returnedAt;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Status status = Status.Active;
 
 	public AssetBorrowing() {
 		super();
 	}
 
-	public AssetBorrowing(int borrowingId, Employee employee, Asset asset, Date borrowedAt, Date returnedAt,
-			Status status) {
+	public AssetBorrowing(int borrowingId, @NotNull(message = "Employee cannot be null") Employee employee,
+			@NotNull(message = "Asset cannot be null") Asset asset, @NotNull LocalDateTime borrowedAt,
+			LocalDateTime returnedAt, @NotNull Status status) {
 		super();
 		this.borrowingId = borrowingId;
 		this.employee = employee;
@@ -54,19 +89,19 @@ public class AssetBorrowing {
 		this.asset = asset;
 	}
 
-	public Date getBorrowedAt() {
+	public LocalDateTime getBorrowedAt() {
 		return borrowedAt;
 	}
 
-	public void setBorrowedAt(Date borrowedAt) {
+	public void setBorrowedAt(LocalDateTime borrowedAt) {
 		this.borrowedAt = borrowedAt;
 	}
 
-	public Date getReturnedAt() {
+	public LocalDateTime getReturnedAt() {
 		return returnedAt;
 	}
 
-	public void setReturnedAt(Date returnedAt) {
+	public void setReturnedAt(LocalDateTime returnedAt) {
 		this.returnedAt = returnedAt;
 	}
 
@@ -84,8 +119,5 @@ public class AssetBorrowing {
 				+ ", borrowedAt=" + borrowedAt + ", returnedAt=" + returnedAt + ", status=" + status + "]";
 	}
 
-	public enum Status {
-		Active, Returned
-	}
-
+    
 }
