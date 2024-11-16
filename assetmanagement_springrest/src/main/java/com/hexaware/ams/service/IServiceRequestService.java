@@ -8,7 +8,7 @@ public interface IServiceRequestService {
 
 	ServiceRequest createServiceRequest(ServiceRequest serviceRequest);
 	ServiceRequest getServiceRequestById(int serviceRequestId);
-	ServiceRequest updateServiceRequest(ServiceRequest serviceRequest);
+	ServiceRequest updateServiceRequestStatus(int serviceRequestId, ServiceRequest.Status status);
 	List<ServiceRequest> getServiceRequestsByEmployee(int employeeId);
 	List<ServiceRequest> getAllServiceRequests();
 	List<ServiceRequest> findByStatus(String status);

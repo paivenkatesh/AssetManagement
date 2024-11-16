@@ -1,33 +1,66 @@
 package com.hexaware.ams.entity;
 
+/*
+ * @Author: Venkatesh Pai
+ * Employee Entity 
+ */
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "employee")
 public class Employee {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int employeeId;
 
+	@Column(nullable = false)
+	@NotNull(message = "Name cannot be null")
+	@Size(min = 2, max = 100, message = "Name must be between 2 and 100 characters")
 	private String name;
+	
+	@NotNull(message = "Choose from Male, Female or Other")
+	@Column(nullable = false)
+	@Enumerated(EnumType.STRING)
 	private Gender gender;
 
+	@NotNull(message = "Contact number cannot be null")
+	@Size(min = 7, max = 15, message = "Contact number must be between 7 and 15 characters")
+	@Column(name = "contact_number", nullable = false)
 	private String contactNumber;
+	
+	@NotNull(message = "Address cannot be null")
+	@Size(min = 3, max = 255, message = "Address must be between 3 and 255 characters")
+	@Column(nullable = false)
 	private String address;
 
-	@Column(unique = true, nullable = false)
+	@NotNull(message = "Email cannot be null")
+    @Email(message = "Email should be valid")
+    @Column(nullable = false, unique = true)
 	private String email;
 	
+	
+	@NotNull(message = "Password cannot be null")
+    @Size(min = 6, message = "Password must be at least 6 characters")
 	@Column(nullable = false)
 	private String password;
 
+	
+    @NotNull(message = "Role cannot be null")
 	@ManyToOne
-	@JoinColumn(name = "roleId", nullable = false)
+	@JoinColumn(name = "role_Id", nullable = false)
 	private Role role;
 
 	public Employee() {

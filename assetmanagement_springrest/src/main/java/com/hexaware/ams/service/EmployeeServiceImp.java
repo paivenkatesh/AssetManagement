@@ -46,9 +46,15 @@ public class EmployeeServiceImp implements IEmployeeService {
 	}
 
 	@Override
-	public int findEmailandPassword(String email, String password) {
+	public int findByEmailandPassword(String email, String password) {
 		
 		return employeeRepository.findByEmailAndPassword(email, password);
+	}
+
+	@Override
+	public boolean existsByEmail(String email) {
+		
+		return employeeRepository.existsByEmail(email);
 	}
 
 }

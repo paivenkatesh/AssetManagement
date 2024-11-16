@@ -9,7 +9,7 @@ import com.hexaware.ams.entity.ServiceRequest;
 import com.hexaware.ams.repository.IServiceRequestRepository;
 
 @Service
-public class ServiceRequestImp implements IServiceRequestService {
+public class ServiceRequestServiceImp implements IServiceRequestService {
 
 	@Autowired
 	private IServiceRequestRepository serviceRequestRepository;
@@ -27,7 +27,11 @@ public class ServiceRequestImp implements IServiceRequestService {
 	}
 
 	@Override
-	public ServiceRequest updateServiceRequest(ServiceRequest serviceRequest) {
+	public ServiceRequest updateServiceRequestStatus(int serviceRequestId, ServiceRequest.Status status) {
+		
+		ServiceRequest serviceRequest = serviceRequestRepository.findById(serviceRequestId).orElse(null);
+		
+		serviceRequest.setStatus(status);
 		
 		return serviceRequestRepository.save(serviceRequest);
 	}
