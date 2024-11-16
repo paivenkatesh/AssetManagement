@@ -11,6 +11,7 @@ public interface IEmployeeService {
 	Employee updateEmployee(Employee employee);
 	void deleteEmployee(int employeeId);
 	List<Employee> getAllEmployee();
-	int findEmailandPassword(String email, String password);
+	int findByEmailandPassword(String email, String password);
+	boolean existsByEmail(String email);
 
 }

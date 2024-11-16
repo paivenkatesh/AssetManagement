@@ -1,18 +1,29 @@
 package com.hexaware.ams.entity;
 
+/*
+ * @Author: Venkatesh Pai
+ * Role Entity
+ */
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name="role")
 public class Role {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int roleId;
 	
-	@Column(unique = true, nullable = false)
+	@Column(name = "role_name", unique = true, nullable = false)
+	@NotNull(message = "Role name cannot be null")
+	@Size(min = 2, max = 50, message = "Role name must be between 2 and 50 charachters")
 	private String roleName;
 	
 	

@@ -1,10 +1,9 @@
-/* 
- * Need to implement the asset attribute once 
- * merged with master
- */
-
 package com.hexaware.ams.entity;
 
+/*
+ * @Author: Venkatesh Pai
+ * Service Request Entity
+ */
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -17,37 +16,47 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "service_request")
 public class ServiceRequest {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private int serviceRequestId;
 
+	@NotNull(message = "Employee cannot be null")
     @ManyToOne
     @JoinColumn(name = "employee_id", nullable = false)
     private Employee employee;
 
-    /*
+	
+	
+	@NotNull(message = "Asset cannot be null")
     @ManyToOne
-    @JoinColumn(name = "asset_id", nullable = false)
+    @JoinColumn(name = "asset_id")
     private Asset asset;
-    */
+    
 
-    @Column(nullable = false)
+	@NotNull(message = "Description cannot be null")
+    @Size(min = 5, message = "Description must be at least 5 characters")
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String description;
 
     @ManyToOne
     @JoinColumn(name = "issue_type_id", nullable = false)
     private IssueType issueType;
 
-    @Enumerated(EnumType.STRING)
-    private Status status;
-
     
+    @NotNull(message = "Status cannot be null")
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Status status = Status.Pending;
+
+    @NotNull(message = "Status cannot be null")
+    @Column(name = "requested_at", nullable = false)
     private Date requestedAt;
 
 	public ServiceRequest() {
