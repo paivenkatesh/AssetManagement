@@ -6,55 +6,112 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hexaware.ams.entity.Employee;
+import com.hexaware.ams.exception.BadRequestException;
+import com.hexaware.ams.exception.MethodArgumentNotValidException;
+import com.hexaware.ams.exception.ResourceAlreadyExistsException;
+import com.hexaware.ams.exception.ResourceNotFoundException;
 import com.hexaware.ams.repository.IEmployeeRepository;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class EmployeeServiceImp implements IEmployeeService {
 
 	@Autowired
 	IEmployeeRepository employeeRepository;
-	
+
 	@Override
+	@Transactional
 	public Employee registerEmployee(Employee employee) {
-		
+
+		if (employeeRepository.existsById(employee.getEmployeeId())) {
+
+			throw new ResourceAlreadyExistsException("Id" + employee.getEmployeeId() + " already exists ");
+
+		}
+
 		return employeeRepository.save(employee);
+
 	}
 
 	@Override
 	public Employee getEmployeeById(int employeeId) {
-		
-		return employeeRepository.findById(employeeId).orElse(new Employee());
+
+		return employeeRepository.findById(employeeId)
+				.orElseThrow(() -> new ResourceNotFoundException("Employee not found with id: " + employeeId));
 	}
 
 	@Override
+	@Transactional
 	public Employee updateEmployee(Employee employee) {
-		
-		return employeeRepository.save(employee);
+
+		Employee existingEmployee = employeeRepository.findById(employee.getEmployeeId())
+				.orElseThrow(() -> new ResourceNotFoundException("Employee not found with id: " + employee.getEmployeeId()));
+
+		try {
+			return employeeRepository.save(existingEmployee);
+
+		} catch (Exception e) {
+
+			throw new BadRequestException("Failed to update Employee:" + e.getMessage());
+		}
+
 	}
 
 	@Override
+	@Transactional
 	public void deleteEmployee(int employeeId) {
-		
-		employeeRepository.deleteById(employeeId);
+
+		try {
+
+			employeeRepository.deleteById(employeeId);
+
+		} catch (Exception e) {
+
+			throw new BadRequestException("Failed to delete Employee: " + e.getMessage());
+		}
 
 	}
 
 	@Override
 	public List<Employee> getAllEmployee() {
-		
-		return employeeRepository.findAll();
+
+		List<Employee> employee = employeeRepository.findAll();
+
+		if (employee.isEmpty()) {
+
+			throw new ResourceNotFoundException("No Employee List exists ");
+		}
+
+		return employee;
 	}
 
 	@Override
 	public int findByEmailandPassword(String email, String password) {
-		
-		return employeeRepository.findByEmailAndPassword(email, password);
+
+		try {
+
+			return employeeRepository.findByEmailAndPassword(email, password);
+
+		} catch (Exception e) {
+
+			throw new ResourceNotFoundException("Entered email and password does not exist" + email + password);
+		}
+
 	}
 
 	@Override
 	public boolean existsByEmail(String email) {
-		
-		return employeeRepository.existsByEmail(email);
+
+		try {
+
+			return employeeRepository.existsByEmail(email);
+
+		} catch (Exception e) {
+
+			throw new ResourceNotFoundException("Employee with email: " + email + "does not exist ");
+		}
+
 	}
 
 }

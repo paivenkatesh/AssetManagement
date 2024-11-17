@@ -89,6 +89,16 @@ public class ServiceRequest {
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
+	
+	
+
+	public Asset getAsset() {
+		return asset;
+	}
+
+	public void setAsset(Asset asset) {
+		this.asset = asset;
+	}
 
 	public String getDescription() {
 		return description;
@@ -124,9 +134,9 @@ public class ServiceRequest {
 
 	@Override
 	public String toString() {
-		return "ServiceRequest [serviceRequestId=" + serviceRequestId + ", employee=" + employee + ", description="
-				+ description + ", issueType=" + issueType + ", status=" + status + ", requestedAt=" + requestedAt
-				+ "]";
+		return "ServiceRequest [serviceRequestId=" + serviceRequestId + ", employee=" + employee + ", asset=" + asset
+				+ ", description=" + description + ", issueType=" + issueType + ", status=" + status + ", requestedAt="
+				+ requestedAt + "]";
 	}
     
     public enum Status {
