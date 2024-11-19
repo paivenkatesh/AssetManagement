@@ -1,6 +1,5 @@
 package com.hexaware.ams.entity;
 // Author: Arghya Mandal
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import jakarta.persistence.Column;
@@ -13,7 +12,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
@@ -55,108 +53,106 @@ public class Asset {
     private LocalDate expiryDate;
 
     @NotNull(message = "Asset value cannot be null")
-    @DecimalMin(value = "0.0", inclusive = false, message = "Asset value must be positive")
     @Column(name = "asset_value", nullable = false)
-    private BigDecimal assetValue;
+    private double assetValue;  
 
     @NotNull(message = "Status cannot be null")
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Status status = Status.Available;
 
-	public Asset() {
-		super();
-	}
+    public Asset() {
+        super();
+    }
 
-	public Asset(int assetId,
-			@NotNull(message = "Asset name cannot be null") @Size(min = 2, max = 100, message = "Asset name must be between 2 and 100 characters") String assetName,
-			@NotNull(message = "Category cannot be null") AssetCategory category,
-			@Size(max = 50, message = "Asset model must be at most 50 characters") String assetModel,
-			@PastOrPresent(message = "Manufacturing date cannot be in the future") LocalDate manufacturingDate,
-			@Future(message = "Expiry date must be in the future") LocalDate expiryDate,
-			@NotNull(message = "Asset value cannot be null") @DecimalMin(value = "0.0", inclusive = false, message = "Asset value must be positive") BigDecimal assetValue,
-			@NotNull(message = "Status cannot be null") Status status) {
-		super();
-		this.assetId = assetId;
-		this.assetName = assetName;
-		this.category = category;
-		this.assetModel = assetModel;
-		this.manufacturingDate = manufacturingDate;
-		this.expiryDate = expiryDate;
-		this.assetValue = assetValue;
-		this.status = status;
-	}
+    public Asset(int assetId,
+                 @NotNull(message = "Asset name cannot be null") @Size(min = 2, max = 100, message = "Asset name must be between 2 and 100 characters") String assetName,
+                 @NotNull(message = "Category cannot be null") AssetCategory category,
+                 @Size(max = 50, message = "Asset model must be at most 50 characters") String assetModel,
+                 @PastOrPresent(message = "Manufacturing date cannot be in the future") LocalDate manufacturingDate,
+                 @Future(message = "Expiry date must be in the future") LocalDate expiryDate,
+                 @NotNull(message = "Asset value cannot be null") double assetValue,  
+                 @NotNull(message = "Status cannot be null") Status status) {
+        super();
+        this.assetId = assetId;
+        this.assetName = assetName;
+        this.category = category;
+        this.assetModel = assetModel;
+        this.manufacturingDate = manufacturingDate;
+        this.expiryDate = expiryDate;
+        this.assetValue = assetValue;
+        this.status = status;
+    }
 
-	public int getAssetId() {
-		return assetId;
-	}
+    public int getAssetId() {
+        return assetId;
+    }
 
-	public void setAssetId(int assetId) {
-		this.assetId = assetId;
-	}
+    public void setAssetId(int assetId) {
+        this.assetId = assetId;
+    }
 
-	public String getAssetName() {
-		return assetName;
-	}
+    public String getAssetName() {
+        return assetName;
+    }
 
-	public void setAssetName(String assetName) {
-		this.assetName = assetName;
-	}
+    public void setAssetName(String assetName) {
+        this.assetName = assetName;
+    }
 
-	public AssetCategory getCategory() {
-		return category;
-	}
+    public AssetCategory getCategory() {
+        return category;
+    }
 
-	public void setCategory(AssetCategory category) {
-		this.category = category;
-	}
+    public void setCategory(AssetCategory category) {
+        this.category = category;
+    }
 
-	public String getAssetModel() {
-		return assetModel;
-	}
+    public String getAssetModel() {
+        return assetModel;
+    }
 
-	public void setAssetModel(String assetModel) {
-		this.assetModel = assetModel;
-	}
+    public void setAssetModel(String assetModel) {
+        this.assetModel = assetModel;
+    }
 
-	public LocalDate getManufacturingDate() {
-		return manufacturingDate;
-	}
+    public LocalDate getManufacturingDate() {
+        return manufacturingDate;
+    }
 
-	public void setManufacturingDate(LocalDate manufacturingDate) {
-		this.manufacturingDate = manufacturingDate;
-	}
+    public void setManufacturingDate(LocalDate manufacturingDate) {
+        this.manufacturingDate = manufacturingDate;
+    }
 
-	public LocalDate getExpiryDate() {
-		return expiryDate;
-	}
+    public LocalDate getExpiryDate() {
+        return expiryDate;
+    }
 
-	public void setExpiryDate(LocalDate expiryDate) {
-		this.expiryDate = expiryDate;
-	}
+    public void setExpiryDate(LocalDate expiryDate) {
+        this.expiryDate = expiryDate;
+    }
 
-	public BigDecimal getAssetValue() {
-		return assetValue;
-	}
+    public double getAssetValue() {
+        return assetValue;  // Returns a double
+    }
 
-	public void setAssetValue(BigDecimal assetValue) {
-		this.assetValue = assetValue;
-	}
+    public void setAssetValue(double assetValue) {
+        this.assetValue = assetValue;  // Accepts a double
+    }
 
-	public Status getStatus() {
-		return status;
-	}
+    public Status getStatus() {
+        return status;
+    }
 
-	public void setStatus(Status status) {
-		this.status = status;
-	}
+    public void setStatus(Status status) {
+        this.status = status;
+    }
 
-	@Override
-	public String toString() {
-		return "Asset [assetId=" + assetId + ", assetName=" + assetName + ", category=" + category + ", assetModel="
-				+ assetModel + ", manufacturingDate=" + manufacturingDate + ", expiryDate=" + expiryDate
-				+ ", assetValue=" + assetValue + ", status=" + status + "]";
-	}
-
-    
+    @Override
+    public String toString() {
+        return "Asset [assetId=" + assetId + ", assetName=" + assetName + ", category=" + category + ", assetModel="
+                + assetModel + ", manufacturingDate=" + manufacturingDate + ", expiryDate=" + expiryDate
+                + ", assetValue=" + assetValue + ", status=" + status + "]";
+    }
 }
+
