@@ -55,19 +55,24 @@ public class ServiceRequest {
     @Enumerated(EnumType.STRING)
     private Status status = Status.Pending;
 
-    @NotNull(message = "Status cannot be null")
+    @NotNull(message = "Date cannot be null")
     @Column(name = "requested_at", nullable = false)
     private Date requestedAt;
+    
+    public enum Status {
+    	Pending, Inprogress, Completed
+    }
 
 	public ServiceRequest() {
 		super();
 	}
 
-	public ServiceRequest(int serviceRequestId, Employee employee, String description, IssueType issueType,
+	public ServiceRequest(int serviceRequestId, Employee employee, Asset asset, String description, IssueType issueType,
 			Status status, Date requestedAt) {
 		super();
 		this.serviceRequestId = serviceRequestId;
 		this.employee = employee;
+		this.asset = asset;
 		this.description = description;
 		this.issueType = issueType;
 		this.status = status;
@@ -139,8 +144,6 @@ public class ServiceRequest {
 				+ requestedAt + "]";
 	}
     
-    public enum Status {
-    	Pending, Inprogress, Completed
-    }
+   
     
 }

@@ -8,7 +8,7 @@ public interface IEmployeeService {
 	
 	Employee registerEmployee(Employee employee);
 	Employee getEmployeeById(int employeeId);
-	Employee updateEmployee(Employee employee);
+	Employee updateEmployee(int employeeId, Employee employeeDetails);
 	void deleteEmployee(int employeeId);
 	List<Employee> getAllEmployee();
 	int findByEmailandPassword(String email, String password);

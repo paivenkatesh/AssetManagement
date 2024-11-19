@@ -3,6 +3,8 @@ package com.hexaware.ams.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,41 +29,53 @@ public class IssueTypeController {
 	IIssueTypeService issueTypeService;
 	
 	@PostMapping("/addIssueType")
-	IssueType addIssueType(@Valid @RequestBody IssueType issueType) {
+	public ResponseEntity<IssueType> addIssueType(@Valid @RequestBody IssueType issueType) {
 		
-		return issueTypeService.addIssueType(issueType);
+		IssueType newIssueType = issueTypeService.addIssueType(issueType);
+		
+		return new ResponseEntity<>(newIssueType, HttpStatus.CREATED);
 	}
 	
 	@GetMapping("/issueTypeById/{issueTypeId}")
-	IssueType getIssueTypeById(@PathVariable int issueTypeId) {
+	public ResponseEntity<IssueType> getIssueTypeById(@PathVariable int issueTypeId) {
 		
-		return issueTypeService.getIssueTypeById(issueTypeId);
+		IssueType issueType = issueTypeService.getIssueTypeById(issueTypeId);
+		
+		return ResponseEntity.ok(issueType);
 	}
 	
 	
 	@GetMapping("/issueTypeByName/{Name}")
-	IssueType getIssueTypeByName(@PathVariable String issueTypeName) {
+	public ResponseEntity<IssueType> getIssueTypeByName(@PathVariable String issueTypeName) {
 		
-		return issueTypeService.getIssueTypeByName(issueTypeName);
+		IssueType issueTypeByName = issueTypeService.getIssueTypeByName(issueTypeName);
+		
+		return ResponseEntity.ok(issueTypeByName);
 	}
 	
 	@GetMapping("/allIssueTypes")
-	List<IssueType> getAllIssueTypes(){
+	public ResponseEntity<List<IssueType>> getAllIssueTypes(){
 		
-		return issueTypeService.getAllIssueTypes();
+		List<IssueType> issueType = issueTypeService.getAllIssueTypes();
+		
+		return ResponseEntity.ok(issueType);
 		
 	}
 	
 	@PutMapping("/updateIssueType/{issueTypeId}/{issueTypeDetails}")
-	IssueType updateIssueType(@PathVariable int issueTypeId, @Valid @RequestBody IssueType issueTypeDetails) {
+	public ResponseEntity<IssueType> updateIssueType(@PathVariable int issueTypeId, @Valid @RequestBody IssueType issueTypeDetails) {
 		
-		return issueTypeService.updateIssueType(issueTypeId, issueTypeDetails);
+		IssueType updatedIssueType = issueTypeService.updateIssueType(issueTypeId, issueTypeDetails);
+		
+		return ResponseEntity.ok(updatedIssueType);
 	}
 	
 	@DeleteMapping("/delete/{issueTypeId}")
-	void deleteIssueType(@PathVariable int issueTypeId) {
+	public ResponseEntity<Void> deleteIssueType(@PathVariable int issueTypeId) {
 		
 		issueTypeService.deleteIssueType(issueTypeId);
+		
+		return ResponseEntity.noContent().build();
 	}
 
 }
