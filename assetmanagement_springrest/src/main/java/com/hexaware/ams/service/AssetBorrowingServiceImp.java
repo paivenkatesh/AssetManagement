@@ -3,6 +3,8 @@ package com.hexaware.ams.service;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +31,7 @@ public class AssetBorrowingServiceImp implements IAssetBorrowingService {
 
     @Autowired
     private IEmployeeRepository employeeRepository;
-
+    Logger logger = LoggerFactory.getLogger(AssetBorrowingServiceImp.class);
     @Override
     public AssetBorrowing borrowAsset(int employeeId, int assetId) {
         // Getting employee
@@ -55,7 +57,7 @@ public class AssetBorrowingServiceImp implements IAssetBorrowingService {
         // Updating asset status
         asset.setStatus(Asset.Status.Borrowed);
         assetRepository.save(asset);
-
+        logger.info(asset.getAssetName() + " with id: " + asset.getAssetId() +" is borrowed by employee with id: " + employee.getEmployeeId());
         return borrowingRepository.save(borrowing);
     }
 
@@ -73,12 +75,12 @@ public class AssetBorrowingServiceImp implements IAssetBorrowingService {
         // Updating borrowing record
         borrowing.setReturnedAt(LocalDateTime.now());
         borrowing.setStatus(AssetBorrowing.Status.Returned);
-
+        logger.info("Asset is returned.");
         // Updating asset status
         Asset asset = borrowing.getAsset();
         asset.setStatus(Asset.Status.Available);
         assetRepository.save(asset);
-
+        logger.info("Asset with id: " + asset.getAssetId() + " is available to borrow.");
         return borrowingRepository.save(borrowing);
     }
 
@@ -93,7 +95,7 @@ public class AssetBorrowingServiceImp implements IAssetBorrowingService {
         if (borrowings.isEmpty()) {
             throw new ResourceNotFoundException("No borrowing records found for employee with ID: " + employeeId);
         }
-
+        logger.info("Returning borrowings of employee with id: " + employeeId);
         return borrowings;
     }
 
@@ -104,7 +106,7 @@ public class AssetBorrowingServiceImp implements IAssetBorrowingService {
         if (activeBorrowings.isEmpty()) {
             throw new ResourceNotFoundException("No active borrowings found");
         }
-
+        logger.info("Returning all active borrowings.");
         return activeBorrowings;
     }
 }

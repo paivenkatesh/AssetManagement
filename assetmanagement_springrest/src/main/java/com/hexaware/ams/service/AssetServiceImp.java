@@ -1,10 +1,12 @@
 package com.hexaware.ams.service;
 //Author: Arghya Mandal
 import java.util.List;
-import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.hexaware.ams.entity.Asset;
 import com.hexaware.ams.entity.AssetCategory;
 import com.hexaware.ams.exception.BadRequestException;
@@ -19,10 +21,11 @@ public class AssetServiceImp implements IAssetService {
 
     @Autowired
     private IAssetRepository assetRepository;
-
+    Logger logger = LoggerFactory.getLogger(AssetServiceImp.class);
     @Override
     public Asset addAsset(Asset asset) {
         try {
+        	logger.info("Asset added with id: "+ asset.getAssetId());
         	return assetRepository.save(asset);
         } catch(Exception e) {
             throw new BadRequestException("Failed to add asset: " + e.getMessage());
@@ -35,7 +38,8 @@ public class AssetServiceImp implements IAssetService {
     	Asset existingAsset = assetRepository.findById(asset.getAssetId())
     			.orElseThrow(() -> new ResourceNotFoundException("Asset not found with ID: " + asset.getAssetId()));
     	try {
-    	return assetRepository.save(existingAsset);
+    		logger.info("Asset updated with id: " + existingAsset.getAssetId());
+    		return assetRepository.save(existingAsset);
     	} catch (Exception e) {
     		throw new BadRequestException("Failed to update asset: " + e.getMessage());
     	}
@@ -43,13 +47,15 @@ public class AssetServiceImp implements IAssetService {
 
     @Override
     public Asset getAssetById(Integer assetId) {
-        return assetRepository.findById(assetId)
+        logger.info("Trying to get asset with id: " + assetId);
+    	return assetRepository.findById(assetId)
             .orElseThrow(() -> new ResourceNotFoundException("Asset not found with ID: " + assetId));
     }
 
     @Override
     public List<Asset> getAllAssets() {
-        return assetRepository.findAll();
+        logger.info("Returning all the asset details.");
+    	return assetRepository.findAll();
     }
 
     @Override
@@ -59,6 +65,7 @@ public class AssetServiceImp implements IAssetService {
         if (assets.isEmpty()) {
             throw new ResourceNotFoundException("No assets found for category: " + categoryName.getCategoryName());
         }
+        logger.info("Returning list of assets with category: " + categoryName);
         return assets;
     }
 
@@ -71,7 +78,7 @@ public class AssetServiceImp implements IAssetService {
         if (Asset.Status.Borrowed.equals(asset.getStatus())) {
             throw new BadRequestException("Cannot delete asset as it is currently borrowed");
         }
-
+        logger.warn("Asset with id: " + assetId + " is deleted.");
         assetRepository.deleteById(assetId);
     }
 }
