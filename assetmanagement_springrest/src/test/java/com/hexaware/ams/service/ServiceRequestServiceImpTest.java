@@ -35,7 +35,7 @@ class ServiceRequestServiceImpTest {
 		
 		AssetCategory ac1 = new AssetCategory(1, "Software");
 		
-		Asset a1 = new Asset(1, "Laptop", ac1, "Dell", LocalDate.of(2010, 12, 12), LocalDate.of(2030, 12, 12), BigDecimal.valueOf(100), Asset.Status.Available  );
+		Asset a1 = new Asset(1, "Laptop", ac1, "Dell", LocalDate.of(2010, 12, 12), LocalDate.of(2030, 12, 12), 1000, Asset.Status.Available  );
 		
 		IssueType i1 = new IssueType(1, "Software Issue");
 		
