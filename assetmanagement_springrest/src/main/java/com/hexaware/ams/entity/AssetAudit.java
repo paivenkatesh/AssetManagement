@@ -51,11 +51,6 @@ public class AssetAudit {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt = LocalDateTime.now();
 
-    @PreUpdate
-    public void onUpdate() {
-        updatedAt = LocalDateTime.now();
-    }
-
 	public AssetAudit() {
 		super();
 	}
