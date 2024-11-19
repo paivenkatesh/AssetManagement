@@ -3,6 +3,8 @@ package com.hexaware.ams.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,34 +29,45 @@ public class EmployeeController {
 	IEmployeeService employeeService;
 	
 	@PostMapping("/register")
-	public Employee registerEmployee(@Valid @RequestBody Employee employee) {
+	public ResponseEntity<Employee> registerEmployee(@Valid @RequestBody Employee employee) {
 		
-		return employeeService.registerEmployee(employee);
+		Employee registeredEmployee =  employeeService.registerEmployee(employee);
+		
+		return new ResponseEntity<>(registeredEmployee, HttpStatus.CREATED);
 	}
 	
 	
 	@GetMapping("/getEmployeeById/{employeeId}")
-	public Employee getEmployeeById(@PathVariable int employeeId) {
+	public ResponseEntity<Employee> getEmployeeById(@PathVariable int employeeId) {
 		
-		return employeeService.getEmployeeById(employeeId);
+		Employee employee = employeeService.getEmployeeById(employeeId);
+		
+		return ResponseEntity.ok(employee);
+		
 	}
 	
 	@PutMapping("/updateEmployee")
-	public Employee updateEmployee(@Valid @RequestBody Employee employee) {
+	public ResponseEntity<Employee> updateEmployee(@Valid @RequestBody int employeeId, Employee employeeDetails) {
 		
-		return employeeService.updateEmployee(employee);
+		Employee updateEmployee = employeeService.updateEmployee(employeeId, employeeDetails);
+		
+		return ResponseEntity.ok(updateEmployee);
 	}
 	
 	@DeleteMapping("/delete/{employeeId}")
-	public void deleteEmployee(@PathVariable int employeeId) {
+	public ResponseEntity<Void> deleteEmployee(@PathVariable int employeeId) {
 		
 		 employeeService.deleteEmployee(employeeId);
+		 
+		 return ResponseEntity.noContent().build();
 	}
 	
 	@GetMapping("/getAllEmployee")
-	public List<Employee> getAllEmployee(){
+	public ResponseEntity<List<Employee>> getAllEmployee(){
 		
-		return employeeService.getAllEmployee();
+		List<Employee> employee = employeeService.getAllEmployee();
+		
+		return ResponseEntity.ok(employee);
 	}
 
 }

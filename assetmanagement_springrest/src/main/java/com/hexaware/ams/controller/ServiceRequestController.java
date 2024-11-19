@@ -3,6 +3,8 @@ package com.hexaware.ams.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -20,39 +22,51 @@ public class ServiceRequestController {
 	IServiceRequestService serviceRequestService;
 	
 	@PostMapping("/createServiceRequest")
-	ServiceRequest createServiceRequest(ServiceRequest serviceRequest) {
+	public ResponseEntity<ServiceRequest> createServiceRequest(ServiceRequest serviceRequest) {
 		
-		return serviceRequestService.createServiceRequest(serviceRequest);
+		ServiceRequest newServiceRequest = serviceRequestService.createServiceRequest(serviceRequest);
+		
+		return new ResponseEntity<>(newServiceRequest, HttpStatus.CREATED);
 	}
 	
 	@GetMapping("/getServiceRequestById/{serviceRequestId}")
-	ServiceRequest getServiceRequestById(int serviceRequestId) {
+	public ResponseEntity<ServiceRequest> getServiceRequestById(int serviceRequestId) {
 		
-		return serviceRequestService.getServiceRequestById(serviceRequestId);
+		ServiceRequest serviceRequest = serviceRequestService.getServiceRequestById(serviceRequestId);
+		
+		return ResponseEntity.ok(serviceRequest);
 	}
 	
 	@PutMapping("/updateServiceRequest/{serviceRequestId}")
-	ServiceRequest updateServiceRequest(int serviceRequestId, ServiceRequest.Status status) {
+	public ResponseEntity<ServiceRequest> updateServiceRequest(int serviceRequestId, ServiceRequest.Status status) {
 		
-		return serviceRequestService.updateServiceRequestStatus(serviceRequestId, status);
+		ServiceRequest updatedServiceRequest = serviceRequestService.updateServiceRequestStatus(serviceRequestId, status);
+		
+		return ResponseEntity.ok(updatedServiceRequest);
 	}
 	
 	@GetMapping("/serviceRequestByEmployee/{employeeId}")
-	List<ServiceRequest> getServiceRequestsByEmployee(int employeeId){
+	public ResponseEntity<List<ServiceRequest>> getServiceRequestsByEmployee(int employeeId){
 		
-		return serviceRequestService.getServiceRequestsByEmployee(employeeId);
+		List<ServiceRequest> employeeserviceRequest = serviceRequestService.getServiceRequestsByEmployee(employeeId);
+		
+		return ResponseEntity.ok(employeeserviceRequest);
 	}
 	
 	@GetMapping("/allServiceRequests")
-	List<ServiceRequest> getAllServiceRequests(){
+	public ResponseEntity<List<ServiceRequest>> getAllServiceRequests(){
 		
-		return serviceRequestService.getAllServiceRequests();
+		List<ServiceRequest> serviceRequest = serviceRequestService.getAllServiceRequests();
+		
+		return ResponseEntity.ok(serviceRequest);
 	}
 	
 	@GetMapping("/findByStatus/{status}")
-	List<ServiceRequest> findByStatus(String status){
+	public ResponseEntity<List<ServiceRequest>> findByStatus(String status){
 		
-		return serviceRequestService.findByStatus(status);
+		List<ServiceRequest> serviceRequestByStatus = serviceRequestService.findByStatus(status);
+		
+		return ResponseEntity.ok(serviceRequestByStatus);
 	}
 
 }

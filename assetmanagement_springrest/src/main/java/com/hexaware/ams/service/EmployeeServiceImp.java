@@ -43,14 +43,23 @@ public class EmployeeServiceImp implements IEmployeeService {
 
 	@Override
 	@Transactional
-	public Employee updateEmployee(Employee employee) {
+	public Employee updateEmployee(int employeeId,Employee employeeDetails) {
 
-		Employee existingEmployee = employeeRepository.findById(employee.getEmployeeId())
-				.orElseThrow(() -> new ResourceNotFoundException("Employee not found with id: " + employee.getEmployeeId()));
+		Employee existingEmployee = employeeRepository.findById(employeeId)
+				.orElseThrow(() -> new ResourceNotFoundException("Employee not found with id: " + employeeId));
 
 		try {
-			return employeeRepository.save(existingEmployee);
+			
+			existingEmployee.setName(employeeDetails.getName());
+			existingEmployee.setGender(employeeDetails.getGender());
+			existingEmployee.setContactNumber(employeeDetails.getContactNumber());
+			existingEmployee.setAddress(employeeDetails.getAddress());
+			existingEmployee.setEmail(employeeDetails.getEmail());
+			existingEmployee.setPassword(employeeDetails.getPassword());
+			existingEmployee.setRole(employeeDetails.getRole());
 
+			return existingEmployee;
+			
 		} catch (Exception e) {
 
 			throw new BadRequestException("Failed to update Employee:" + e.getMessage());
