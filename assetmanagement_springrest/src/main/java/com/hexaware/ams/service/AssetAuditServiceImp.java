@@ -2,6 +2,8 @@ package com.hexaware.ams.service;
 //Author: Arghya Mandal
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +29,7 @@ public class AssetAuditServiceImp implements IAssetAuditService {
 
     @Autowired
     private IAssetRepository assetRepository;
-
+    Logger logger = LoggerFactory.getLogger(AssetAuditServiceImp.class);
     @Override
     public AssetAudit sendAuditRequest(int employeeId, int assetId) {
         // getting employee
@@ -41,7 +43,7 @@ public class AssetAuditServiceImp implements IAssetAuditService {
         audit.setEmployee(employee);
         audit.setAsset(asset);
         audit.setAuditStatus(AssetAudit.AuditStatus.Pending);
-
+        logger.info("Asset audit request sent.");
         return auditRepository.save(audit);
     }
 
@@ -52,6 +54,7 @@ public class AssetAuditServiceImp implements IAssetAuditService {
                 .orElseThrow(() -> new ResourceNotFoundException("Audit not found with id: " + auditId));
     	// updating audit status
         audit.setAuditStatus(auditStatus);
+        logger.info("Audit request updated.");
         return auditRepository.save(audit);
     }
 
@@ -60,17 +63,20 @@ public class AssetAuditServiceImp implements IAssetAuditService {
         // getting employee
     	Employee employee = employeeRepository.findById(employeeId)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found"));
-        return auditRepository.findByEmployee(employee);
+        logger.info("Audits of employee with id: " + employeeId + " returned.");
+    	return auditRepository.findByEmployee(employee);
     }
 
     @Override
     public List<AssetAudit> getAllAudits() {
-        return auditRepository.findAll();
+        logger.info("All audits returned.");
+    	return auditRepository.findAll();
     }
 
     @Override
     public AssetAudit getAuditById(int auditId) {
-        return auditRepository.findById(auditId)
+        logger.info("Returning audit request with id: " + auditId);
+    	return auditRepository.findById(auditId)
                 .orElseThrow(() -> new ResourceNotFoundException("Audit not found with id: " + auditId));
     }
 }
