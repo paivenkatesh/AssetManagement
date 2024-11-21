@@ -67,8 +67,16 @@ public class Employee {
 		super();
 	}
 
-	public Employee(int employeeId, String name, Gender gender, String contactNumber, String address, String email,
-			String password, Role role) {
+	
+
+	public Employee(int employeeId,
+			@NotNull(message = "Name cannot be null") @Size(min = 2, max = 100, message = "Name must be between 2 and 100 characters") String name,
+			@NotNull(message = "Choose from Male, Female or Other") Gender gender,
+			@NotNull(message = "Contact number cannot be null") @Size(min = 7, max = 15, message = "Contact number must be between 7 and 15 characters") String contactNumber,
+			@NotNull(message = "Address cannot be null") @Size(min = 3, max = 255, message = "Address must be between 3 and 255 characters") String address,
+			@NotNull(message = "Email cannot be null") @Email(message = "Email should be valid") String email,
+			@NotNull(message = "Password cannot be null") @Size(min = 6, message = "Password must be at least 6 characters") String password,
+			@NotNull(message = "Role cannot be null") Role role) {
 		super();
 		this.employeeId = employeeId;
 		this.name = name;
@@ -79,6 +87,8 @@ public class Employee {
 		this.password = password;
 		this.role = role;
 	}
+
+
 
 	public int getEmployeeId() {
 		return employeeId;

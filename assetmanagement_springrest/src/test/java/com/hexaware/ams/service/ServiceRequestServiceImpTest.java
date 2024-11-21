@@ -1,10 +1,11 @@
 package com.hexaware.ams.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import java.math.BigDecimal;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -43,31 +44,54 @@ class ServiceRequestServiceImpTest {
 		
 		ServiceRequest s2 = serviceRequestService.createServiceRequest(s1);
 		
+		assertNotNull(s2);
+		
 		assertEquals(1, s2.getServiceRequestId());
 	}
 
 	@Test
 	void testGetServiceRequestById() {
 		
+		ServiceRequest s1 = serviceRequestService.getServiceRequestById(1);
+		
+		assertEquals(1, s1.getServiceRequestId());
+		
 	}
 
 	@Test
 	void testUpdateServiceRequestStatus() {
+		
+		ServiceRequest s2 = serviceRequestService.updateServiceRequestStatus(1, ServiceRequest.Status.Pending);
+		
+		assertEquals("Pending", s2.getStatus());
+		
+		
 		
 	}
 
 	@Test
 	void testGetServiceRequestsByEmployee() {
 		
+		List<ServiceRequest> s3 = serviceRequestService.getServiceRequestsByEmployee(2);
+		
+		assertNotNull(s3);
+		
 	}
 
 	@Test
 	void testGetAllServiceRequests() {
 		
+		List<ServiceRequest> s4 = serviceRequestService.getAllServiceRequests();
+		
+		assertNotNull(s4);
 	}
 
 	@Test
 	void testFindByStatus() {
+		
+		List<ServiceRequest> s5 = serviceRequestService.findByStatus("Pending");
+		
+		assertNotNull(s5);
 		
 	}
 

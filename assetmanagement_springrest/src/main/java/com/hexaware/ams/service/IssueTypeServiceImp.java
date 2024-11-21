@@ -14,6 +14,7 @@ import com.hexaware.ams.repository.IIssueTypeRepository;
 import jakarta.transaction.Transactional;
 
 @Service
+@Transactional
 public class IssueTypeServiceImp implements IIssueTypeService {
 
 	@Autowired
