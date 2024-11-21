@@ -1,7 +1,8 @@
 package com.hexaware.ams.exception;
 
 /*
- * Author: Arghya & Venkatesh
+ * @Author: Arghya & Venkatesh
+ * Date: 8-11-24
  */
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

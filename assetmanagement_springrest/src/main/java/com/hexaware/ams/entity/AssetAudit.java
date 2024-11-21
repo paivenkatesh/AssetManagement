@@ -1,5 +1,8 @@
 package com.hexaware.ams.entity;
-// Author: Arghya Mandal
+/*
+@Author: Arghya Mandal
+Date: 2-11-2024
+*/
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
