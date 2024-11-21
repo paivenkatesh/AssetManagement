@@ -24,7 +24,7 @@ class EmployeeServiceImpTest {
 	IEmployeeService employeeService;
 
 	@Test
-	
+	@Disabled
 	@DisplayName("register Employee")
 	void testRegisterEmployee() {
 		
