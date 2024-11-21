@@ -27,7 +27,7 @@ class ServiceRequestServiceImpTest {
 	IServiceRequestService serviceRequestService;
 	
 	@Test
-	@Disabled
+	
 	void testCreateServiceRequest() {
 		
 		Role r1 = new Role(2, "User");
