@@ -14,6 +14,7 @@ import com.hexaware.ams.repository.IServiceRequestRepository;
 import jakarta.transaction.Transactional;
 
 @Service
+@Transactional
 public class ServiceRequestServiceImp implements IServiceRequestService {
 
 	@Autowired

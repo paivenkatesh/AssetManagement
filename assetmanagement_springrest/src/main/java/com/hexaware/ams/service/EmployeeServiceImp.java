@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.hexaware.ams.entity.Employee;
 import com.hexaware.ams.exception.BadRequestException;
-import com.hexaware.ams.exception.MethodArgumentNotValidException;
 import com.hexaware.ams.exception.ResourceAlreadyExistsException;
 import com.hexaware.ams.exception.ResourceNotFoundException;
 import com.hexaware.ams.repository.IEmployeeRepository;
@@ -15,6 +14,7 @@ import com.hexaware.ams.repository.IEmployeeRepository;
 import jakarta.transaction.Transactional;
 
 @Service
+@Transactional
 public class EmployeeServiceImp implements IEmployeeService {
 
 	@Autowired

@@ -67,8 +67,12 @@ public class ServiceRequest {
 		super();
 	}
 
-	public ServiceRequest(int serviceRequestId, Employee employee, Asset asset, String description, IssueType issueType,
-			Status status, Date requestedAt) {
+	
+	public ServiceRequest(int serviceRequestId, @NotNull(message = "Employee cannot be null") Employee employee,
+			@NotNull(message = "Asset cannot be null") Asset asset,
+			@NotNull(message = "Description cannot be null") @Size(min = 5, message = "Description must be at least 5 characters") String description,
+			IssueType issueType, @NotNull(message = "Status cannot be null") Status status,
+			@NotNull(message = "Date cannot be null") Date requestedAt) {
 		super();
 		this.serviceRequestId = serviceRequestId;
 		this.employee = employee;
@@ -78,6 +82,7 @@ public class ServiceRequest {
 		this.status = status;
 		this.requestedAt = requestedAt;
 	}
+
 
 	public int getServiceRequestId() {
 		return serviceRequestId;

@@ -31,11 +31,16 @@ public class IssueType {
 		super();
 	}
 
-	public IssueType(int issueTypeId, String issueTypeName) {
+	
+
+	public IssueType(int issueTypeId,
+			@NotNull(message = "Issue type name cannot be null") @Size(min = 2, max = 100, message = "Issue type name must be between 2 and 100 characters") String issueTypeName) {
 		super();
 		this.issueTypeId = issueTypeId;
 		this.issueTypeName = issueTypeName;
 	}
+
+
 
 	public int getIssueTypeId() {
 		return issueTypeId;
