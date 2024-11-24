@@ -2,6 +2,7 @@ package com.hexaware.ams.dto;
 
 import java.time.LocalDate;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,12 +11,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class AssetDto {
+	public enum Status {
+        Available,
+        Borrowed
+    }
 	private int assetId;
 	private String assetName;
-	private int categoryId;
+	private AssetCategoryDto category;
 	private String assetModel;
 	private LocalDate manufacturingDate;
 	private LocalDate expiryDate;
 	private double assetValue;
-	private String status;
+	private Status status = Status.Available;
 }

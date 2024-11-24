@@ -9,11 +9,15 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AssetBorrowingDTO {
+public class AssetBorrowingDto {
+	public enum Status {
+        Active,
+        Returned
+    }
 	private int borrowingId;
-	private int employeeId;
-	private int assetId;
+	private EmployeeDto employeeDto;
+	private AssetDto assetDto;
 	private LocalDateTime borrowedAt;
 	private LocalDateTime returnedAt;
-	private String status;
+	private Status status = Status.Active;
 }

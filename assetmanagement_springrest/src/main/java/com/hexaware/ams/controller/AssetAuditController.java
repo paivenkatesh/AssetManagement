@@ -6,19 +6,18 @@ Date: 16-11-2024
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hexaware.ams.dto.AssetAuditDto;
 import com.hexaware.ams.entity.AssetAudit;
 import com.hexaware.ams.service.IAssetAuditService;
-
-import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/audits")
@@ -29,14 +28,14 @@ public class AssetAuditController {
 
     // Create a new audit request
     @PostMapping("/send/{employeeId}/{assetId}")
-    public ResponseEntity<AssetAudit> sendAuditRequest(@PathVariable int employeeId, @PathVariable int assetId, @Valid @RequestBody AssetAudit assetAudit) {
+    public ResponseEntity<AssetAudit> sendAuditRequest(@PathVariable int employeeId, @PathVariable int assetId) {
         AssetAudit audit = assetAuditService.sendAuditRequest(employeeId, assetId);
-        return ResponseEntity.ok(audit);
+        return new ResponseEntity<>(audit, HttpStatus.CREATED);
     }
 
     // Update audit status
     @PutMapping("/update/{auditId}/{auditStatus}")
-    public ResponseEntity<AssetAudit> updateAuditStatus(@PathVariable int auditId, @PathVariable AssetAudit.AuditStatus auditStatus) {
+    public ResponseEntity<AssetAudit> updateAuditStatus(@PathVariable int auditId, @PathVariable AssetAuditDto.AuditStatus auditStatus) {
         AssetAudit updatedAudit = assetAuditService.updateAuditStatus(auditId, auditStatus);
         return ResponseEntity.ok(updatedAudit);
     }
