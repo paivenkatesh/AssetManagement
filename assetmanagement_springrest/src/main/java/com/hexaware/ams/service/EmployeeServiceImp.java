@@ -7,7 +7,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hexaware.ams.dto.EmployeeDto;
+import com.hexaware.ams.dto.RoleDto;
+import com.hexaware.ams.dto.EmployeeDto.GenderDTO;
 import com.hexaware.ams.entity.Employee;
+import com.hexaware.ams.entity.Role;
+import com.hexaware.ams.entity.Employee.Gender;
 import com.hexaware.ams.exception.BadRequestException;
 import com.hexaware.ams.exception.ResourceAlreadyExistsException;
 import com.hexaware.ams.exception.ResourceNotFoundException;
@@ -26,18 +31,29 @@ public class EmployeeServiceImp implements IEmployeeService {
 
 	@Override
 	@Transactional
-	public Employee registerEmployee(Employee employee) {
+	public Employee registerEmployee(EmployeeDto employeeDto) {
 
-		if (employeeRepository.existsById(employee.getEmployeeId())) {
+		if (employeeRepository.existsById(employeeDto.getEmployeeId())) {
 
-			throw new ResourceAlreadyExistsException("Id" + employee.getEmployeeId() + " already exists ");
+			throw new ResourceAlreadyExistsException("Id" + employeeDto.getEmployeeId() + " already exists ");
 
 		}
 
-		logger.info("Employee added successfully");
-		return employeeRepository.save(employee);
 		
+		try {
+			
+			Employee employee = mapToEntity(employeeDto);
+			
+			logger.info("Employee added successfully");
+			
+			return employeeRepository.save(employee);
+			
 
+		}catch(Exception e) {
+			
+			throw new BadRequestException("Failed to add Employee:" + e.getMessage());
+		}
+		
 	}
 
 	@Override
@@ -50,21 +66,24 @@ public class EmployeeServiceImp implements IEmployeeService {
 
 	@Override
 	@Transactional
-	public Employee updateEmployee(int employeeId,Employee employeeDetails) {
+	public Employee updateEmployee(int employeeId,EmployeeDto employeeDetails) {
 
 		logger.warn("Trying to update employee Details");
+		
 		Employee existingEmployee = employeeRepository.findById(employeeId)
 				.orElseThrow(() -> new ResourceNotFoundException("Employee not found with id: " + employeeId));
+		
+		Employee e1 = mapToEntity(employeeDetails);
 
 		try {
 			
-			existingEmployee.setName(employeeDetails.getName());
-			existingEmployee.setGender(employeeDetails.getGender());
-			existingEmployee.setContactNumber(employeeDetails.getContactNumber());
-			existingEmployee.setAddress(employeeDetails.getAddress());
-			existingEmployee.setEmail(employeeDetails.getEmail());
-			existingEmployee.setPassword(employeeDetails.getPassword());
-			existingEmployee.setRole(employeeDetails.getRole());
+			existingEmployee.setName(e1.getName());
+			existingEmployee.setGender(e1.getGender());
+			existingEmployee.setContactNumber(e1.getContactNumber());
+			existingEmployee.setAddress(e1.getAddress());
+			existingEmployee.setEmail(e1.getEmail());
+			existingEmployee.setPassword(e1.getPassword());
+			existingEmployee.setRole(e1.getRole());
 
 			
 			logger.info("Updating employee details");
@@ -137,5 +156,41 @@ public class EmployeeServiceImp implements IEmployeeService {
 		}
 
 	}
+	
+	
+	//Helper method to convert DTO to Entity
+		public Employee mapToEntity(EmployeeDto employeeDto) {
+			
+			Employee employee = new Employee();
+			if (employeeDto.getEmployeeId() != 0) {
+		        employee.setEmployeeId(employeeDto.getEmployeeId());
+		    }
+			employee.setName(employeeDto.getName());
+			employee.setGender(Gender.valueOf(employeeDto.getGender().name()));
+			employee.setContactNumber(employeeDto.getContactNumber());
+			employee.setAddress(employeeDto.getAddress());
+			employee.setEmail(employeeDto.getAddress());
+			employee.setPassword(employeeDto.getPassword());
+			employee.setRole(new Role (employeeDto.getRole().getRoleId(), employeeDto.getRole().getRoleName()));
+			
+			return employee;
+		}
+		
 
+		//Helper method to convert Entity to DTO
+		public EmployeeDto mapToDTO(Employee employee) {
+			
+			return new EmployeeDto(
+					employee.getEmployeeId(),
+					employee.getName(),
+					GenderDTO.valueOf(employee.getGender().name()),
+					employee.getContactNumber(),
+					employee.getAddress(),
+					employee.getEmail(),
+					employee.getPassword(),
+					new RoleDto (employee.getRole().getRoleId(), employee.getRole().getRoleName())
+					);
+
+		}
+		
 }

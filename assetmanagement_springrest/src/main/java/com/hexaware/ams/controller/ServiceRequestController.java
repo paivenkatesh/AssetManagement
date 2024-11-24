@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hexaware.ams.dto.ServiceRequestDto;
 import com.hexaware.ams.entity.ServiceRequest;
 import com.hexaware.ams.service.IServiceRequestService;
 
@@ -29,7 +30,7 @@ public class ServiceRequestController {
 	
 	// Create a new Service Request
 	@PostMapping("/createServiceRequest")
-	public ResponseEntity<ServiceRequest> createServiceRequest(@Valid @RequestBody ServiceRequest serviceRequest) {
+	public ResponseEntity<ServiceRequest> createServiceRequest(@Valid @RequestBody ServiceRequestDto serviceRequest) {
 		
 		ServiceRequest newServiceRequest = serviceRequestService.createServiceRequest(serviceRequest);
 		

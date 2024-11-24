@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hexaware.ams.dto.IssueTypeDto;
 import com.hexaware.ams.entity.IssueType;
 import com.hexaware.ams.exception.BadRequestException;
 import com.hexaware.ams.exception.ResourceAlreadyExistsException;
@@ -26,15 +27,18 @@ public class IssueTypeServiceImp implements IIssueTypeService {
 	
 	@Override
 	@Transactional
-	public IssueType addIssueType(IssueType issueType) {
+	public IssueType addIssueType(IssueTypeDto issueType) {
 		
 		if(issueTypeRepository.existsByIssueTypeName(issueType.getIssueTypeName())) {
 			
 			throw new ResourceAlreadyExistsException("Issue Type already exists" + issueType.getIssueTypeName());
 		}
 		
+		IssueType i1 = mapToEntity(issueType);
+		
 		logger.info("Adding a new Issue Type");
-		return issueTypeRepository.save(issueType);
+		
+		return issueTypeRepository.save(i1);
 	}
 
 	@Override
@@ -68,10 +72,10 @@ public class IssueTypeServiceImp implements IIssueTypeService {
 
 	@Override
 	@Transactional
-	public IssueType updateIssueType(int issueTypeId, IssueType issueTypeDetails) {
-		
-		
+	public IssueType updateIssueType(int issueTypeId, IssueTypeDto issueTypeDetails) {
+
 		logger.warn("Issue Type will be updated");
+		
 		IssueType issueType = getIssueTypeById(issueTypeId);
 		
 		if(issueType == null){
@@ -80,9 +84,12 @@ public class IssueTypeServiceImp implements IIssueTypeService {
 			
 		}
 		
-		issueType.setIssueTypeName(issueTypeDetails.getIssueTypeName());
+		IssueType i2 = mapToEntity(issueTypeDetails);
+		
+		issueType.setIssueTypeName(i2.getIssueTypeName());
 		
 		logger.info("Updated the issue requested");
+		
 		return issueTypeRepository.save(issueType);
 		
 		
@@ -102,6 +109,17 @@ public class IssueTypeServiceImp implements IIssueTypeService {
 			throw new BadRequestException("Failed to delete issue");
 		}
 
+	}
+	
+	public IssueType mapToEntity(IssueTypeDto issueTypeDto) {
+		
+		IssueType issueType = new IssueType();
+		if(issueTypeDto.getIssueTypeId() != 0) {
+			issueType.setIssueTypeId(issueTypeDto.getIssueTypeId());
+		}
+		issueType.setIssueTypeName(issueTypeDto.getIssueTypeName());
+		
+		return issueType;
 	}
 
 }

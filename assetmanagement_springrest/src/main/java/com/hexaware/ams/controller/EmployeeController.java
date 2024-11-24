@@ -15,7 +15,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hexaware.ams.dto.EmployeeDto;
+import com.hexaware.ams.dto.EmployeeDto.GenderDTO;
+import com.hexaware.ams.dto.RoleDto;
 import com.hexaware.ams.entity.Employee;
+import com.hexaware.ams.entity.Employee.Gender;
+import com.hexaware.ams.entity.Role;
 import com.hexaware.ams.service.IEmployeeService;
 
 import jakarta.validation.Valid;
@@ -30,9 +35,9 @@ public class EmployeeController {
 
 	// Register a New Employee
 	@PostMapping("/register")
-	public ResponseEntity<Employee> registerEmployee(@Valid @RequestBody Employee employee) {
+	public ResponseEntity<Employee> registerEmployee(@Valid @RequestBody EmployeeDto employeeDto) {
 
-		Employee registeredEmployee = employeeService.registerEmployee(employee);
+		Employee registeredEmployee = employeeService.registerEmployee(employeeDto);
 
 		return new ResponseEntity<>(registeredEmployee, HttpStatus.CREATED);
 	}
@@ -48,8 +53,8 @@ public class EmployeeController {
 	}
 
 	// Update existing Employee details
-	@PutMapping("/updateEmployee")
-	public ResponseEntity<Employee> updateEmployee(@Valid @RequestBody int employeeId, Employee employeeDetails) {
+	@PutMapping("/updateEmployee/{employeeId}")
+	public ResponseEntity<Employee> updateEmployee(@Valid @PathVariable  int employeeId, @RequestBody EmployeeDto employeeDetails) {
 
 		Employee updateEmployee = employeeService.updateEmployee(employeeId, employeeDetails);
 
@@ -73,5 +78,5 @@ public class EmployeeController {
 
 		return ResponseEntity.ok(employee);
 	}
-
+	
 }
