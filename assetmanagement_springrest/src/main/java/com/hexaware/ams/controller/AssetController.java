@@ -1,4 +1,19 @@
 package com.hexaware.ams.controller;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.hexaware.ams.dto.AssetDto;
 /*
 @Author: Arghya Mandal
 Date: 16-11-2024
@@ -9,12 +24,6 @@ import com.hexaware.ams.service.IAssetService;
 
 import jakarta.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-
 @RestController
 @RequestMapping("/api/assets")
 public class AssetController {
@@ -24,28 +33,28 @@ public class AssetController {
 
     // Add a new asset
     @PostMapping("/add")
-    public ResponseEntity<Asset> addAsset(@Valid @RequestBody Asset asset) {
-        Asset newAsset = assetService.addAsset(asset);
-        return ResponseEntity.ok(newAsset);
+    public ResponseEntity<Asset> addAsset(@Valid @RequestBody AssetDto assetDto) {
+        Asset newAsset = assetService.addAsset(assetDto);
+        return new ResponseEntity<>(newAsset, HttpStatus.CREATED);
     }
 
     // Update an existing asset
     @PutMapping("/update/{assetId}")
-    public ResponseEntity<Asset> updateAsset(@PathVariable Integer assetId, @Valid @RequestBody Asset asset) {
-        asset.setAssetId(assetId); // Ensure the assetId is set for the update
-        Asset updatedAsset = assetService.updateAsset(asset);
+    public ResponseEntity<Asset> updateAsset(@PathVariable Integer assetId, @Valid @RequestBody AssetDto assetDto) {
+        assetDto.setAssetId(assetId);
+        Asset updatedAsset = assetService.updateAsset(assetDto);
         return ResponseEntity.ok(updatedAsset);
     }
 
     // Get asset by ID
-    @GetMapping("/{assetId}")
+    @GetMapping("/getbyid/{assetId}")
     public ResponseEntity<Asset> getAssetById(@PathVariable Integer assetId) {
         Asset asset = assetService.getAssetById(assetId);
         return ResponseEntity.ok(asset);
     }
 
     // Get all assets
-    @GetMapping
+    @GetMapping("/getall")
     public ResponseEntity<List<Asset>> getAllAssets() {
         List<Asset> assets = assetService.getAllAssets();
         return ResponseEntity.ok(assets);
@@ -59,7 +68,7 @@ public class AssetController {
     }
 
     // Delete an asset
-    @DeleteMapping("/{assetId}")
+    @DeleteMapping("/delete/{assetId}")
     public ResponseEntity<Void> deleteAsset(@PathVariable Integer assetId) {
         assetService.deleteAsset(assetId);
         return ResponseEntity.noContent().build();

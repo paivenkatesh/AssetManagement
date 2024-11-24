@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hexaware.ams.dto.AssetCategoryDto;
+import com.hexaware.ams.dto.AssetDto;
 import com.hexaware.ams.entity.Asset;
 import com.hexaware.ams.entity.AssetCategory;
 import com.hexaware.ams.exception.BadRequestException;
@@ -26,23 +28,40 @@ public class AssetServiceImp implements IAssetService {
     private IAssetRepository assetRepository;
     Logger logger = LoggerFactory.getLogger(AssetServiceImp.class);
     @Override
-    public Asset addAsset(Asset asset) {
+    public Asset addAsset(AssetDto assetDto) {
         try {
-        	logger.info("Asset added with id: "+ asset.getAssetId());
-        	return assetRepository.save(asset);
+        	Asset asset = new Asset();
+        	asset.setAssetName(assetDto.getAssetName());
+            asset.setAssetModel(assetDto.getAssetModel());
+            asset.setCategory(mapToCategory(assetDto.getCategory()));
+            asset.setManufacturingDate(assetDto.getManufacturingDate());
+            asset.setExpiryDate(assetDto.getExpiryDate());
+            asset.setAssetValue(assetDto.getAssetValue());
+            asset.setStatus(Asset.Status.Available);
+
+            Asset savedAsset = assetRepository.save(asset);
+            logger.info("Asset added with ID: {}", savedAsset.getAssetId());
+            return savedAsset;
         } catch(Exception e) {
             throw new BadRequestException("Failed to add asset: " + e.getMessage());
         }
     }
 
     @Override
-    public Asset updateAsset(Asset asset) {
+    public Asset updateAsset(AssetDto assetDto) {
     	// checking if asset exists or not
-    	Asset existingAsset = assetRepository.findById(asset.getAssetId())
-    			.orElseThrow(() -> new ResourceNotFoundException("Asset not found with ID: " + asset.getAssetId()));
+    	Asset existingAsset = assetRepository.findById(assetDto.getAssetId())
+    			.orElseThrow(() -> new ResourceNotFoundException("Asset not found with ID: " + assetDto.getAssetId()));
     	try {
     		logger.info("Asset updated with id: " + existingAsset.getAssetId());
-    		return assetRepository.save(existingAsset);
+    		existingAsset.setAssetName(assetDto.getAssetName());
+            existingAsset.setAssetModel(assetDto.getAssetModel());
+            existingAsset.setCategory(mapToCategory(assetDto.getCategory()));
+            existingAsset.setManufacturingDate(assetDto.getManufacturingDate());
+            existingAsset.setExpiryDate(assetDto.getExpiryDate());
+            existingAsset.setAssetValue(assetDto.getAssetValue());
+            logger.info("Asset updated with ID: {}", existingAsset.getAssetId());
+            return assetRepository.save(existingAsset);
     	} catch (Exception e) {
     		throw new BadRequestException("Failed to update asset: " + e.getMessage());
     	}
@@ -83,5 +102,13 @@ public class AssetServiceImp implements IAssetService {
         }
         logger.warn("Asset with id: " + assetId + " is deleted.");
         assetRepository.deleteById(assetId);
+    }
+    
+    // mapping AssetCategoryDto object to AssetCategory object
+    private AssetCategory mapToCategory(AssetCategoryDto categoryDto) {
+        AssetCategory category = new AssetCategory();
+        category.setCategoryId(categoryDto.getCategoryId());
+        category.setCategoryName(categoryDto.getCategoryName());
+        return category;
     }
 }
