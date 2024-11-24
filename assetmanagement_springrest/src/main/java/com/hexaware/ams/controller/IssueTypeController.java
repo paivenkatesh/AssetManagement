@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hexaware.ams.dto.IssueTypeDto;
 import com.hexaware.ams.entity.IssueType;
 import com.hexaware.ams.service.IIssueTypeService;
 
@@ -31,7 +32,7 @@ public class IssueTypeController {
 	
 	//Create a new IssueType
 	@PostMapping("/addIssueType")
-	public ResponseEntity<IssueType> addIssueType(@Valid @RequestBody IssueType issueType) {
+	public ResponseEntity<IssueType> addIssueType(@Valid @RequestBody IssueTypeDto issueType) {
 		
 		IssueType newIssueType = issueTypeService.addIssueType(issueType);
 		
@@ -72,7 +73,7 @@ public class IssueTypeController {
 	
 	// Update an Issue Type 
 	@PutMapping("/updateIssueType/{issueTypeId}/{issueTypeDetails}")
-	public ResponseEntity<IssueType> updateIssueType(@PathVariable int issueTypeId, @Valid @RequestBody IssueType issueTypeDetails) {
+	public ResponseEntity<IssueType> updateIssueType(@PathVariable int issueTypeId, @Valid @RequestBody IssueTypeDto issueTypeDetails) {
 		
 		IssueType updatedIssueType = issueTypeService.updateIssueType(issueTypeId, issueTypeDetails);
 		
