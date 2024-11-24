@@ -2,6 +2,8 @@ package com.hexaware.ams.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,8 @@ public class IssueTypeServiceImp implements IIssueTypeService {
 	@Autowired
 	IIssueTypeRepository issueTypeRepository;
 	
+	Logger logger = LoggerFactory.getLogger(EmployeeServiceImp.class);
+	
 	@Override
 	@Transactional
 	public IssueType addIssueType(IssueType issueType) {
@@ -29,12 +33,14 @@ public class IssueTypeServiceImp implements IIssueTypeService {
 			throw new ResourceAlreadyExistsException("Issue Type already exists" + issueType.getIssueTypeName());
 		}
 		
+		logger.info("Adding a new Issue Type");
 		return issueTypeRepository.save(issueType);
 	}
 
 	@Override
 	public IssueType getIssueTypeById(int issueTypeId) {
 		
+		logger.info("Finding Issue with given Id");
 		return issueTypeRepository.findById(issueTypeId)
 				.orElseThrow(() -> new ResourceNotFoundException("Issue Type not found with id " + issueTypeId));
 	}
@@ -42,10 +48,12 @@ public class IssueTypeServiceImp implements IIssueTypeService {
 	@Override
 	public IssueType getIssueTypeByName(String issueTypeName) {
 		
+		logger.info("Trying to find Issue Type with given name ");
 		IssueType issueType = issueTypeRepository.findByIssueTypeName(issueTypeName);
 		
 		if(issueType == null) {
 			
+			logger.info("Could not find Issue Type with given Name ");
 			throw new ResourceNotFoundException("Issue type not found" + issueTypeName);
 		}
 		
@@ -63,7 +71,7 @@ public class IssueTypeServiceImp implements IIssueTypeService {
 	public IssueType updateIssueType(int issueTypeId, IssueType issueTypeDetails) {
 		
 		
-		
+		logger.warn("Issue Type will be updated");
 		IssueType issueType = getIssueTypeById(issueTypeId);
 		
 		if(issueType == null){
@@ -74,6 +82,7 @@ public class IssueTypeServiceImp implements IIssueTypeService {
 		
 		issueType.setIssueTypeName(issueTypeDetails.getIssueTypeName());
 		
+		logger.info("Updated the issue requested");
 		return issueTypeRepository.save(issueType);
 		
 		
@@ -85,6 +94,7 @@ public class IssueTypeServiceImp implements IIssueTypeService {
 		
 		try {
 			
+		logger.warn("Issue will be deleted");
 		issueTypeRepository.deleteById(issueTypeId);
 		
 		}catch(Exception e) {
