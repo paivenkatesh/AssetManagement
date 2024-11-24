@@ -24,49 +24,53 @@ import jakarta.validation.Valid;
 @RequestMapping("/ams/employee")
 @Validated
 public class EmployeeController {
-	
+
 	@Autowired
 	IEmployeeService employeeService;
-	
+
+	// Register a New Employee
 	@PostMapping("/register")
 	public ResponseEntity<Employee> registerEmployee(@Valid @RequestBody Employee employee) {
-		
-		Employee registeredEmployee =  employeeService.registerEmployee(employee);
-		
+
+		Employee registeredEmployee = employeeService.registerEmployee(employee);
+
 		return new ResponseEntity<>(registeredEmployee, HttpStatus.CREATED);
 	}
-	
-	
+
+	// Get Employee By Id
 	@GetMapping("/getEmployeeById/{employeeId}")
 	public ResponseEntity<Employee> getEmployeeById(@PathVariable int employeeId) {
-		
+
 		Employee employee = employeeService.getEmployeeById(employeeId);
-		
+
 		return ResponseEntity.ok(employee);
-		
+
 	}
-	
+
+	// Update existing Employee details
 	@PutMapping("/updateEmployee")
 	public ResponseEntity<Employee> updateEmployee(@Valid @RequestBody int employeeId, Employee employeeDetails) {
-		
+
 		Employee updateEmployee = employeeService.updateEmployee(employeeId, employeeDetails);
-		
+
 		return ResponseEntity.ok(updateEmployee);
 	}
-	
+
+	// Delete an Employee Record
 	@DeleteMapping("/delete/{employeeId}")
 	public ResponseEntity<Void> deleteEmployee(@PathVariable int employeeId) {
-		
-		 employeeService.deleteEmployee(employeeId);
-		 
-		 return ResponseEntity.noContent().build();
+
+		employeeService.deleteEmployee(employeeId);
+
+		return ResponseEntity.noContent().build();
 	}
-	
+
+	// List of all current Employees
 	@GetMapping("/getAllEmployee")
-	public ResponseEntity<List<Employee>> getAllEmployee(){
-		
+	public ResponseEntity<List<Employee>> getAllEmployee() {
+
 		List<Employee> employee = employeeService.getAllEmployee();
-		
+
 		return ResponseEntity.ok(employee);
 	}
 

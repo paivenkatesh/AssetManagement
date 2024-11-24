@@ -21,6 +21,8 @@ public class ServiceRequestController {
 	@Autowired
 	IServiceRequestService serviceRequestService;
 	
+	
+	// Create a new Service Request
 	@PostMapping("/createServiceRequest")
 	public ResponseEntity<ServiceRequest> createServiceRequest(ServiceRequest serviceRequest) {
 		
@@ -29,6 +31,8 @@ public class ServiceRequestController {
 		return new ResponseEntity<>(newServiceRequest, HttpStatus.CREATED);
 	}
 	
+	
+	//Get Service Request By its Id
 	@GetMapping("/getServiceRequestById/{serviceRequestId}")
 	public ResponseEntity<ServiceRequest> getServiceRequestById(int serviceRequestId) {
 		
@@ -37,6 +41,8 @@ public class ServiceRequestController {
 		return ResponseEntity.ok(serviceRequest);
 	}
 	
+	
+	// Update a Service Request By id
 	@PutMapping("/updateServiceRequest/{serviceRequestId}")
 	public ResponseEntity<ServiceRequest> updateServiceRequest(int serviceRequestId, ServiceRequest.Status status) {
 		
@@ -45,6 +51,8 @@ public class ServiceRequestController {
 		return ResponseEntity.ok(updatedServiceRequest);
 	}
 	
+	
+	//Get service Requests By Employee Id 
 	@GetMapping("/serviceRequestByEmployee/{employeeId}")
 	public ResponseEntity<List<ServiceRequest>> getServiceRequestsByEmployee(int employeeId){
 		
@@ -53,6 +61,8 @@ public class ServiceRequestController {
 		return ResponseEntity.ok(employeeserviceRequest);
 	}
 	
+	
+	// Get all service Request 
 	@GetMapping("/allServiceRequests")
 	public ResponseEntity<List<ServiceRequest>> getAllServiceRequests(){
 		
@@ -61,6 +71,8 @@ public class ServiceRequestController {
 		return ResponseEntity.ok(serviceRequest);
 	}
 	
+	
+	// Find Service Requests by providing a Status
 	@GetMapping("/findByStatus/{status}")
 	public ResponseEntity<List<ServiceRequest>> findByStatus(String status){
 		

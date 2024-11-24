@@ -2,6 +2,8 @@ package com.hexaware.ams.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,8 @@ public class EmployeeServiceImp implements IEmployeeService {
 
 	@Autowired
 	IEmployeeRepository employeeRepository;
+	
+	Logger logger = LoggerFactory.getLogger(EmployeeServiceImp.class);
 
 	@Override
 	@Transactional
@@ -30,13 +34,16 @@ public class EmployeeServiceImp implements IEmployeeService {
 
 		}
 
+		logger.info("Employee added successfully");
 		return employeeRepository.save(employee);
+		
 
 	}
 
 	@Override
 	public Employee getEmployeeById(int employeeId) {
 
+		logger.info("Getting Employee with Id");
 		return employeeRepository.findById(employeeId)
 				.orElseThrow(() -> new ResourceNotFoundException("Employee not found with id: " + employeeId));
 	}
@@ -45,6 +52,7 @@ public class EmployeeServiceImp implements IEmployeeService {
 	@Transactional
 	public Employee updateEmployee(int employeeId,Employee employeeDetails) {
 
+		logger.warn("Trying to update employee Details");
 		Employee existingEmployee = employeeRepository.findById(employeeId)
 				.orElseThrow(() -> new ResourceNotFoundException("Employee not found with id: " + employeeId));
 
@@ -58,6 +66,8 @@ public class EmployeeServiceImp implements IEmployeeService {
 			existingEmployee.setPassword(employeeDetails.getPassword());
 			existingEmployee.setRole(employeeDetails.getRole());
 
+			
+			logger.info("Updating employee details");
 			return existingEmployee;
 			
 		} catch (Exception e) {
@@ -73,6 +83,7 @@ public class EmployeeServiceImp implements IEmployeeService {
 
 		try {
 
+			logger.warn("Attempting to delete Employee. Details will Erased");
 			employeeRepository.deleteById(employeeId);
 
 		} catch (Exception e) {
@@ -89,9 +100,11 @@ public class EmployeeServiceImp implements IEmployeeService {
 
 		if (employee.isEmpty()) {
 
+			logger.warn("Problem with getting list of employees");
 			throw new ResourceNotFoundException("No Employee List exists ");
 		}
 
+		logger.info("Employee list retrieved successfully");
 		return employee;
 	}
 
@@ -100,6 +113,7 @@ public class EmployeeServiceImp implements IEmployeeService {
 
 		try {
 
+			logger.info("Trying to find Employee Email and Password");
 			return employeeRepository.findByEmailAndPassword(email, password);
 
 		} catch (Exception e) {
@@ -114,6 +128,7 @@ public class EmployeeServiceImp implements IEmployeeService {
 
 		try {
 
+			logger.info("Checking if Employee email exists");
 			return employeeRepository.existsByEmail(email);
 
 		} catch (Exception e) {

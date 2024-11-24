@@ -28,6 +28,8 @@ public class IssueTypeController {
 	@Autowired
 	IIssueTypeService issueTypeService;
 	
+	
+	//Create a new IssueType
 	@PostMapping("/addIssueType")
 	public ResponseEntity<IssueType> addIssueType(@Valid @RequestBody IssueType issueType) {
 		
@@ -36,6 +38,8 @@ public class IssueTypeController {
 		return new ResponseEntity<>(newIssueType, HttpStatus.CREATED);
 	}
 	
+	
+	//Get an Issue Type by Id
 	@GetMapping("/issueTypeById/{issueTypeId}")
 	public ResponseEntity<IssueType> getIssueTypeById(@PathVariable int issueTypeId) {
 		
@@ -45,6 +49,7 @@ public class IssueTypeController {
 	}
 	
 	
+	//Get an Issue Type by Name
 	@GetMapping("/issueTypeByName/{Name}")
 	public ResponseEntity<IssueType> getIssueTypeByName(@PathVariable String issueTypeName) {
 		
@@ -53,6 +58,8 @@ public class IssueTypeController {
 		return ResponseEntity.ok(issueTypeByName);
 	}
 	
+	
+	//All issue Types 
 	@GetMapping("/allIssueTypes")
 	public ResponseEntity<List<IssueType>> getAllIssueTypes(){
 		
@@ -62,6 +69,8 @@ public class IssueTypeController {
 		
 	}
 	
+	
+	// Update an Issue Type 
 	@PutMapping("/updateIssueType/{issueTypeId}/{issueTypeDetails}")
 	public ResponseEntity<IssueType> updateIssueType(@PathVariable int issueTypeId, @Valid @RequestBody IssueType issueTypeDetails) {
 		
@@ -70,6 +79,7 @@ public class IssueTypeController {
 		return ResponseEntity.ok(updatedIssueType);
 	}
 	
+	// Delete an Issue Type using Id
 	@DeleteMapping("/delete/{issueTypeId}")
 	public ResponseEntity<Void> deleteIssueType(@PathVariable int issueTypeId) {
 		
