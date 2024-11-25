@@ -66,25 +66,41 @@ public class AssetBorrowingServiceImp implements IAssetBorrowingService {
 
     @Override
     public AssetBorrowing returnAsset(int borrowingId) {
+        logger.info("Attempting to return asset for borrowing ID: {}", borrowingId);
+        
         // Getting borrowing record
         AssetBorrowing borrowing = borrowingRepository.findById(borrowingId)
-            .orElseThrow(() -> new ResourceNotFoundException("Borrowing record not found with ID: " + borrowingId));
+            .orElseThrow(() -> {
+                logger.error("Borrowing record not found with ID: {}", borrowingId);
+                return new ResourceNotFoundException("Borrowing record not found with ID: " + borrowingId);
+            });
+            
+        logger.info("Found borrowing record. Current status: {}", borrowing.getStatus());
 
         // Checking if already returned
         if (AssetBorrowing.Status.Returned.equals(borrowing.getStatus())) {
+            logger.warn("Asset has already been returned for borrowing ID: {}", borrowingId);
             throw new BadRequestException("Asset has already been returned");
         }
 
         // Updating borrowing record
         borrowing.setReturnedAt(LocalDateTime.now());
         borrowing.setStatus(AssetBorrowing.Status.Returned);
-        logger.info("Asset is returned.");
+        
         // Updating asset status
         Asset asset = borrowing.getAsset();
+        logger.info("Updating asset status for asset ID: {}. Current status: {}", 
+            asset.getAssetId(), asset.getStatus());
+            
         asset.setStatus(Asset.Status.Available);
         assetRepository.save(asset);
-        logger.info("Asset with id: " + asset.getAssetId() + " is available to borrow.");
-        return borrowingRepository.save(borrowing);
+        
+        logger.info("Successfully updated asset status to Available");
+        
+        AssetBorrowing savedBorrowing = borrowingRepository.save(borrowing);
+        logger.info("Successfully updated borrowing record to Returned");
+        
+        return savedBorrowing;
     }
 
     @Override
