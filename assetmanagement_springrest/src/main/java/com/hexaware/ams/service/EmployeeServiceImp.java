@@ -158,7 +158,7 @@ public class EmployeeServiceImp implements IEmployeeService {
 	}
 	
 	
-	//Helper method to convert DTO to Entity
+		//Helper method to convert DTO to Entity
 		public Employee mapToEntity(EmployeeDto employeeDto) {
 			
 			Employee employee = new Employee();
@@ -169,7 +169,7 @@ public class EmployeeServiceImp implements IEmployeeService {
 			employee.setGender(Gender.valueOf(employeeDto.getGender().name()));
 			employee.setContactNumber(employeeDto.getContactNumber());
 			employee.setAddress(employeeDto.getAddress());
-			employee.setEmail(employeeDto.getAddress());
+			employee.setEmail(employeeDto.getEmail());
 			employee.setPassword(employeeDto.getPassword());
 			employee.setRole(new Role (employeeDto.getRole().getRoleId(), employeeDto.getRole().getRoleName()));
 			
