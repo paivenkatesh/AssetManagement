@@ -7,6 +7,7 @@ Date: 20-11-2024
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import com.hexaware.ams.dto.AssetAuditDto;
 import com.hexaware.ams.entity.Asset;
 import com.hexaware.ams.entity.AssetAudit;
 import com.hexaware.ams.entity.AssetAudit.AuditStatus;
@@ -79,7 +80,7 @@ public class AssetAuditServiceImpTest {
         when(auditRepository.findById(audit.getAuditId())).thenReturn(Optional.of(audit));
         when(auditRepository.save(any(AssetAudit.class))).thenReturn(audit);
 
-        AssetAudit result = auditService.updateAuditStatus(audit.getAuditId(), AuditStatus.Verified);
+        AssetAudit result = auditService.updateAuditStatus(audit.getAuditId(), AssetAuditDto.AuditStatus.Verified);
 
         assertNotNull(result);
         assertEquals(AuditStatus.Verified, result.getAuditStatus());
