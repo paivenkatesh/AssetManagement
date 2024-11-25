@@ -49,8 +49,8 @@ public class ServiceRequestController {
 	
 	
 	// Update a Service Request By id
-	@PutMapping("/updateServiceRequest/{serviceRequestId}")
-	public ResponseEntity<ServiceRequest> updateServiceRequest(@PathVariable int serviceRequestId, @PathVariable ServiceRequest.Status status) {
+	@PutMapping("/updateServiceRequest/{serviceRequestId}/{Status}")
+	public ResponseEntity<ServiceRequest> updateServiceRequest(@PathVariable int serviceRequestId, @RequestBody ServiceRequest.Status status) {
 		
 		ServiceRequest updatedServiceRequest = serviceRequestService.updateServiceRequestStatus(serviceRequestId, status);
 		

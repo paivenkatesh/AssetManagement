@@ -70,6 +70,7 @@ public class AssetServiceImpTest {
     public void testAddAsset() {
         when(assetRepository.save(any(Asset.class))).thenReturn(asset);
 
+
         Asset savedAsset = assetService.addAsset(assetDto);
 
         assertNotNull(savedAsset);
@@ -81,6 +82,7 @@ public class AssetServiceImpTest {
     public void testUpdateAsset() {
         when(assetRepository.findById(asset.getAssetId())).thenReturn(Optional.of(asset));
         when(assetRepository.save(any(Asset.class))).thenReturn(asset);
+
 
         Asset updatedAsset = assetService.updateAsset(assetDto);
 

@@ -7,9 +7,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hexaware.ams.dto.AssetDto;
 import com.hexaware.ams.dto.EmployeeDto;
 import com.hexaware.ams.dto.IssueTypeDto;
 import com.hexaware.ams.dto.ServiceRequestDto;
+import com.hexaware.ams.entity.Asset;
+import com.hexaware.ams.entity.AssetCategory;
 import com.hexaware.ams.entity.Employee;
 import com.hexaware.ams.entity.IssueType;
 import com.hexaware.ams.entity.ServiceRequest;
@@ -72,7 +75,11 @@ public class ServiceRequestServiceImp implements IServiceRequestService {
 		serviceRequest.setStatus(status);
 		
 		logger.info("Service Request status updated successfully");
-		return serviceRequestRepository.save(serviceRequest);
+		
+		return serviceRequest;
+		
+		
+		//return serviceRequestRepository.save(serviceRequest);
 	}
 
 	@Override
@@ -114,7 +121,7 @@ public class ServiceRequestServiceImp implements IServiceRequestService {
 	
 	
 	//Map ServiceRequestDto to ServiceRequest Entity
-	private ServiceRequest mapToEntity(ServiceRequestDto s1) {
+	public ServiceRequest mapToEntity(ServiceRequestDto s1) {
 		
 		ServiceRequest newServiceRequest = new ServiceRequest();
 		
@@ -125,6 +132,7 @@ public class ServiceRequestServiceImp implements IServiceRequestService {
 		newServiceRequest.setEmployee(eS1.mapToEntity(s1.getEmployee()));
 		
 		//Need to add Asset Map to Entity function here 
+		newServiceRequest.setAsset(mapToAssetEntity(s1.getAsset()));
 		
 		newServiceRequest.setDescription(s1.getDescription());
 		
@@ -138,5 +146,22 @@ public class ServiceRequestServiceImp implements IServiceRequestService {
 		
 		return newServiceRequest;	
 	
+	}
+	
+	public Asset mapToAssetEntity(AssetDto assetDto) {
+		
+		Asset a1 = new Asset();
+		if(assetDto.getAssetId() != 0) {
+			a1.setAssetId(assetDto.getAssetId());
+		}
+		
+		a1.setAssetName(assetDto.getAssetName());
+		a1.setCategory(new AssetCategory(assetDto.getCategory().getCategoryId(), assetDto.getCategory().getCategoryName()));
+		a1.setAssetModel(assetDto.getAssetModel());
+		a1.setManufacturingDate(assetDto.getManufacturingDate());
+		a1.setExpiryDate(assetDto.getExpiryDate());
+		a1.setAssetValue(assetDto.getAssetValue());
+		
+		return a1;
 	}
 }
