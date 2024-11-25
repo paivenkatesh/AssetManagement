@@ -60,7 +60,7 @@ public class ServiceRequest {
     private Date requestedAt;
     
     public enum Status {
-    	Pending, Inprogress, Completed
+    	Pending, InProgress, Completed
     }
 
 	public ServiceRequest() {
