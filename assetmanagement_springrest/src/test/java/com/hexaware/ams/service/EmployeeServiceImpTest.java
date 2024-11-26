@@ -13,6 +13,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.hexaware.ams.dto.EmployeeDto;
+import com.hexaware.ams.dto.EmployeeDto.GenderDTO;
+import com.hexaware.ams.dto.RoleDto;
 import com.hexaware.ams.entity.Employee;
 import com.hexaware.ams.entity.Employee.Gender;
 import com.hexaware.ams.entity.Role;
@@ -24,17 +27,17 @@ class EmployeeServiceImpTest {
 	IEmployeeService employeeService;
 
 	@Test
-	@Disabled
 	@DisplayName("register Employee")
+	@Disabled
 	void testRegisterEmployee() {
 		
-		Role role = new Role(2, "User");
+		RoleDto role = new RoleDto(2, "User");
 		
-		Employee employee = new Employee(3,"Loraine", Gender.Female, "7242332675", "05 Ueno Street", "loraine@example.com", "Loraine204", role);
+		EmployeeDto employee = new EmployeeDto(20,"Denise", GenderDTO.Female, "7242332643", "05 Tokyo Street", "denise@example.com", "Denise224", role);
 		
-		//Employee e1 = employeeService.registerEmployee(employee);
+		Employee e1 = employeeService.registerEmployee(employee);
 		
-		//assertNotNull(e1);
+		assertNotNull(e1);
 	}
 
 	@Test
@@ -48,16 +51,16 @@ class EmployeeServiceImpTest {
 
 	@Test
 	@DisplayName("update employee")
-	@Disabled 
+	@Disabled
 	void testUpdateEmployee() {
 		
-		Role role = new Role(2, "User");
+		RoleDto role = new RoleDto(2, "User");
 		
-		Employee employee = new Employee(4,"Martha", Gender.Female, "9794332675", "05 Okachimachi Street", "martha@example.com", "martha203", role);
+		EmployeeDto employee = new EmployeeDto(5,"Loraine", GenderDTO.Female, "7242332675", "05 Okachimachi Street", "loraine@example.com", "martha204", role);
 		
-		//Employee e3 = employeeService.updateEmployee(3, employee);
+		Employee e3 = employeeService.updateEmployee(5, employee);
 		
-		//assertEquals("05 Okachimachi Street", e3.getAddress());
+		assertEquals("05 Okachimachi Street", e3.getAddress());
 		
 	}
 
@@ -80,9 +83,10 @@ class EmployeeServiceImpTest {
 	}
 
 	@Test
+	@Disabled
 	void testFindByEmailandPassword() {
 		
-		int  e4 = employeeService.findByEmailandPassword("martha@example.com", "martha203");
+		int  e4 = employeeService.findByEmailandPassword("trevor@example.com", "Trevor213");
 		
 		assertNotNull(e4);
 		

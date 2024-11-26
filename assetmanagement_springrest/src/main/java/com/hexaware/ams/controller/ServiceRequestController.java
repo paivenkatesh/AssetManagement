@@ -68,6 +68,7 @@ public class ServiceRequestController {
 	}
 	
 	
+	
 	// Get all service Request 
 	@GetMapping("/allServiceRequests")
 	public ResponseEntity<List<ServiceRequest>> getAllServiceRequests(){
@@ -78,6 +79,7 @@ public class ServiceRequestController {
 	}
 	
 	
+	
 	// Find Service Requests by providing a Status
 	@GetMapping("/findByStatus/{status}")
 	public ResponseEntity<List<ServiceRequest>> findByStatus(@PathVariable String status){
@@ -86,5 +88,6 @@ public class ServiceRequestController {
 		
 		return ResponseEntity.ok(serviceRequestByStatus);
 	}
+	
 
 }

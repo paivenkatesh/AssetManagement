@@ -21,7 +21,7 @@ public class ServiceRequestDto {
 	
 	
 	public enum StatusDTO{
-		Pending, Inprogress, Completed
+		Pending, Transit, Completed
 	}
 
 }
