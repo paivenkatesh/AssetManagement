@@ -1,6 +1,6 @@
 package com.hexaware.ams.dto;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,7 +17,7 @@ public class ServiceRequestDto {
 	private String description;
 	private IssueTypeDto issueType;
 	private StatusDTO status = StatusDTO.Pending;
-	private Date requestedAt;
+	private LocalDateTime requestedAt;
 	
 	
 	public enum StatusDTO{
