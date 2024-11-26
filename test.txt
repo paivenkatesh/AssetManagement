@@ -59,6 +59,18 @@ Asset-Audit-Controller:
 
 => /api/audits/getall:   [GET]
 
+Authentication Controller:
+=> POST http://localhost:8080/api/auth/register:
+{
+    "name": "string",
+    "gender": "Male",
+    "contactNumber": "string",
+    "address": "string",
+    "email": "string",
+    "password": "string",
+    "roleId": 1
+}
+
 Employee-Controller:
 => /ams/employee/updateEmployee/{employeeId}:	[PUT]
 {
