@@ -46,8 +46,8 @@ public class ServiceRequestController {
 	
 	
 	// Update a Service Request By id
-	@PutMapping("/updateServiceRequest/{serviceRequestId}/{Status}")
-	public ResponseEntity<ServiceRequest> updateServiceRequest(@PathVariable int serviceRequestId, @RequestBody ServiceRequest.Status status) {
+	@PutMapping("/updateServiceRequest/{serviceRequestId}/{status}")
+	public ResponseEntity<ServiceRequest> updateServiceRequest(@PathVariable int serviceRequestId, @PathVariable ServiceRequest.Status status) {
 		
 		ServiceRequest updatedServiceRequest = serviceRequestService.updateServiceRequestStatus(serviceRequestId, status);
 		
@@ -79,7 +79,7 @@ public class ServiceRequestController {
 	
 	// Find Service Requests by providing a Status
 	@GetMapping("/findByStatus/{status}")
-	public ResponseEntity<List<ServiceRequest>> findByStatus(@PathVariable String status){
+	public ResponseEntity<List<ServiceRequest>> findByStatus(@PathVariable ServiceRequest.Status status){
 		
 		List<ServiceRequest> serviceRequestByStatus = serviceRequestService.findByStatus(status);
 		

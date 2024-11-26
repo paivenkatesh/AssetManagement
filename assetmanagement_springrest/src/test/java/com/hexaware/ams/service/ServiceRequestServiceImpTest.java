@@ -23,6 +23,7 @@ import com.hexaware.ams.dto.IssueTypeDto;
 import com.hexaware.ams.dto.RoleDto;
 import com.hexaware.ams.dto.ServiceRequestDto;
 import com.hexaware.ams.entity.ServiceRequest;
+import com.hexaware.ams.entity.ServiceRequest.Status;
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -89,7 +90,7 @@ class ServiceRequestServiceImpTest {
 	@Disabled
 	void testFindByStatus() {
 		
-		List<ServiceRequest> s6 = serviceRequestService.findByStatus("Completed");
+		List<ServiceRequest> s6 = serviceRequestService.findByStatus(Status.Completed);
 		
 		assertNotNull(s6);
 		

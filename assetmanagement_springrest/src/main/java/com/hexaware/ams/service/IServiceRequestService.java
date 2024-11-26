@@ -13,5 +13,5 @@ public interface IServiceRequestService {
 	ServiceRequest updateServiceRequestStatus(int serviceRequestId, ServiceRequest.Status status);
 	List<ServiceRequest> getServiceRequestsByEmployee(int employeeId);
 	List<ServiceRequest> getAllServiceRequests();
-	List<ServiceRequest> findByStatus(String status);
+	List<ServiceRequest> findByStatus(ServiceRequest.Status status);
 }

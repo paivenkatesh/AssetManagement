@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,6 +34,7 @@ public class AssetController {
 
     // Add a new asset
     @PostMapping("/add")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Asset> addAsset(@Valid @RequestBody AssetDto assetDto) {
         Asset newAsset = assetService.addAsset(assetDto);
         return new ResponseEntity<>(newAsset, HttpStatus.CREATED);
@@ -40,6 +42,7 @@ public class AssetController {
 
     // Update an existing asset
     @PutMapping("/update/{assetId}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Asset> updateAsset(@PathVariable Integer assetId, @Valid @RequestBody AssetDto assetDto) {
         assetDto.setAssetId(assetId);
         Asset updatedAsset = assetService.updateAsset(assetDto);
@@ -69,6 +72,7 @@ public class AssetController {
 
     // Delete an asset
     @DeleteMapping("/delete/{assetId}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Void> deleteAsset(@PathVariable Integer assetId) {
         assetService.deleteAsset(assetId);
         return ResponseEntity.noContent().build();

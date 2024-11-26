@@ -104,43 +104,8 @@ Employee-Controller:
 => /ams/employee/delete/{employeeId}:	[DELETE]
 
 Service-Request-Controller:
-=> /ams/servicerequest/createServiceRequest:	[POST]
-{
-  "serviceRequestId": 0,
-  "employee": {
-    "employeeId": 0,
-    "name": "string",
-    "gender": "Male",
-    "contactNumber": "string",
-    "address": "string",
-    "email": "string",
-    "password": "string",
-    "role": {
-      "roleId": 0,
-      "roleName": "string"
-    }
-  },
-  "asset": {
-    "assetId": 0,
-    "assetName": "string",
-    "category": {
-      "categoryId": 0,
-      "categoryName": "string"
-    },
-    "assetModel": "string",
-    "manufacturingDate": "2024-11-26",
-    "expiryDate": "2024-11-26",
-    "assetValue": 0,
-    "status": "Available"
-  },
-  "description": "string",
-  "issueType": {
-    "issueTypeId": 0,
-    "issueTypeName": "string"
-  },
-  "status": "Pending",
-  "requestedAt": "2024-11-26T09:18:54.906Z"
-}
+=> http://localhost:8080/ams/servicerequest/createServiceRequest/{employeeId}/{assetId}/{issueTypeId}:	[POST]
+// Pass text
 => /ams/servicerequest/updateServiceRequest/{serviceRequestId}/{Status}:    [PUT]
 
 => /ams/servicerequest/serviceRequestByEmployee/{employeeId}:	[GET]
