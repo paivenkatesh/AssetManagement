@@ -19,6 +19,7 @@ import com.hexaware.ams.dto.IssueTypeDto;
 import com.hexaware.ams.entity.IssueType;
 import com.hexaware.ams.service.IIssueTypeService;
 
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @RestController
@@ -32,6 +33,7 @@ public class IssueTypeController {
 	
 	//Create a new IssueType
 	@PostMapping("/addIssueType")
+	@Transactional
 	public ResponseEntity<IssueType> addIssueType(@Valid @RequestBody IssueTypeDto issueType) {
 		
 		IssueType newIssueType = issueTypeService.addIssueType(issueType);
@@ -51,7 +53,7 @@ public class IssueTypeController {
 	
 	
 	//Get an Issue Type by Name
-	@GetMapping("/issueTypeByName/{Name}")
+	@GetMapping("/issueTypeByName/{issueTypeName}")
 	public ResponseEntity<IssueType> getIssueTypeByName(@PathVariable String issueTypeName) {
 		
 		IssueType issueTypeByName = issueTypeService.getIssueTypeByName(issueTypeName);
@@ -73,6 +75,7 @@ public class IssueTypeController {
 	
 	// Update an Issue Type 
 	@PutMapping("/updateIssueType/{issueTypeId}/{issueTypeDetails}")
+	@Transactional
 	public ResponseEntity<IssueType> updateIssueType(@PathVariable int issueTypeId, @Valid @RequestBody IssueTypeDto issueTypeDetails) {
 		
 		IssueType updatedIssueType = issueTypeService.updateIssueType(issueTypeId, issueTypeDetails);
@@ -82,6 +85,7 @@ public class IssueTypeController {
 	
 	// Delete an Issue Type using Id
 	@DeleteMapping("/delete/{issueTypeId}")
+	@Transactional
 	public ResponseEntity<Void> deleteIssueType(@PathVariable int issueTypeId) {
 		
 		issueTypeService.deleteIssueType(issueTypeId);

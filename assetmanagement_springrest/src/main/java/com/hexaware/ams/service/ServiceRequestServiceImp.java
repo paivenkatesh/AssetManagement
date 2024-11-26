@@ -1,3 +1,5 @@
+
+
 package com.hexaware.ams.service;
 
 import java.util.List;
@@ -25,7 +27,6 @@ import com.hexaware.ams.repository.IServiceRequestRepository;
 import jakarta.transaction.Transactional;
 
 @Service
-@Transactional
 public class ServiceRequestServiceImp implements IServiceRequestService {
 
 	@Autowired
@@ -63,7 +64,7 @@ public class ServiceRequestServiceImp implements IServiceRequestService {
 		return serviceRequestRepository.findById(serviceRequestId)
 				.orElseThrow(() -> new ResourceNotFoundException("Service Request not found with id " + serviceRequestId) );
 	}
-
+	
 	@Override
 	@Transactional
 	public ServiceRequest updateServiceRequestStatus(int serviceRequestId, ServiceRequest.Status status) {
@@ -78,9 +79,8 @@ public class ServiceRequestServiceImp implements IServiceRequestService {
 		
 		return serviceRequest;
 		
-		
-		//return serviceRequestRepository.save(serviceRequest);
 	}
+	
 
 	@Override
 	public List<ServiceRequest> getServiceRequestsByEmployee(int employeeId) {
@@ -104,20 +104,19 @@ public class ServiceRequestServiceImp implements IServiceRequestService {
 		return serviceRequestRepository.findAll();
 	}
 
+	
+	
 	@Override
 	public List<ServiceRequest> findByStatus(String status) {
 		
-		try {
-			
-			logger.info("Getting Service Requests by Status");
-		return serviceRequestRepository.findByStatus(status);
 		
-		}catch(Exception e) {
-			
-			throw new MethodArgumentNotValidException("Enter a valid Status");
-		}
-	
+		List<ServiceRequest> s1 = serviceRequestRepository.findByStatus(status);
+		
+		return s1;
 	}
+	
+	
+	
 	
 	
 	//Map ServiceRequestDto to ServiceRequest Entity
@@ -148,6 +147,8 @@ public class ServiceRequestServiceImp implements IServiceRequestService {
 	
 	}
 	
+	
+	//Map AssetDto to AssetEntity
 	public Asset mapToAssetEntity(AssetDto assetDto) {
 		
 		Asset a1 = new Asset();
@@ -164,4 +165,8 @@ public class ServiceRequestServiceImp implements IServiceRequestService {
 		
 		return a1;
 	}
+
+	
+
+	
 }
