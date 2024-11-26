@@ -134,7 +134,7 @@ public class ServiceRequestServiceImp implements IServiceRequestService {
 	
 	
 	@Override
-	public List<ServiceRequest> findByStatus(String status) {
+	public List<ServiceRequest> findByStatus(ServiceRequest.Status status) {
 		
 		
 		List<ServiceRequest> s1 = serviceRequestRepository.findByStatus(status);
