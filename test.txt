@@ -1,2 +1,151 @@
 This is the first day of project 
 Edited on 12/11/2024
+Asset-Controller:
+=> /api/assets/add:	[POST]
+{
+  "assetId": 0,
+  "assetName": "string",
+  "category": {
+    "categoryId": 0,
+    "categoryName": "string"
+  },
+  "assetModel": "string",
+  "manufacturingDate": "2024-11-26",
+  "expiryDate": "2024-11-26",
+  "assetValue": 0,
+  "status": "Available"
+}
+
+=> /api/assets/update/{assetId}:	[PUT]
+{
+  "assetId": 0,
+  "assetName": "string",
+  "category": {
+    "categoryId": 0,
+    "categoryName": "string"
+  },
+  "assetModel": "string",
+  "manufacturingDate": "2024-11-26",
+  "expiryDate": "2024-11-26",
+  "assetValue": 0,
+  "status": "Available"
+}
+
+=> /api/assets/getbyid/{assetId}	[GET]
+
+=> /api/assets/getall	[GET]
+
+=> /api/assets/category/{categoryName}	[GET]
+
+=> /api/assets/delete/{assetId}		[DELETE]
+
+Asset-Borrowing-Controller:
+=> /api/borrowings/borrow/{employeeId}/{assetId}:   [POST]
+
+=> /api/borrowings/return/{borrowingId}:   [PUT]
+
+=> /api/borrowings/getbyId/{employeeId}:   [GET]
+
+=> /api/borrowings/active:   [GET]
+
+Asset-Audit-Controller:
+=> /api/audits/send/{employeeId}/{assetId}:   [POST]
+
+=> /api/audits/update/{auditId}/{auditStatus}:   [PUT]
+
+=> /api/audits/getbyid/{auditId}:   [GET]
+
+=> /api/audits/getbyid/{employeeId}:   [GET]
+
+=> /api/audits/getall:   [GET]
+
+Employee-Controller:
+=> /ams/employee/updateEmployee/{employeeId}:	[PUT]
+{
+  "employeeId": 0,
+  "name": "string",
+  "gender": "Male",
+  "contactNumber": "string",
+  "address": "string",
+  "email": "string",
+  "password": "string",
+  "role": {
+    "roleId": 0,
+    "roleName": "string"
+  }
+}
+
+=> /ams/employee/getEmployeeById/{employeeId}:	[GET]
+
+=> /ams/employee/getAllEmployee:	[GET]
+
+=> /ams/employee/delete/{employeeId}:	[DELETE]
+
+Service-Request-Controller:
+=> /ams/servicerequest/createServiceRequest:	[POST]
+{
+  "serviceRequestId": 0,
+  "employee": {
+    "employeeId": 0,
+    "name": "string",
+    "gender": "Male",
+    "contactNumber": "string",
+    "address": "string",
+    "email": "string",
+    "password": "string",
+    "role": {
+      "roleId": 0,
+      "roleName": "string"
+    }
+  },
+  "asset": {
+    "assetId": 0,
+    "assetName": "string",
+    "category": {
+      "categoryId": 0,
+      "categoryName": "string"
+    },
+    "assetModel": "string",
+    "manufacturingDate": "2024-11-26",
+    "expiryDate": "2024-11-26",
+    "assetValue": 0,
+    "status": "Available"
+  },
+  "description": "string",
+  "issueType": {
+    "issueTypeId": 0,
+    "issueTypeName": "string"
+  },
+  "status": "Pending",
+  "requestedAt": "2024-11-26T09:18:54.906Z"
+}
+=> /ams/servicerequest/updateServiceRequest/{serviceRequestId}/{Status}:    [PUT]
+
+=> /ams/servicerequest/serviceRequestByEmployee/{employeeId}:	[GET]
+
+=> /ams/servicerequest/serviceRequestById/{serviceRequestId}:	[GET]
+
+=> /ams/servicerequest/findByStatus/{status}:	[GET]
+
+=> /ams/servicerequest/allServiceRequests:	[GET]
+
+Issue-Type-Controller:
+=> /ams/IssueType/addIssueType:	[POST]
+{
+  "issueTypeId": 0,
+  "issueTypeName": "string"
+}
+
+=> /ams/IssueType/updateIssueType/{issueTypeId}/{issueTypeDetails}:	[PUT]
+{
+  "issueTypeId": 0,
+  "issueTypeName": "string"
+}
+
+=> /ams/IssueType/issueTypeByName/{Name}:	[GET]
+
+=> /ams/IssueType/issueTypeById/{issueTypeId}:	[GET]
+
+=> /ams/IssueType/allIssueTypes:	[GET]
+
+=> /ams/IssueType/delete/{issueTypeId}:	[DELETE]
