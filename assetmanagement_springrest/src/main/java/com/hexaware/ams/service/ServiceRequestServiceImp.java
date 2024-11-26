@@ -2,6 +2,7 @@
 
 package com.hexaware.ams.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -19,9 +20,13 @@ import com.hexaware.ams.entity.Employee;
 import com.hexaware.ams.entity.IssueType;
 import com.hexaware.ams.entity.ServiceRequest;
 import com.hexaware.ams.entity.ServiceRequest.Status;
+import com.hexaware.ams.exception.BadRequestException;
 import com.hexaware.ams.exception.MethodArgumentNotValidException;
 import com.hexaware.ams.exception.ResourceAlreadyExistsException;
 import com.hexaware.ams.exception.ResourceNotFoundException;
+import com.hexaware.ams.repository.IAssetRepository;
+import com.hexaware.ams.repository.IEmployeeRepository;
+import com.hexaware.ams.repository.IIssueTypeRepository;
 import com.hexaware.ams.repository.IServiceRequestRepository;
 
 import jakarta.transaction.Transactional;
@@ -38,23 +43,45 @@ public class ServiceRequestServiceImp implements IServiceRequestService {
 	@Autowired
 	private IssueTypeServiceImp iTS1;
 	
+	@Autowired
+	private IEmployeeRepository employeeRepository;
+	
+	@Autowired
+	private IAssetRepository assetRepository;
+	
+	@Autowired
+	private IIssueTypeRepository issueTypeRepository;
+	
 	Logger logger = LoggerFactory.getLogger(ServiceRequestServiceImp.class);
 	
 	@Override
-	@Transactional
-	public ServiceRequest createServiceRequest(ServiceRequestDto serviceRequest) {
+	public ServiceRequest createServiceRequest(int employeeId, int assetId, int issueTypeId, String Description) {
 		
-		if(serviceRequestRepository.existsById(serviceRequest.getServiceRequestId())) {
-			
-			logger.warn("Service Request has duplicate values ");
-			throw new ResourceAlreadyExistsException("Service Request already exists " + serviceRequest.getServiceRequestId());
+		try {
+		Employee e1 = employeeRepository.findById(employeeId)
+				.orElseThrow(() -> new ResourceNotFoundException("Employee not found with ID: " + employeeId));
+		
+		Asset a1 = assetRepository.findById(assetId)
+				.orElseThrow(() -> new ResourceNotFoundException("Asset Not Found with id " + assetId));
+		
+		IssueType i1 = issueTypeRepository.findById(issueTypeId)
+				.orElseThrow(() -> new ResourceNotFoundException("Issue Type not Found with id " + issueTypeId));
+		
+		ServiceRequest serviceRequest = new ServiceRequest();
+		
+		serviceRequest.setEmployee(e1);
+		serviceRequest.setAsset(a1);
+		serviceRequest.setDescription(Description);
+		serviceRequest.setIssueType(i1);
+		serviceRequest.setStatus(Status.Pending);
+		serviceRequest.setRequestedAt(LocalDateTime.now());
+		
+		return serviceRequestRepository.save(serviceRequest);
 		}
-		
-		ServiceRequest createServiceRequest = mapToEntity(serviceRequest);
-		
-		logger.info("Service Request Successfully created");
-		
-		return serviceRequestRepository.save(createServiceRequest);
+		catch(Exception e) {
+			
+			throw new BadRequestException("Failed to create a new Service Request");
+		}
 	}
 
 	@Override
@@ -165,6 +192,8 @@ public class ServiceRequestServiceImp implements IServiceRequestService {
 		
 		return a1;
 	}
+
+	
 
 	
 

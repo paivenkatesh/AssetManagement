@@ -1,5 +1,6 @@
 package com.hexaware.ams.entity;
 
+import java.time.LocalDateTime;
 /*
  * @Author: Venkatesh Pai
  * Service Request Entity
@@ -57,7 +58,7 @@ public class ServiceRequest {
 
     @NotNull(message = "Date cannot be null")
     @Column(name = "requested_at", nullable = false)
-    private Date requestedAt;
+	private LocalDateTime requestedAt;
     
     public enum Status {
     	Pending, Transit, Completed
@@ -72,7 +73,7 @@ public class ServiceRequest {
 			@NotNull(message = "Asset cannot be null") Asset asset,
 			@NotNull(message = "Description cannot be null") @Size(min = 5, message = "Description must be at least 5 characters") String description,
 			IssueType issueType, @NotNull(message = "Status cannot be null") Status status,
-			@NotNull(message = "Date cannot be null") Date requestedAt) {
+			@NotNull(message = "Date cannot be null") LocalDateTime requestedAt) {
 		super();
 		this.serviceRequestId = serviceRequestId;
 		this.employee = employee;
@@ -134,11 +135,11 @@ public class ServiceRequest {
 		this.status = status;
 	}
 
-	public Date getRequestedAt() {
+	public LocalDateTime getRequestedAt() {
 		return requestedAt;
 	}
 
-	public void setRequestedAt(Date requestedAt) {
+	public void setRequestedAt(LocalDateTime requestedAt) {
 		this.requestedAt = requestedAt;
 	}
 

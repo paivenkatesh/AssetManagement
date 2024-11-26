@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,15 +27,13 @@ public class ServiceRequestController {
 	IServiceRequestService serviceRequestService;
 	
 	
-	// Create a new Service Request
-	@PostMapping("/createServiceRequest")
-	public ResponseEntity<ServiceRequest> createServiceRequest(@Valid @RequestBody ServiceRequestDto serviceRequest) {
+	//Create a new Service Request
+	@PostMapping("/createServiceRequest/{employeeId}/{assetId}/{issueTypeId}")
+	public ResponseEntity<ServiceRequest> createServiceRequest(@PathVariable int employeeId, @PathVariable int assetId, @PathVariable int issueTypeId, @RequestBody String Description) {
 		
-		ServiceRequest newServiceRequest = serviceRequestService.createServiceRequest(serviceRequest);
-		
-		return new ResponseEntity<>(newServiceRequest, HttpStatus.CREATED);
+		ServiceRequest newServiceRequest = serviceRequestService.createServiceRequest(employeeId, assetId, issueTypeId, Description);
+		return new ResponseEntity<>(newServiceRequest,HttpStatus.CREATED);
 	}
-	
 	
 	//Get Service Request By its Id
 	@GetMapping("/getServiceRequestById/{serviceRequestId}")

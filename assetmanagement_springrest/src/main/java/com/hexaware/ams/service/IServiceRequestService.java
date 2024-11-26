@@ -8,7 +8,7 @@ import com.hexaware.ams.entity.ServiceRequest;
 
 public interface IServiceRequestService {
 
-	ServiceRequest createServiceRequest(ServiceRequestDto serviceRequestDto);
+	ServiceRequest createServiceRequest(int employeeId, int assetId, int issueTypeId, String Description);
 	ServiceRequest getServiceRequestById(int serviceRequestId);
 	ServiceRequest updateServiceRequestStatus(int serviceRequestId, ServiceRequest.Status status);
 	List<ServiceRequest> getServiceRequestsByEmployee(int employeeId);
