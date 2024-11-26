@@ -35,7 +35,11 @@ Asset-Controller:
 
 => /api/assets/getall	[GET]
 
-=> /api/assets/category/{categoryName}	[GET]
+=> /api/assets/category:	[GET]
+{
+    "categoryId": 1,
+    "categoryName": "Electronics"
+}
 
 => /api/assets/delete/{assetId}		[DELETE]
 
@@ -44,7 +48,7 @@ Asset-Borrowing-Controller:
 
 => /api/borrowings/return/{borrowingId}:   [PUT]
 
-=> /api/borrowings/getbyId/{employeeId}:   [GET]
+=> /api/borrowings/getbyeid/{employeeId}:   [GET]
 
 => /api/borrowings/active:   [GET]
 
@@ -69,6 +73,12 @@ Authentication Controller:
     "email": "string",
     "password": "string",
     "roleId": 1
+}
+
+=> POST http://localhost:8080/api/auth/authenticate:
+{
+    "email": "john@example.com",
+    "password": "password123"
 }
 
 Employee-Controller:

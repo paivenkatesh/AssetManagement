@@ -61,8 +61,8 @@ public class AssetController {
     }
 
     // Get assets by category
-    @GetMapping("/category/{categoryName}")
-    public ResponseEntity<List<Asset>> getAssetsByCategory(@PathVariable AssetCategory categoryName) {
+    @GetMapping("/category")
+    public ResponseEntity<List<Asset>> getAssetsByCategory(@RequestBody AssetCategory categoryName) {
         List<Asset> assets = assetService.getAssetsByCategory(categoryName);
         return ResponseEntity.ok(assets);
     }
