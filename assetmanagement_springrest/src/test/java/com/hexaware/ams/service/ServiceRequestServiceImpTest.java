@@ -36,27 +36,12 @@ class ServiceRequestServiceImpTest {
 	@Disabled
 	void testCreateServiceRequest() {
 		
-		RoleDto r1 = new RoleDto(1, "Admin");
+		ServiceRequest s1 = serviceRequestService.createServiceRequest(1, 1, 2, "Test Request for checking");
 		
-		EmployeeDto e1 = new EmployeeDto(14,"Harvey", GenderDTO.Male, "9780606088", "12 Manhattan NY", "harvey@example.com", "Harvey214", r1);
-		
-		AssetCategoryDto ac1 = new AssetCategoryDto(1, "Laptop");
-		
-		AssetDto a1 = new AssetDto(1, "Laptop", ac1, "Dell", LocalDate.of(2020, 11, 24), LocalDate.of(2030, 11, 24), 50000, AssetDto.Status.Available);
-		
-		IssueTypeDto i1 = new IssueTypeDto(2, "Software Issue");
-		
-		ServiceRequestDto s1 = new ServiceRequestDto(10, e1, a1, "Borrow Request",i1, ServiceRequestDto.StatusDTO.Pending, Date.valueOf("2024-11-18"));
-		
-		
-		ServiceRequest s2 = serviceRequestService.createServiceRequest(s1);
-		
-		assertNotNull(s2);
-		
-		assertEquals(1, s2.getServiceRequestId());
-		
+		assertEquals(1, s1.getServiceRequestId());
 	}
 
+	
 	@Test
 	@Order(2)
 	void testGetServiceRequestById() {
