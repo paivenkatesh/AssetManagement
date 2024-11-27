@@ -1,7 +1,10 @@
-
-
 package com.hexaware.ams.service;
 
+/*
+ * Author: Venkatesh Pai
+ * Date: 09-11-24
+ * Description: Service Request service implementation
+ */
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -54,7 +57,10 @@ public class ServiceRequestServiceImp implements IServiceRequestService {
 	
 	Logger logger = LoggerFactory.getLogger(ServiceRequestServiceImp.class);
 	
+	
+	//Create a new ServiceRequest for a borrowed Asset
 	@Override
+	@Transactional
 	public ServiceRequest createServiceRequest(int employeeId, int assetId, int issueTypeId, String Description) {
 		
 		try {
@@ -84,6 +90,8 @@ public class ServiceRequestServiceImp implements IServiceRequestService {
 		}
 	}
 
+	
+	//Get an existing ServiceRequest by its Id
 	@Override
 	public ServiceRequest getServiceRequestById(int serviceRequestId) {
 		
@@ -92,6 +100,8 @@ public class ServiceRequestServiceImp implements IServiceRequestService {
 				.orElseThrow(() -> new ResourceNotFoundException("Service Request not found with id " + serviceRequestId) );
 	}
 	
+	
+	//Update the Status of an existing ServiceRequest(Transit, Completed)
 	@Override
 	@Transactional
 	public ServiceRequest updateServiceRequestStatus(int serviceRequestId, ServiceRequest.Status status) {
@@ -109,6 +119,7 @@ public class ServiceRequestServiceImp implements IServiceRequestService {
 	}
 	
 
+	//Get all ServiceRequests for particular Employee by Id
 	@Override
 	public List<ServiceRequest> getServiceRequestsByEmployee(int employeeId) {
 		
@@ -124,6 +135,8 @@ public class ServiceRequestServiceImp implements IServiceRequestService {
 		
 	}
 
+	
+	//Get all the ServiceRequests
 	@Override
 	public List<ServiceRequest> getAllServiceRequests() {
 		
@@ -132,7 +145,7 @@ public class ServiceRequestServiceImp implements IServiceRequestService {
 	}
 
 	
-	
+	//Find the ServiceRequests by their Status
 	@Override
 	public List<ServiceRequest> findByStatus(ServiceRequest.Status status) {
 		
@@ -143,9 +156,7 @@ public class ServiceRequestServiceImp implements IServiceRequestService {
 	}
 	
 	
-	
-	
-	
+	//Helper method
 	//Map ServiceRequestDto to ServiceRequest Entity
 	public ServiceRequest mapToEntity(ServiceRequestDto s1) {
 		
@@ -174,7 +185,7 @@ public class ServiceRequestServiceImp implements IServiceRequestService {
 	
 	}
 	
-	
+	//Helper Method
 	//Map AssetDto to AssetEntity
 	public Asset mapToAssetEntity(AssetDto assetDto) {
 		

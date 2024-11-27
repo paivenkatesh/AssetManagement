@@ -1,10 +1,13 @@
 package com.hexaware.ams.entity;
 
-import java.time.LocalDateTime;
 /*
  * @Author: Venkatesh Pai
+ * Date: 16-11-24
+ * Description:Service Request Entity with Mappings
  * Service Request Entity
  */
+import java.time.LocalDateTime;
+
 import java.util.Date;
 
 import jakarta.persistence.Column;

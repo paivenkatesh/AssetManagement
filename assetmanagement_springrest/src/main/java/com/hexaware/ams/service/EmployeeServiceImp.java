@@ -1,5 +1,11 @@
 package com.hexaware.ams.service;
 
+/*
+ * Author: Venkatesh Pai
+ * Date: 09-11-2024
+ * Description: Employee Service Implementation
+ */
+
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -21,7 +27,6 @@ import com.hexaware.ams.repository.IEmployeeRepository;
 import jakarta.transaction.Transactional;
 
 @Service
-@Transactional
 public class EmployeeServiceImp implements IEmployeeService {
 
 	@Autowired
@@ -29,6 +34,8 @@ public class EmployeeServiceImp implements IEmployeeService {
 	
 	Logger logger = LoggerFactory.getLogger(EmployeeServiceImp.class);
 
+	
+	//Method to register an Employee
 	@Override
 	@Transactional
 	public Employee registerEmployee(EmployeeDto employeeDto) {
@@ -56,6 +63,8 @@ public class EmployeeServiceImp implements IEmployeeService {
 		
 	}
 
+	
+	//Get an Employee by his Id
 	@Override
 	public Employee getEmployeeById(int employeeId) {
 
@@ -64,6 +73,7 @@ public class EmployeeServiceImp implements IEmployeeService {
 				.orElseThrow(() -> new ResourceNotFoundException("Employee not found with id: " + employeeId));
 	}
 
+	//Update an existing employee Details
 	@Override
 	@Transactional
 	public Employee updateEmployee(int employeeId,EmployeeDto employeeDetails) {
@@ -96,6 +106,8 @@ public class EmployeeServiceImp implements IEmployeeService {
 
 	}
 
+	
+	//Delete an Employee's Details
 	@Override
 	@Transactional
 	public void deleteEmployee(int employeeId) {

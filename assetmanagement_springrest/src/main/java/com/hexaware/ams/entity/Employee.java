@@ -1,5 +1,11 @@
 package com.hexaware.ams.entity;
 
+/*
+ * @Author: Venkatesh Pai
+ * Date: 16-11-24
+ * Employee Entity 
+ * Description: Employee Entity with mappings
+ */
 import java.util.Collection;
 import java.util.List;
 
@@ -7,10 +13,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-/*
- * @Author: Venkatesh Pai
- * Employee Entity 
- */
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

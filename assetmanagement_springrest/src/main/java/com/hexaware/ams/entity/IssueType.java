@@ -2,6 +2,8 @@ package com.hexaware.ams.entity;
 
 /*
  * @Author: Venkatesh Pai
+ * Date: 16-11-24
+ * Description: IssueType Entity with mappings
  * Issue Type Entity
  */
 import jakarta.persistence.Column;
