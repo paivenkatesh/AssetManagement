@@ -1,8 +1,9 @@
 package com.hexaware.ams.service;
 /*
-@Author: Arghya Mandal
-Date: 9-11-2024
-*/
+ * @Author: Arghya Mandal
+ * @Date: 09-11-2024
+ * @Description: Service implementation for managing AssetBorrowing entities. This class provides methods for borrowing assets, returning assets, retrieving borrowings by employee, and fetching all active borrowings. It ensures proper validation and exception handling during asset borrowing operations and uses repositories for database interactions.
+ */
 import java.time.LocalDateTime;
 import java.util.List;
 

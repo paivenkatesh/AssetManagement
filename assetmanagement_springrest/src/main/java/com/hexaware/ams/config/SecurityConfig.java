@@ -1,5 +1,12 @@
 package com.hexaware.ams.config;
 
+/*
+ * @Author: Arghya Mandal
+ * Date: 26-11-2024
+ * Description: Security configuration class that sets up JWT authentication, password encoding, and 
+ * session management policies. It disables CSRF protection, permits all requests to the authentication 
+ * endpoints, and ensures that all other requests require authentication.
+ */
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

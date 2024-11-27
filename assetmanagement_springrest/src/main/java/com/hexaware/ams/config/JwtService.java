@@ -1,5 +1,9 @@
 package com.hexaware.ams.config;
-
+/*
+ * @Author: Arghya Mandal
+ * Date: 26-11-2024
+ * Description: Service for generating and validating JWT tokens, and extracting claims like username and expiration.
+ */
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;

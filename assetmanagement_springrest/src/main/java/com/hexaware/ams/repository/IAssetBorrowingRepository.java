@@ -1,8 +1,9 @@
 package com.hexaware.ams.repository;
 /*
-@Author: Arghya Mandal
-Date: 8-11-2024
-*/
+ * @Author: Arghya Mandal
+ * @Date: 08-11-2024
+ * @Description: Repository interface for managing AssetBorrowing entities. It extends JpaRepository to provide CRUD operations and includes custom query methods to find AssetBorrowing records by Employee and by Status.
+ */
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,4 +1,9 @@
 package com.hexaware.ams.controller;
+/*
+ * @Author: Arghya Mandal
+ * @Date: 16-11-2024
+ * @Description: Controller for managing asset operations including adding, updating, retrieving, and deleting assets.
+ */
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hexaware.ams.dto.AssetDto;
-/*
-@Author: Arghya Mandal
-Date: 16-11-2024
-*/
 import com.hexaware.ams.entity.Asset;
 import com.hexaware.ams.entity.AssetCategory;
 import com.hexaware.ams.service.IAssetService;

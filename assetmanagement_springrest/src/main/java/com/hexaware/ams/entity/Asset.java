@@ -1,8 +1,9 @@
 package com.hexaware.ams.entity;
 /*
-@Author: Arghya Mandal
-Date: 2-11-2024
-*/
+ * @Author: Arghya Mandal
+ * @Date: 02-11-2024
+ * @Description: Entity class representing an asset, including attributes such as asset ID, name, category, model, manufacturing and expiry dates, value, and status.
+ */
 import java.time.LocalDate;
 
 import jakarta.persistence.Column;

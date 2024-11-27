@@ -2,7 +2,8 @@ package com.hexaware.ams.exception;
 
 /*
  * @Author: Arghya & Venkatesh
- * Date: 8-11-24
+ * @Date: 08-11-2024
+ * @Description: Global exception handler class that handles various exceptions thrown in the application. It provides custom responses for different types of exceptions, including resource not found, bad request, resource already exists, method argument validation errors, and unauthorized access.
  */
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

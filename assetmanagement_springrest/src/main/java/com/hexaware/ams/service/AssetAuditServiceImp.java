@@ -1,4 +1,9 @@
 package com.hexaware.ams.service;
+/*
+ * @Author: Arghya Mandal
+ * @Date: 09-11-2024
+ * @Description: Service implementation for managing AssetAudit entities. This class provides methods to send audit requests, update audit statuses, retrieve audits by employee, and fetch all audits. It uses repositories to interact with the database and handles exceptions for resource not found scenarios.
+ */
 import java.time.LocalDateTime;
 /*
 @Author: Arghya Mandal

@@ -1,8 +1,9 @@
 package com.hexaware.ams.entity;
 /*
-@Author: Arghya Mandal
-Date: 2-11-2024
-*/
+ * @Author: Arghya Mandal
+ * @Date: 02-11-2024
+ * @Description: Entity class representing an asset audit record, including attributes such as audit ID, employee, asset, audit status, and timestamps for requested and updated times.
+ */
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;

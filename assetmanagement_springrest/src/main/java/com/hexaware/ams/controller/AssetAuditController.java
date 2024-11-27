@@ -1,8 +1,10 @@
 package com.hexaware.ams.controller;
 /*
-@Author: Arghya Mandal
-Date: 16-11-2024
-*/
+ * @Author: Arghya Mandal
+ * Date: 16-11-2024
+ * Description: Controller for handling asset audit requests. It includes endpoints to create, update, 
+ * and retrieve asset audits by employee, audit ID, and all audits.
+ */
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;

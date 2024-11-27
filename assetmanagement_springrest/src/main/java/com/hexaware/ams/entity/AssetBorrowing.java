@@ -1,8 +1,9 @@
 package com.hexaware.ams.entity;
 /*
-@Author: Arghya Mandal
-Date: 2-11-2024
-*/
+ * @Author: Arghya Mandal
+ * @Date: 02-11-2024
+ * @Description: Entity class representing an asset borrowing record, including attributes such as borrowing ID, employee, asset, timestamps for when the asset was borrowed and returned, and the current status of the borrowing.
+ */
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;

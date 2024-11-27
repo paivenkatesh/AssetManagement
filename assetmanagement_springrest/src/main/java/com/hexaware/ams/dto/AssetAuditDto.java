@@ -1,5 +1,9 @@
 package com.hexaware.ams.dto;
-
+/*
+ * @Author: Arghya Mandal
+ * @Date: 23-11-2024
+ * @Description: Data Transfer Object for asset audit information, including audit status and timestamps.
+ */
 import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;

@@ -1,8 +1,10 @@
 package com.hexaware.ams.controller;
 /*
-@Author: Arghya Mandal
-Date: 16-11-2024
-*/
+ * @Author: Arghya Mandal
+ * Date: 16-11-2024
+ * Description: Controller for managing asset borrowings, including endpoints for borrowing, returning, 
+ * and retrieving active or employee-specific borrowings.
+ */
 import com.hexaware.ams.entity.AssetBorrowing;
 import com.hexaware.ams.service.IAssetBorrowingService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,5 +1,9 @@
 package com.hexaware.ams.dto;
-
+/*
+ * @Author: Arghya Mandal
+ * @Date: 23-11-2024
+ * @Description: Data Transfer Object for asset information, including asset details such as name, category, model, dates, value, and status.
+ */
 import java.time.LocalDate;
 
 

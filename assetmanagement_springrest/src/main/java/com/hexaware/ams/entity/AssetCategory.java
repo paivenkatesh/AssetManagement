@@ -1,8 +1,9 @@
 package com.hexaware.ams.entity;
 /*
-@Author: Arghya Mandal
-Date: 2-11-2024
-*/
+ * @Author: Arghya Mandal
+ * @Date: 02-11-2024
+ * @Description: Entity class representing an asset category, including attributes such as category ID and category name, with validation constraints for the category name.
+ */
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

@@ -1,5 +1,9 @@
 package com.hexaware.ams.config;
-
+/*
+ * @Author: Arghya Mandal
+ * Date: 26-11-2024
+ * Description: Intercepts requests to validate JWT tokens and sets authentication in the SecurityContext if the token is valid.
+ */
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
