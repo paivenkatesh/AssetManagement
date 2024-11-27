@@ -11,6 +11,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,6 +36,7 @@ public class ServiceRequestController {
 	
 	//Create a new Service Request
 	@PostMapping("/createServiceRequest/{employeeId}/{assetId}/{issueTypeId}")
+	@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
 	public ResponseEntity<ServiceRequest> createServiceRequest(@PathVariable int employeeId, @PathVariable int assetId, @PathVariable int issueTypeId, @RequestBody String Description) {
 		
 		ServiceRequest newServiceRequest = serviceRequestService.createServiceRequest(employeeId, assetId, issueTypeId, Description);
@@ -43,6 +45,7 @@ public class ServiceRequestController {
 	
 	//Get Service Request By its Id
 	@GetMapping("/getServiceRequestById/{serviceRequestId}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<ServiceRequest> getServiceRequestById(@PathVariable int serviceRequestId) {
 		
 		ServiceRequest serviceRequest = serviceRequestService.getServiceRequestById(serviceRequestId);
@@ -53,6 +56,7 @@ public class ServiceRequestController {
 	
 	// Update a Service Request By id
 	@PutMapping("/updateServiceRequest/{serviceRequestId}/{status}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<ServiceRequest> updateServiceRequest(@PathVariable int serviceRequestId, @PathVariable ServiceRequest.Status status) {
 		
 		ServiceRequest updatedServiceRequest = serviceRequestService.updateServiceRequestStatus(serviceRequestId, status);
@@ -63,6 +67,7 @@ public class ServiceRequestController {
 	
 	//Get service Requests By Employee Id 
 	@GetMapping("/serviceRequestByEmployee/{employeeId}")
+	@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
 	public ResponseEntity<List<ServiceRequest>> getServiceRequestsByEmployee(@PathVariable int employeeId){
 		
 		List<ServiceRequest> employeeserviceRequest = serviceRequestService.getServiceRequestsByEmployee(employeeId);
@@ -74,6 +79,7 @@ public class ServiceRequestController {
 	
 	// Get all service Request 
 	@GetMapping("/allServiceRequests")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<List<ServiceRequest>> getAllServiceRequests(){
 		
 		List<ServiceRequest> serviceRequest = serviceRequestService.getAllServiceRequests();
@@ -85,6 +91,7 @@ public class ServiceRequestController {
 	
 	// Find Service Requests by providing a Status
 	@GetMapping("/findByStatus/{status}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<List<ServiceRequest>> findByStatus(@PathVariable ServiceRequest.Status status){
 		
 		List<ServiceRequest> serviceRequestByStatus = serviceRequestService.findByStatus(status);

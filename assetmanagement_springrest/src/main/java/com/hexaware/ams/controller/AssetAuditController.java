@@ -10,6 +10,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,6 +31,7 @@ public class AssetAuditController {
 
     // Create a new audit request
     @PostMapping("/send/{employeeId}/{assetId}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<AssetAudit> sendAuditRequest(@PathVariable int employeeId, @PathVariable int assetId) {
         AssetAudit audit = assetAuditService.sendAuditRequest(employeeId, assetId);
         return new ResponseEntity<>(audit, HttpStatus.CREATED);
@@ -37,6 +39,7 @@ public class AssetAuditController {
 
     // Update audit status
     @PutMapping("/update/{auditId}/{auditStatus}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<AssetAudit> updateAuditStatus(@PathVariable int auditId, @PathVariable AssetAuditDto.AuditStatus auditStatus) {
         AssetAudit updatedAudit = assetAuditService.updateAuditStatus(auditId, auditStatus);
         return ResponseEntity.ok(updatedAudit);
@@ -44,6 +47,7 @@ public class AssetAuditController {
 
     // Get audits by employee
     @GetMapping("/getbyeid/{employeeId}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<AssetAudit>> getAuditsByEmployee(@PathVariable int employeeId) {
         List<AssetAudit> audits = assetAuditService.getAuditsByEmployee(employeeId);
         return ResponseEntity.ok(audits);
@@ -51,6 +55,7 @@ public class AssetAuditController {
 
     // Get all audits
     @GetMapping("/getall")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<AssetAudit>> getAllAudits() {
         List<AssetAudit> audits = assetAuditService.getAllAudits();
         return ResponseEntity.ok(audits);
@@ -58,6 +63,7 @@ public class AssetAuditController {
 
     // Get audit by ID
     @GetMapping("/getbyid/{auditId}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<AssetAudit> getAuditById(@PathVariable int auditId) {
         AssetAudit audit = assetAuditService.getAuditById(auditId);
         return ResponseEntity.ok(audit);

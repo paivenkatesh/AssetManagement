@@ -35,7 +35,7 @@ public class AssetController {
 
     // Add a new asset
     @PostMapping("/add")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Asset> addAsset(@Valid @RequestBody AssetDto assetDto) {
         Asset newAsset = assetService.addAsset(assetDto);
         return new ResponseEntity<>(newAsset, HttpStatus.CREATED);
@@ -43,7 +43,7 @@ public class AssetController {
 
     // Update an existing asset
     @PutMapping("/update/{assetId}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Asset> updateAsset(@PathVariable Integer assetId, @Valid @RequestBody AssetDto assetDto) {
         assetDto.setAssetId(assetId);
         Asset updatedAsset = assetService.updateAsset(assetDto);
@@ -52,6 +52,7 @@ public class AssetController {
 
     // Get asset by ID
     @GetMapping("/getbyid/{assetId}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public ResponseEntity<Asset> getAssetById(@PathVariable Integer assetId) {
         Asset asset = assetService.getAssetById(assetId);
         return ResponseEntity.ok(asset);
@@ -59,6 +60,7 @@ public class AssetController {
 
     // Get all assets
     @GetMapping("/getall")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public ResponseEntity<List<Asset>> getAllAssets() {
         List<Asset> assets = assetService.getAllAssets();
         return ResponseEntity.ok(assets);
@@ -66,6 +68,7 @@ public class AssetController {
 
     // Get assets by category
     @GetMapping("/category")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public ResponseEntity<List<Asset>> getAssetsByCategory(@RequestBody AssetCategory categoryName) {
         List<Asset> assets = assetService.getAssetsByCategory(categoryName);
         return ResponseEntity.ok(assets);
@@ -73,7 +76,7 @@ public class AssetController {
 
     // Delete an asset
     @DeleteMapping("/delete/{assetId}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteAsset(@PathVariable Integer assetId) {
         assetService.deleteAsset(assetId);
         return ResponseEntity.noContent().build();
