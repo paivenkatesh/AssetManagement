@@ -10,6 +10,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,6 +50,7 @@ public class EmployeeController {
 
 	// Get Employee By Id
 	@GetMapping("/getEmployeeById/{employeeId}")
+	@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
 	public ResponseEntity<Employee> getEmployeeById(@PathVariable int employeeId) {
 
 		Employee employee = employeeService.getEmployeeById(employeeId);
@@ -59,6 +61,7 @@ public class EmployeeController {
 
 	// Update existing Employee details
 	@PutMapping("/updateEmployee/{employeeId}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Employee> updateEmployee(@Valid @PathVariable  int employeeId, @RequestBody EmployeeDto employeeDetails) {
 
 		Employee updateEmployee = employeeService.updateEmployee(employeeId, employeeDetails);
@@ -68,6 +71,7 @@ public class EmployeeController {
 
 	// Delete an Employee Record
 	@DeleteMapping("/delete/{employeeId}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Void> deleteEmployee(@PathVariable int employeeId) {
 
 		employeeService.deleteEmployee(employeeId);
@@ -77,6 +81,7 @@ public class EmployeeController {
 
 	// List of all current Employees
 	@GetMapping("/getAllEmployee")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<List<Employee>> getAllEmployee() {
 
 		List<Employee> employee = employeeService.getAllEmployee();

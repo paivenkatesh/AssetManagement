@@ -46,7 +46,7 @@ public class AuthenticationController {
     private AuthenticationManager authenticationManager;
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest request) {
+    public ResponseEntity<String> register(@RequestBody RegisterRequest request) {
     	// Check if email already exists
     	if (employeeRepository.findByEmail(request.getEmail()).isPresent()) {
             throw new ResourceAlreadyExistsException("Email already registered");
@@ -66,8 +66,7 @@ public class AuthenticationController {
 
         employeeRepository.save(employee);
         
-        String jwtToken = jwtService.generateToken(employee);
-        return ResponseEntity.ok(new AuthenticationResponse(jwtToken));
+        return ResponseEntity.ok("User registered successfully");
     }
 
     @PostMapping("/authenticate")
