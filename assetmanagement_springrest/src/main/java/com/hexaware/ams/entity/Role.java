@@ -2,6 +2,8 @@ package com.hexaware.ams.entity;
 
 /*
  * @Author: Venkatesh Pai
+ * Date: 16-11-24
+ * Description: Role Entity with Mappings
  * Role Entity
  */
 import jakarta.persistence.Column;

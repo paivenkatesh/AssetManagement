@@ -1,5 +1,10 @@
 package com.hexaware.ams.config;
 
+/*
+ * Author: Venkatesh Pai
+ * Date: 25-11-24
+ * Description: Custom User Details Service
+ */
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

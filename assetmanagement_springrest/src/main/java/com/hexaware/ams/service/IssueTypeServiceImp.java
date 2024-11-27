@@ -1,5 +1,10 @@
 package com.hexaware.ams.service;
 
+/*
+ * Author: Venkatesh Pai
+ * Date: 09-11-24
+ * Description: IssueType Service Implementation
+ */
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -17,7 +22,6 @@ import com.hexaware.ams.repository.IIssueTypeRepository;
 import jakarta.transaction.Transactional;
 
 @Service
-@Transactional
 public class IssueTypeServiceImp implements IIssueTypeService {
 
 	@Autowired
@@ -25,6 +29,8 @@ public class IssueTypeServiceImp implements IIssueTypeService {
 	
 	Logger logger = LoggerFactory.getLogger(EmployeeServiceImp.class);
 	
+	
+	//Add a new Issue Type
 	@Override
 	@Transactional
 	public IssueType addIssueType(IssueTypeDto issueType) {
@@ -41,6 +47,8 @@ public class IssueTypeServiceImp implements IIssueTypeService {
 		return issueTypeRepository.save(i1);
 	}
 
+	
+	//Get an IssueType by its Id
 	@Override
 	public IssueType getIssueTypeById(int issueTypeId) {
 		
@@ -49,6 +57,8 @@ public class IssueTypeServiceImp implements IIssueTypeService {
 				.orElseThrow(() -> new ResourceNotFoundException("Issue Type not found with id " + issueTypeId));
 	}
 
+	
+	//Get an IssueType by its Name
 	@Override
 	public IssueType getIssueTypeByName(String issueTypeName) {
 		
@@ -64,12 +74,16 @@ public class IssueTypeServiceImp implements IIssueTypeService {
 		return issueType;
 	}
 
+	
+	//Get a List of all the existing IssueTypes
 	@Override
 	public List<IssueType> getAllIssueTypes() {
 		
 		return issueTypeRepository.findAll();
 	}
 
+	
+	//Update an IssueType
 	@Override
 	@Transactional
 	public IssueType updateIssueType(int issueTypeId, IssueTypeDto issueTypeDetails) {
@@ -95,6 +109,8 @@ public class IssueTypeServiceImp implements IIssueTypeService {
 		
 	}
 
+	
+	//Delete an IssueType by its Id
 	@Override
 	@Transactional
 	public void deleteIssueType(int issueTypeId) {
@@ -111,6 +127,7 @@ public class IssueTypeServiceImp implements IIssueTypeService {
 
 	}
 	
+	//Helper method to Map a Dto to Entity
 	public IssueType mapToEntity(IssueTypeDto issueTypeDto) {
 		
 		IssueType issueType = new IssueType();
