@@ -1,4 +1,4 @@
-//import { Employee } from './employee.model';
+import { Employee } from './employee.model';
 import { Asset } from './asset.model';
 
 export enum BorrowingStatus {
@@ -8,7 +8,7 @@ export enum BorrowingStatus {
 
 export interface AssetBorrowing {
   borrowingId: number;
-  //employee: Employee;
+  employee: Employee;
   asset: Asset;
   borrowedAt: string; 
   returnedAt: string; 

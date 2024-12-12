@@ -1,4 +1,4 @@
-//import { Employee } from './employee.model';
+import { Employee } from './employee.model';
 import { Asset } from './asset.model';
 
 export enum AuditStatus {
@@ -9,7 +9,7 @@ export enum AuditStatus {
 
 export interface AssetAudit {
   auditId: number;
-  //employee: Employee;
+  employee: Employee;
   asset: Asset;
   auditStatus: AuditStatus;
   requestedAt: string; 
