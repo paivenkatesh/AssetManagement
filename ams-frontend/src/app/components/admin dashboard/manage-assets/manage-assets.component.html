@@ -1,1 +1,131 @@
-<p>manage-assets works!</p>
+<div class="container mt-4">
+  <h3 class="mb-4">Manage Assets</h3>
+
+  <!-- Success Message -->
+  <div *ngIf="successMessage" class="alert alert-success">
+    {{ successMessage }}
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Add New Asset Form -->
+  <div class="card mb-4">
+    <div class="card-header">
+      Add New Asset
+    </div>
+    <div class="card-body">
+      <form #assetForm="ngForm" (ngSubmit)="addAsset(assetForm)">
+        <div class="row">
+          <div class="form-group mb-3 col-md-4">
+            <label for="assetName">Asset Name</label>
+            <input type="text" id="assetName" name="assetName" class="form-control" required [(ngModel)]="newAsset.assetName">
+            <div *ngIf="assetForm.submitted && !newAsset.assetName" class="text-danger">
+              Asset Name is required.
+            </div>
+          </div>
+          <div class="form-group mb-3 col-md-4">
+            <label for="categoryId">Category ID</label>
+            <input type="number" id="categoryId" name="categoryId" class="form-control" required [(ngModel)]="newAsset.category.categoryId">
+            <div *ngIf="assetForm.submitted && !newAsset.category.categoryId" class="text-danger">
+              Category ID is required.
+            </div>
+          </div>
+          <div class="form-group mb-3 col-md-4">
+            <label for="assetModel">Asset Model</label>
+            <input type="text" id="assetModel" name="assetModel" class="form-control" required [(ngModel)]="newAsset.assetModel">
+            <div *ngIf="assetForm.submitted && !newAsset.assetModel" class="text-danger">
+              Asset Model is required.
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group mb-3 col-md-4">
+            <label for="manufacturingDate">Manufacturing Date</label>
+            <input type="date" id="manufacturingDate" name="manufacturingDate" class="form-control" required [(ngModel)]="newAsset.manufacturingDate">
+            <div *ngIf="assetForm.submitted && !newAsset.manufacturingDate" class="text-danger">
+              Manufacturing Date is required.
+            </div>
+          </div>
+          <div class="form-group mb-3 col-md-4">
+            <label for="expiryDate">Expiry Date</label>
+            <input type="date" id="expiryDate" name="expiryDate" class="form-control" required [(ngModel)]="newAsset.expiryDate">
+            <div *ngIf="assetForm.submitted && !newAsset.expiryDate" class="text-danger">
+              Expiry Date is required.
+            </div>
+          </div>
+          <div class="form-group mb-3 col-md-4">
+            <label for="assetValue">Asset Value</label>
+            <input type="number" id="assetValue" name="assetValue" class="form-control" required min="0" [(ngModel)]="newAsset.assetValue">
+            <div *ngIf="assetForm.submitted && (!newAsset.assetValue || newAsset.assetValue < 0)" class="text-danger">
+              Asset Value must be a positive number.
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-success">Add Asset</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Assets Table -->
+  <div class="card">
+    <div class="card-header">
+      All Assets
+    </div>
+    <div class="card-body">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Asset ID</th>
+            <th>Asset Name</th>
+            <th>Category ID</th>
+            <th>Category Name</th>
+            <th>Asset Model</th>
+            <th>Manufacturing Date</th>
+            <th>Expiry Date</th>
+            <th>Asset Value</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let asset of assets">
+            <td>{{ asset.assetId }}</td>
+            <td>
+              <span *ngIf="!editingAsset || editingAsset.assetId !== asset.assetId">{{ asset.assetName }}</span>
+              <input *ngIf="editingAsset && editingAsset.assetId === asset.assetId" type="text" class="form-control" [(ngModel)]="editingAsset.assetName" name="assetName{{asset.assetId}}" required>
+            </td>
+            <td>{{ asset.category.categoryId }}</td>
+            <td>{{ asset.category.categoryName }}</td>
+            <td>
+              <span *ngIf="!editingAsset || editingAsset.assetId !== asset.assetId">{{ asset.assetModel }}</span>
+              <input *ngIf="editingAsset && editingAsset.assetId === asset.assetId" type="text" class="form-control" [(ngModel)]="editingAsset.assetModel" name="assetModel{{asset.assetId}}" required>
+            </td>
+            <td>{{ asset.manufacturingDate | date:'shortDate' }}</td>
+            <td>{{ asset.expiryDate | date:'shortDate' }}</td>
+            <td>{{ asset.assetValue | currency }}</td>
+            <td>
+              <span class="badge" [ngClass]="{
+                'bg-success': asset.status === 'Available',
+                'bg-warning': asset.status === 'Borrowed'
+              }">
+                {{ asset.status }}
+              </span>
+            </td>
+            <td>
+              <button *ngIf="!editingAsset || editingAsset.assetId !== asset.assetId" class="btn btn-primary btn-sm me-2" (click)="editAsset(asset)">Edit</button>
+              <button *ngIf="!editingAsset || editingAsset.assetId !== asset.assetId" class="btn btn-danger btn-sm" (click)="deleteAsset(asset.assetId)">Delete</button>
+
+              <div *ngIf="editingAsset && editingAsset.assetId === asset.assetId" class="mt-2">
+                <button class="btn btn-success btn-sm me-2" (click)="updateAsset(assetForm)">Save</button>
+                <button class="btn btn-secondary btn-sm" (click)="cancelEdit()">Cancel</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

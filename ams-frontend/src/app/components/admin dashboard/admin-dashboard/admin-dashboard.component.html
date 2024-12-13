@@ -1,12 +1,46 @@
-<h1>Admin Dashboard</h1>
-
-<nav>
-  <ul>
-    <li><a routerLink="/admin/manage-assets">Manage Assets</a></li>
-    <li><a routerLink="/admin/manage-employees">Manage Employees</a></li>
-    <li><a routerLink="/admin/manage-asset-audits">Manage Asset Audits</a></li>
-  </ul>
-</nav>
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Admin Dashboard</h2>
+  <div class="row">
+    <!-- Manage Employees -->
+    <div class="col-md-4">
+      <div class="card text-white bg-primary mb-3">
+        <div class="card-header">Manage Employees</div>
+        <div class="card-body">
+          <h5 class="card-title">Employees</h5>
+          <p class="card-text">Add, update, or delete employee records.</p>
+          <a routerLink="/admin/manage-employees" class="btn btn-light"
+            >Go to Employees</a
+          >
+        </div>
+      </div>
+    </div>
+    <!-- Manage Assets -->
+    <div class="col-md-4">
+      <div class="card text-white bg-success mb-3">
+        <div class="card-header">Manage Assets</div>
+        <div class="card-body">
+          <h5 class="card-title">Assets</h5>
+          <p class="card-text">Add, update, or delete company assets.</p>
+          <a routerLink="/admin/manage-assets" class="btn btn-light"
+            >Go to Assets</a
+          >
+        </div>
+      </div>
+    </div>
+    <!-- Asset Audits -->
+    <div class="col-md-4">
+      <div class="card text-white bg-warning mb-3">
+        <div class="card-header">Asset Audits</div>
+        <div class="card-body">
+          <h5 class="card-title">Audits</h5>
+          <p class="card-text">Manage asset audit requests and statuses.</p>
+          <a routerLink="/admin/asset-audits" class="btn btn-light"
+            >Go to Audits</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <router-outlet></router-outlet>
-
