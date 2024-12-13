@@ -1,7 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
 import { ServiceRequest, Status } from '../models/service-request.model';
 
 @Injectable({
@@ -75,3 +75,4 @@ export class ServiceRequestService {
     return this.http.get<ServiceRequest[]>(url);
   }
 }
+
