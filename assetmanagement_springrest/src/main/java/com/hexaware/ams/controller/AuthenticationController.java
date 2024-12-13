@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +26,7 @@ import com.hexaware.ams.exception.ResourceAlreadyExistsException;
 import com.hexaware.ams.exception.ResourceNotFoundException;
 import com.hexaware.ams.repository.IEmployeeRepository;
 import com.hexaware.ams.repository.IRoleRepository;
-
+@CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthenticationController {

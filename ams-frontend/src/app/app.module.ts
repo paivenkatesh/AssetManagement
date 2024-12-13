@@ -22,6 +22,11 @@ import { EmployeeService } from './services/employee.service';
 import { IssueTypeService } from './services/issue-type.service';
 import { ServiceRequestService } from './services/service-request.service';
 import { FormsModule } from '@angular/forms';
+import { HandleServiceRequestsComponent } from './components/admin dashboard/handle-service-requests/handle-service-requests.component';
+import { AssetCategoryService } from './services/asset-category.service';
+import { RoleService } from './services/role.service';
+import { NavbarComponent } from './components/shared/navbar/navbar.component';
+import { FooterComponent } from './components/shared/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +42,9 @@ import { FormsModule } from '@angular/forms';
     ServiceRequestComponent,
     ReturnAssetComponent,
     RegisterComponent,
+    HandleServiceRequestsComponent,
+    NavbarComponent,
+    FooterComponent,
     
   ],
   imports: [
@@ -49,9 +57,11 @@ import { FormsModule } from '@angular/forms';
   providers: [
     AssetAuditService,
     AssetBorrowingService,
+    AssetCategoryService,
     AssetService,
     EmployeeService,
     IssueTypeService,
+    RoleService,
     ServiceRequestService
   ],
   bootstrap: [AppComponent]

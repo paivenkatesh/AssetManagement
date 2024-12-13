@@ -11,8 +11,8 @@ import { Asset, AssetStatus } from '../../../models/asset.model';
 })
 export class AssetAuditsComponent implements OnInit {
   audits: AssetAudit[] = [];
-  employees: Employee[] = []; // Assuming you have a service to fetch employees
-  assets: Asset[] = []; // Assuming you have a service to fetch assets
+  employees: Employee[] = []; 
+  assets: Asset[] = []; 
   newAudit: AssetAudit = {
     auditId: 0,
     employee: { employeeId: 0, name: '', gender: Gender.Male, contactNumber: '', address: '', email: '', password: '', role: { roleId: 0, roleName: '' } },

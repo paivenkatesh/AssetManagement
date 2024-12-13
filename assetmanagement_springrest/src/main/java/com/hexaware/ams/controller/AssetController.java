@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,17 +22,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hexaware.ams.dto.AssetDto;
 import com.hexaware.ams.entity.Asset;
+import com.hexaware.ams.entity.AssetBorrowing;
 import com.hexaware.ams.entity.AssetCategory;
+import com.hexaware.ams.service.IAssetBorrowingService;
 import com.hexaware.ams.service.IAssetService;
 
 import jakarta.validation.Valid;
-
+@CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping("/api/assets")
 public class AssetController {
 
     @Autowired
     private IAssetService assetService;
+    @Autowired
+    private IAssetBorrowingService assetBorrowingService;
 
     // Add a new asset
     @PostMapping("/add")
@@ -80,5 +85,12 @@ public class AssetController {
     public ResponseEntity<Void> deleteAsset(@PathVariable Integer assetId) {
         assetService.deleteAsset(assetId);
         return ResponseEntity.noContent().build();
+    }
+    // Get assets assigned to an employee
+    @GetMapping("/assigned/{employeeId}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    public ResponseEntity<List<AssetBorrowing>> getAssignedAssets(@PathVariable Integer employeeId) {
+        List<AssetBorrowing> assignedAssets = assetBorrowingService.getBorrowingsByEmployee(employeeId);
+        return ResponseEntity.ok(assignedAssets);
     }
 }
