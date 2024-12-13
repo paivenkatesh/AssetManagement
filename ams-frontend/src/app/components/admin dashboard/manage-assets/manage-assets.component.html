@@ -27,10 +27,13 @@
             </div>
           </div>
           <div class="form-group mb-3 col-md-4">
-            <label for="categoryId">Category ID</label>
-            <input type="number" id="categoryId" name="categoryId" class="form-control" required [(ngModel)]="newAsset.category.categoryId">
+            <label for="category">Category</label>
+            <select id="category" name="category" class="form-select" required [(ngModel)]="newAsset.category.categoryId">
+              <option value="">Select Category</option>
+              <option *ngFor="let category of categories" [value]="category.categoryId">{{ category.categoryName }}</option>
+            </select>
             <div *ngIf="assetForm.submitted && !newAsset.category.categoryId" class="text-danger">
-              Category ID is required.
+              Category is required.
             </div>
           </div>
           <div class="form-group mb-3 col-md-4">
@@ -116,13 +119,21 @@
             </td>
             <td>
               <button *ngIf="!editingAsset || editingAsset.assetId !== asset.assetId" class="btn btn-primary btn-sm me-2" (click)="editAsset(asset)">Edit</button>
-              <button *ngIf="!editingAsset || editingAsset.assetId !== asset.assetId" class="btn btn-danger btn-sm" (click)="deleteAsset(asset.assetId)">Delete</button>
+              <button *ngIf="!editingAsset || editingAsset.assetId !== asset.assetId" class="btn btn-danger btn-sm" 
+                      [disabled]="asset.status !== 'Available'" 
+                      (click)="deleteAsset(asset.assetId)"
+                      [title]="asset.status !== 'Available' ? 'Cannot delete asset that is assigned or in service.' : 'Delete asset'">
+                      Delete
+              </button>
 
               <div *ngIf="editingAsset && editingAsset.assetId === asset.assetId" class="mt-2">
                 <button class="btn btn-success btn-sm me-2" (click)="updateAsset(assetForm)">Save</button>
                 <button class="btn btn-secondary btn-sm" (click)="cancelEdit()">Cancel</button>
               </div>
             </td>
+          </tr>
+          <tr *ngIf="assets.length === 0">
+            <td colspan="10" class="text-center">No assets found.</td>
           </tr>
         </tbody>
       </table>

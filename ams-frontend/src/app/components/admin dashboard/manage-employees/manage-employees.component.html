@@ -72,10 +72,13 @@
             </div>
           </div>
           <div class="form-group mb-3 col-md-6">
-            <label for="roleId">Role ID</label>
-            <input type="number" id="roleId" name="roleId" class="form-control" required [(ngModel)]="newEmployee.role.roleId">
+            <label for="role">Role</label>
+            <select id="role" name="role" class="form-select" required [(ngModel)]="newEmployee.role.roleId">
+              <option value="">Select Role</option>
+              <option *ngFor="let role of roles" [value]="role.roleId">{{ role.roleName }}</option>
+            </select>
             <div *ngIf="employeeForm.submitted && !newEmployee.role.roleId" class="text-danger">
-              Role ID is required.
+              Role is required.
             </div>
           </div>
         </div>
@@ -132,7 +135,13 @@
             </td>
             <td>
               <span *ngIf="!editingEmployee || editingEmployee.employeeId !== employee.employeeId">{{ employee.role.roleId }}</span>
-              <input *ngIf="editingEmployee && editingEmployee.employeeId === employee.employeeId" type="number" class="form-control" [(ngModel)]="editingEmployee.role.roleId" name="roleId{{employee.employeeId}}" required>
+              <select *ngIf="editingEmployee && editingEmployee.employeeId === employee.employeeId" class="form-select" [(ngModel)]="editingEmployee.role.roleId" name="roleId{{employee.employeeId}}" required>
+                <option value="">Select Role</option>
+                <option *ngFor="let role of roles" [value]="role.roleId">{{ role.roleName }}</option>
+              </select>
+              <div *ngIf="editingEmployee && editingEmployee.employeeId === employee.employeeId && !editingEmployee.role.roleId" class="text-danger">
+                Role is required.
+              </div>
             </td>
             <td>{{ employee.role.roleName }}</td>
             <td>
@@ -144,6 +153,9 @@
                 <button class="btn btn-secondary btn-sm" (click)="cancelEdit()">Cancel</button>
               </div>
             </td>
+          </tr>
+          <tr *ngIf="employees.length === 0">
+            <td colspan="9" class="text-center">No employees found.</td>
           </tr>
         </tbody>
       </table>

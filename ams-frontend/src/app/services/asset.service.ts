@@ -37,4 +37,9 @@ export class AssetService {
   deleteAsset(assetId: number): Observable<void> {
     return this.http.delete<void>(`${this.assetsUrl}/delete/${assetId}`);
   }
+  
+  getAssetsByEmployee(employeeId: number): Observable<Asset[]> {
+    return this.http.get<Asset[]>(`${this.assetsUrl}/assigned/${employeeId}`);
+  }
+  
 }

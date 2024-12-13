@@ -1,0 +1,96 @@
+<div class="container mt-4">
+  <h3 class="mb-4">Handle Service Requests</h3>
+
+  <!-- Success Message -->
+  <div *ngIf="successMessage" class="alert alert-success">
+    {{ successMessage }}
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Filter Service Requests -->
+  <div class="card mb-4">
+    <div class="card-header">
+      Filter Service Requests
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4">
+          <label for="filterStatus" class="form-label">Status</label>
+          <select id="filterStatus" class="form-select" [(ngModel)]="filterStatus" (change)="filterServiceRequests()">
+            <option value="">All</option>
+            <option *ngFor="let status of ['Pending', 'Transit', 'Completed']" [value]="status">{{ status }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Service Requests Table -->
+  <div class="card">
+    <div class="card-header">
+      All Service Requests
+    </div>
+    <div class="card-body">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Request ID</th>
+            <th>Employee ID</th>
+            <th>Employee Name</th>
+            <th>Asset ID</th>
+            <th>Asset Name</th>
+            <th>Description</th>
+            <th>Issue Type</th>
+            <th>Status</th>
+            <th>Requested At</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let request of serviceRequests">
+            <td>{{ request.serviceRequestId }}</td>
+            <td>{{ request.employee.employeeId }}</td>
+            <td>{{ request.employee.name }}</td>
+            <td>{{ request.asset.assetId }}</td>
+            <td>{{ request.asset.assetName }}</td>
+            <td>{{ request.description }}</td>
+            <td>{{ request.issueType.issueTypeName }}</td>
+            <td>
+              <span class="badge" [ngClass]="{
+                'bg-warning': request.status === 'Pending',
+                'bg-info': request.status === 'Transit',
+                'bg-success': request.status === 'Completed'
+              }">
+                {{ request.status }}
+              </span>
+            </td>
+            <td>{{ request.requestedAt | date:'short' }}</td>
+            <td>
+              <!-- If not editing, show action buttons -->
+              <div *ngIf="!editingRequest || editingRequest.serviceRequestId !== request.serviceRequestId">
+                <button class="btn btn-primary btn-sm me-2" (click)="editServiceRequest(request)">Edit</button>
+                <!-- Additional actions can be added here -->
+              </div>
+
+              <!-- If editing, show save and cancel buttons -->
+              <div *ngIf="editingRequest && editingRequest.serviceRequestId === request.serviceRequestId" class="mt-2">
+                <select class="form-select mb-2" [(ngModel)]="editingRequest.status" name="status{{request.serviceRequestId}}">
+                  <option *ngFor="let status of ['Pending', 'Transit', 'Completed']" [value]="status">{{ status }}</option>
+                </select>
+                <button class="btn btn-success btn-sm me-2" (click)="saveServiceRequest()">Save</button>
+                <button class="btn btn-secondary btn-sm" (click)="cancelEdit()">Cancel</button>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="serviceRequests.length === 0">
+            <td colspan="10" class="text-center">No service requests found.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

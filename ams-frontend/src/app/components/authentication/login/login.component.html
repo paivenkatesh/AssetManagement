@@ -1,1 +1,85 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <h2 class="text-center mb-4">Login</h2>
 
+      <!-- Error Message -->
+      <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
+      </div>
+
+      <!-- Login Form -->
+      <div class="card">
+        <div class="card-body">
+          <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm)">
+            <div class="form-group mb-3">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-control"
+                required
+                email
+                [(ngModel)]="authenticationRequest.email"
+              />
+              <div
+                *ngIf="loginForm.submitted && !authenticationRequest.email"
+                class="text-danger"
+              >
+                Email is required.
+              </div>
+              <div
+                *ngIf="
+                  loginForm.submitted &&
+                  authenticationRequest.email &&
+                  !loginForm.controls['email']?.valid
+                "
+                class="text-danger"
+              >
+                Enter a valid email.
+              </div>
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="form-control"
+                required
+                minlength="6"
+                [(ngModel)]="authenticationRequest.password"
+              />
+              <div
+                *ngIf="
+                  loginForm.submitted &&
+                  (!authenticationRequest.password ||
+                    authenticationRequest.password.length < 6)
+                "
+                class="text-danger"
+              >
+                Password must be at least 6 characters.
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              class="btn btn-primary w-100"
+              [disabled]="isLoading"
+            >
+              {{ isLoading ? "Logging in..." : "Login" }}
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="text-center mt-3">
+        <p>
+          Don't have an account? <a routerLink="/register">Register here</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
