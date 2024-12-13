@@ -21,6 +21,7 @@ import { RegisterComponent } from './components/authentication/register/register
 import { EmployeeService } from './services/employee.service';
 import { IssueTypeService } from './services/issue-type.service';
 import { ServiceRequestService } from './services/service-request.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { ServiceRequestService } from './services/service-request.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
 
   providers: [
