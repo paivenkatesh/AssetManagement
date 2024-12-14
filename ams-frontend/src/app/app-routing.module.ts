@@ -4,11 +4,11 @@ import { RouterModule, Routes } from '@angular/router';
 // Import Components
 import { LoginComponent } from './components/authentication/login/login.component';
 import { RegisterComponent } from './components/authentication/register/register.component';
-import { EmployeeDashboardComponent } from './components/employee-dashboard/employee-dashboard.component';
-import { AssignedAssetsComponent } from './components/employee-dashboard/assigned-assets/assigned-assets.component';
-import { AssetBorrowingComponent } from './components/employee-dashboard/asset-borrowing/asset-borrowing.component';
-import { ServiceRequestComponent } from './components/employee-dashboard/service-request/service-request.component';
-import { ReturnAssetComponent } from './components/employee-dashboard/return-asset/return-asset.component';
+import { EmployeeDashboardComponent } from './components/employee dashboard/employee-dashboard/employee-dashboard.component';
+import { AssignedAssetsComponent } from './components/employee dashboard/assigned-assets/assigned-assets.component';
+import { AssetBorrowingComponent } from './components/employee dashboard/asset-borrowing/asset-borrowing.component';
+import { ServiceRequestComponent } from './components/employee dashboard/service-request/service-request.component';
+import { ReturnAssetComponent } from './components/employee dashboard/return-asset/return-asset.component';
 import { AdminDashboardComponent } from './components/admin dashboard/admin-dashboard/admin-dashboard.component';
 import { ManageEmployeesComponent } from './components/admin dashboard/manage-employees/manage-employees.component';
 import { ManageAssetsComponent } from './components/admin dashboard/manage-assets/manage-assets.component';

@@ -1,0 +1,51 @@
+.navbar {
+  background-color: #212529; /* Dark background, adjust as needed */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  padding: 0.5rem 1rem; /* Adjust padding */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
+}
+
+.navbar-brand {
+  font-weight: 600;
+  font-size: 1.5rem; /* Increase brand size */
+  color: #f8f9fa; /* Light text color */
+  transition: color 0.2s ease-in-out; /* Smooth color transition on hover */
+}
+
+.navbar-brand:hover {
+  color: #007bff; /* Change color on hover (example: blue) */
+}
+
+.navbar-toggler {
+  border: none; /* Remove default border */
+}
+
+.navbar-toggler:focus {
+  outline: none; /* Remove focus outline */
+  box-shadow: none;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(255, 255, 255, 0.9)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.navbar-nav .nav-link {
+  color: #f8f9fa; /* Light text color */
+  font-weight: 500;
+  margin-left: 1rem; /* Spacing between links */
+  transition: color 0.2s ease-in-out; /* Smooth color transition on hover */
+}
+
+.navbar-nav .nav-link:hover {
+  color: #007bff; /* Change color on hover */
+}
+
+.navbar-nav .nav-link:focus {
+  outline: none; /* Remove focus outline */
+}
+
+/* Active link style (optional) */
+.navbar-nav .nav-item.active .nav-link {
+  color: #007bff; /* Example: blue color for active link */
+  font-weight: bold;
+}

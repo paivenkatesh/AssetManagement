@@ -1,1 +1,59 @@
-<p>assigned-assets works!</p>
+<div class="container mt-4">
+  <h3 class="mb-4">My Assigned Assets</h3>
+
+  <!-- Success Message -->
+  <div *ngIf="successMessage" class="alert alert-success">
+    {{ successMessage }}
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Assets Table -->
+  <div class="card">
+    <div class="card-header">Assigned Assets</div>
+    <div class="card-body">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Asset ID</th>
+            <th>Asset Name</th>
+            <th>Category</th>
+            <th>Asset Model</th>
+            <th>Manufacturing Date</th>
+            <th>Expiry Date</th>
+            <th>Asset Value</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let asset of assets">
+            <td>{{ asset.assetId }}</td>
+            <td>{{ asset.assetName }}</td>
+            <td>{{ asset.category.categoryName }}</td>
+            <td>{{ asset.assetModel }}</td>
+            <td>{{ asset.manufacturingDate | date : "shortDate" }}</td>
+            <td>{{ asset.expiryDate | date : "shortDate" }}</td>
+            <td>{{ asset.assetValue | currency }}</td>
+            <td>
+              <span
+                class="badge"
+                [ngClass]="{
+                  'bg-success': asset.status === 'Available',
+                  'bg-warning': asset.status === 'Borrowed'
+                }"
+              >
+                {{ asset.status }}
+              </span>
+            </td>
+          </tr>
+          <tr *ngIf="assets.length === 0">
+            <td colspan="8" class="text-center">No assets assigned.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

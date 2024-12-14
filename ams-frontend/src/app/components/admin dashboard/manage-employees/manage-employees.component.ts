@@ -127,10 +127,10 @@ export class ManageEmployeesComponent implements OnInit {
    * Updates an existing employee.
    * @param form The form containing updated employee details.
    */
-  updateEmployee(form: any): void {
-    if (form.invalid || !this.editingEmployee) {
+  updateEmployee(): void {
+    if (!this.editingEmployee) {
       return;
-    }
+  }
 
     // Find the selected role from the roles array
     const selectedRole = this.roles.find(role => role.roleId === this.editingEmployee?.role.roleId);
@@ -147,12 +147,12 @@ export class ManageEmployeesComponent implements OnInit {
 
     this.employeeService.updateEmployee(employeeToUpdate.employeeId, employeeToUpdate).subscribe({
       next: (data) => {
-        this.successMessage = 'Employee updated successfully!';
-        this.fetchAllEmployees();
-        this.editingEmployee = null;
+          this.successMessage = 'Employee updated successfully!';
+          this.fetchAllEmployees();
+          this.editingEmployee = null;
       },
       error: (err) => this.errorMessage = 'Failed to update employee.'
-    });
+  });
   }
 
   /**

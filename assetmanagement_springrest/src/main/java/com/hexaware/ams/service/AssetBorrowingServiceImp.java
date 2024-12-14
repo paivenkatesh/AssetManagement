@@ -111,9 +111,9 @@ public class AssetBorrowingServiceImp implements IAssetBorrowingService {
             .orElseThrow(() -> new ResourceNotFoundException("Employee not found with ID: " + employeeId));
 
         // Getting borrowings for employee
-        List<AssetBorrowing> borrowings = borrowingRepository.findByEmployee(employee);
+        List<AssetBorrowing> borrowings = borrowingRepository.findByEmployeeIdAndAssetStatus(employeeId);
         if (borrowings.isEmpty()) {
-            throw new ResourceNotFoundException("No borrowing records found for employee with ID: " + employeeId);
+            throw new ResourceNotFoundException("No borrowings found for employee ID: " + employeeId);
         }
         logger.info("Returning borrowings of employee with id: " + employeeId);
         return borrowings;

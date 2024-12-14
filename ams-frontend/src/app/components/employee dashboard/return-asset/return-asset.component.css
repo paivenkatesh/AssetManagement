@@ -1,0 +1,25 @@
+.table th,
+.table td {
+  vertical-align: middle;
+}
+
+.badge {
+  font-size: 0.9em;
+}
+
+button {
+  min-width: 75px;
+}
+
+h3 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #333;
+  text-transform: uppercase;
+  margin-bottom: 2rem; 
+}
+.card-header{
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+}

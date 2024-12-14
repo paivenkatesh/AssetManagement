@@ -65,8 +65,9 @@ export class ManageAssetsComponent implements OnInit {
       return;
     }
 
-    // Find the selected category from the categories array
-    const selectedCategory = this.categories.find(cat => cat.categoryId === this.newAsset.category.categoryId);
+    // Ensure categoryId is treated as a number
+    const categoryId = +this.newAsset.category.categoryId; // Convert to number
+    const selectedCategory = this.categories.find(cat => cat.categoryId === categoryId);
 
     if (!selectedCategory) {
       this.errorMessage = 'Invalid category selected.';
@@ -131,35 +132,35 @@ export class ManageAssetsComponent implements OnInit {
 
   /**
    * Updates an existing asset.
-   * @param form The form containing updated asset details.
    */
-  updateAsset(form: any): void {
-    if (form.invalid || !this.editingAsset) {
-      return;
-    }
+  updateAsset(): void {
+    // Ensure the category ID is a number
+    const categoryId = +this.editingAsset!.category.categoryId; // Convert to number
 
-    // Find the selected category from the categories array
-    const selectedCategory = this.categories.find(cat => cat.categoryId === this.editingAsset?.category.categoryId);
+    // Find the selected category from the categories array using the numeric ID
+    const selectedCategory = this.categories.find(cat => cat.categoryId === categoryId);
 
     if (!selectedCategory) {
-      this.errorMessage = 'Invalid category selected.';
-      return;
+        this.errorMessage = 'Invalid category selected.';
+        return;
     }
 
+    // Create a copy of the asset to update, ensuring category is correctly set
     const assetToUpdate: Asset = {
-      ...this.editingAsset,
-      category: selectedCategory
+        ...this.editingAsset!,
+        category: selectedCategory
     };
 
+    // Call the asset service to update the asset
     this.assetService.updateAsset(assetToUpdate.assetId, assetToUpdate).subscribe({
-      next: (data) => {
-        this.successMessage = 'Asset updated successfully!';
-        this.fetchAllAssets();
-        this.editingAsset = null;
-      },
-      error: (err) => this.errorMessage = 'Failed to update asset.'
+        next: () => {
+            this.successMessage = 'Asset updated successfully!';
+            this.fetchAllAssets();
+            this.editingAsset = null;
+        },
+        error: (err) => this.errorMessage = 'Failed to update asset: ' + err.message
     });
-  }
+}
 
   /**
    * Cancels the editing mode.

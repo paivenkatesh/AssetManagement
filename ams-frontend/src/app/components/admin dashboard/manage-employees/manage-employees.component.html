@@ -40,7 +40,7 @@
             <label for="contactNumber">Contact Number</label>
             <input type="text" id="contactNumber" name="contactNumber" class="form-control" required pattern="^[0-9]{10}$" [(ngModel)]="newEmployee.contactNumber">
             <div *ngIf="employeeForm.submitted && (!newEmployee.contactNumber || newEmployee.contactNumber.length !== 10)" class="text-danger">
-              Contact Number must be 10 digits.
+              Contact Number must be at least 10 digits.
             </div>
           </div>
         </div>
@@ -112,30 +112,30 @@
             <td>{{ employee.employeeId }}</td>
             <td>
               <span *ngIf="!editingEmployee || editingEmployee.employeeId !== employee.employeeId">{{ employee.name }}</span>
-              <input *ngIf="editingEmployee && editingEmployee.employeeId === employee.employeeId" type="text" class="form-control" [(ngModel)]="editingEmployee.name" name="name{{employee.employeeId}}" required>
+              <input *ngIf="editingEmployee && editingEmployee.employeeId === employee.employeeId" type="text" class="form-control" [(ngModel)]="editingEmployee.name" name="name{{employee.employeeId}}" id="name{{employee.employeeId}}" required>
             </td>
             <td>
               <span *ngIf="!editingEmployee || editingEmployee.employeeId !== employee.employeeId">{{ employee.gender }}</span>
-              <select *ngIf="editingEmployee && editingEmployee.employeeId === employee.employeeId" class="form-select" [(ngModel)]="editingEmployee.gender" name="gender{{employee.employeeId}}" required>
+              <select *ngIf="editingEmployee && editingEmployee.employeeId === employee.employeeId" class="form-select" [(ngModel)]="editingEmployee.gender" name="gender{{employee.employeeId}}" id="gender{{employee.employeeId}}" required>
                 <option value="">Select Gender</option>
                 <option *ngFor="let gender of ['Male', 'Female', 'Other']" [value]="gender">{{ gender }}</option>
               </select>
             </td>
             <td>
               <span *ngIf="!editingEmployee || editingEmployee.employeeId !== employee.employeeId">{{ employee.contactNumber }}</span>
-              <input *ngIf="editingEmployee && editingEmployee.employeeId === employee.employeeId" type="text" class="form-control" [(ngModel)]="editingEmployee.contactNumber" name="contactNumber{{employee.employeeId}}" required pattern="^[0-9]{10}$">
+              <input *ngIf="editingEmployee && editingEmployee.employeeId === employee.employeeId" type="text" class="form-control" [(ngModel)]="editingEmployee.contactNumber" name="contactNumber{{employee.employeeId}}" id="contactNumber{{employee.employeeId}}" required pattern="^[0-9]{10}$">
             </td>
             <td>
               <span *ngIf="!editingEmployee || editingEmployee.employeeId !== employee.employeeId">{{ employee.address }}</span>
-              <input *ngIf="editingEmployee && editingEmployee.employeeId === employee.employeeId" type="text" class="form-control" [(ngModel)]="editingEmployee.address" name="address{{employee.employeeId}}" required>
+              <input *ngIf="editingEmployee && editingEmployee.employeeId === employee.employeeId" type="text" class="form-control" [(ngModel)]="editingEmployee.address" name="address{{employee.employeeId}}" id="address{{employee.employeeId}}" required>
             </td>
             <td>
               <span *ngIf="!editingEmployee || editingEmployee.employeeId !== employee.employeeId">{{ employee.email }}</span>
-              <input *ngIf="editingEmployee && editingEmployee.employeeId === employee.employeeId" type="email" class="form-control" [(ngModel)]="editingEmployee.email" name="email{{employee.employeeId}}" required email>
+              <input *ngIf="editingEmployee && editingEmployee.employeeId === employee.employeeId" type="email" class="form-control" [(ngModel)]="editingEmployee.email" name="email{{employee.employeeId}}" id="email{{employee.employeeId}}" required email>
             </td>
             <td>
               <span *ngIf="!editingEmployee || editingEmployee.employeeId !== employee.employeeId">{{ employee.role.roleId }}</span>
-              <select *ngIf="editingEmployee && editingEmployee.employeeId === employee.employeeId" class="form-select" [(ngModel)]="editingEmployee.role.roleId" name="roleId{{employee.employeeId}}" required>
+              <select *ngIf="editingEmployee && editingEmployee.employeeId === employee.employeeId" class="form-select" [(ngModel)]="editingEmployee.role.roleId" name="roleId{{employee.employeeId}}" id="roleId{{employee.employeeId}}" required>
                 <option value="">Select Role</option>
                 <option *ngFor="let role of roles" [value]="role.roleId">{{ role.roleName }}</option>
               </select>
@@ -149,7 +149,7 @@
               <button *ngIf="!editingEmployee || editingEmployee.employeeId !== employee.employeeId" class="btn btn-danger btn-sm" (click)="deleteEmployee(employee.employeeId)">Delete</button>
 
               <div *ngIf="editingEmployee && editingEmployee.employeeId === employee.employeeId" class="mt-2">
-                <button class="btn btn-success btn-sm me-2" (click)="updateEmployee(employeeForm)">Save</button>
+                <button class="btn btn-success btn-sm me-2" (click)="updateEmployee()">Save</button>
                 <button class="btn btn-secondary btn-sm" (click)="cancelEdit()">Cancel</button>
               </div>
             </td>

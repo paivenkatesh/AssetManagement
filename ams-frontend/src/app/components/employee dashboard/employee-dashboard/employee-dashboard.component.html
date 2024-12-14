@@ -1,1 +1,66 @@
-<p>employee-dashboard works!</p>
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Employee Dashboard</h2>
+  <div class="row">
+    <!-- Assigned Assets -->
+    <div class="col-md-4">
+      <div class="card text-white bg-primary mb-3">
+        <div class="card-header">Assigned Assets</div>
+        <div class="card-body">
+          <h5 class="card-title">My Assets</h5>
+          <p class="card-text">View all assets assigned to you.</p>
+          <a
+            routerLink="assigned-assets"
+            class="btn btn-light"
+            >View Assets</a
+          >
+        </div>
+      </div>
+    </div>
+    <!-- Borrow Asset -->
+    <div class="col-md-4">
+      <div class="card text-white bg-success mb-3">
+        <div class="card-header">Borrow Asset</div>
+        <div class="card-body">
+          <h5 class="card-title">Borrow Asset</h5>
+          <p class="card-text">Request to borrow assets as needed.</p>
+          <a
+            routerLink="asset-borrowing"
+            class="btn btn-light"
+            >Borrow Asset</a
+          >
+        </div>
+      </div>
+    </div>
+    <!-- Service Requests -->
+    <div class="col-md-4">
+      <div class="card text-white bg-warning mb-3">
+        <div class="card-header">Service Requests</div>
+        <div class="card-body">
+          <h5 class="card-title">Asset Repairs</h5>
+          <p class="card-text">
+            Request maintenance or repairs for your assets.
+          </p>
+          <a
+            routerLink="service-request"
+            class="btn btn-light"
+            >Request Service</a
+          >
+        </div>
+      </div>
+    </div>
+    <!-- Return Assets -->
+    <div class="col-md-4">
+      <div class="card text-white bg-secondary mb-3">
+        <div class="card-header">Return Asset</div>
+        <div class="card-body">
+          <h5 class="card-title">Return Assets</h5>
+          <p class="card-text">Return assets when no longer needed.</p>
+          <a routerLink="return-asset" class="btn btn-light"
+            >Return Asset</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>

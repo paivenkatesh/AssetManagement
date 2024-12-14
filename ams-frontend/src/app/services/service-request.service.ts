@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ServiceRequest, Status } from '../models/service-request.model';
 
@@ -21,8 +20,9 @@ export class ServiceRequestService {
    * @returns Observable of the created ServiceRequest.
    */
   createServiceRequest(employeeId: number, assetId: number, issueTypeId: number, description: string): Observable<ServiceRequest> {
-    const url = `${this.apiUrl}/createServiceRequest/${employeeId}/${assetId}/${issueTypeId}`;
-    return this.http.post<ServiceRequest>(url, { description });
+    const encodedDescription = encodeURIComponent(description);
+    const url = `${this.apiUrl}/createServiceRequest/${employeeId}/${assetId}/${issueTypeId}?description=${encodedDescription}`;
+    return this.http.post<ServiceRequest>(url, {});
   }
 
   /**

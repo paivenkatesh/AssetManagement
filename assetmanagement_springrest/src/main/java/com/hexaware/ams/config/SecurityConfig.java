@@ -1,12 +1,7 @@
 package com.hexaware.ams.config;
 
-/*
- * @Author: Arghya Mandal
- * Date: 26-11-2024
- * Description: Security configuration class that sets up JWT authentication, password encoding, and 
- * session management policies. It disables CSRF protection, permits all requests to the authentication 
- * endpoints, and ensures that all other requests require authentication.
- */
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,40 +15,59 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.context.SecurityContextPersistenceFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
-    
+
     @Autowired
     private JwtAuthenticationFilter jwtAuthFilter;
-    
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http.csrf().disable()
-                .authorizeHttpRequests()
-                .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("/api/assets/**").hasAnyRole("ADMIN", "USER") 
-                .requestMatchers("/api/borrowings/**").hasAnyRole("ADMIN", "USER")
-                .requestMatchers("/api/audits/**").hasRole("ADMIN") 
-                .requestMatchers("/ams/employee/**").hasAnyRole("ADMIN", "USER") 
-                .requestMatchers("/ams/IssueType/**").hasRole("ADMIN")
-                .requestMatchers("/ams/servicerequest/**").hasAnyRole("ADMIN", "USER")
-                .anyRequest().authenticated()
-                .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
+        return http
+                .cors(cors -> cors.configurationSource(corsConfigurationSource())) // Apply CORS configuration
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(authz -> authz
+                        .requestMatchers("/api/auth/authenticate", "/api/auth/register").permitAll() // Explicitly permit login and registration
+                        .requestMatchers("/api/assets/**").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers("/api/borrowings/**").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers("/api/audits/**").hasRole("ADMIN")
+                        .requestMatchers("/ams/employee/**").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers("/ams/IssueType/**").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers("/ams/servicerequest/**").hasAnyRole("ADMIN", "USER")
+                        .anyRequest().authenticated()
+                )
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new CorsFilter(corsConfigurationSource()), SecurityContextPersistenceFilter.class) // Add custom CorsFilter
                 .build();
     }
-    
+
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setAllowCredentials(true);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-    
+
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();

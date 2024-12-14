@@ -1,0 +1,17 @@
+.card {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+h2 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  color: #333;
+  text-transform: uppercase;
+  margin-bottom: 2rem; 
+}

@@ -32,7 +32,6 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/ams/IssueType")
 @Validated
-@PreAuthorize("hasRole('ADMIN')")
 public class IssueTypeController {
 	
 	@Autowired
@@ -42,6 +41,7 @@ public class IssueTypeController {
 	//Create a new IssueType
 	@PostMapping("/addIssueType")
 	@Transactional
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<IssueType> addIssueType(@Valid @RequestBody IssueTypeDto issueType) {
 		
 		IssueType newIssueType = issueTypeService.addIssueType(issueType);
@@ -52,6 +52,7 @@ public class IssueTypeController {
 	
 	//Get an Issue Type by Id
 	@GetMapping("/issueTypeById/{issueTypeId}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<IssueType> getIssueTypeById(@PathVariable int issueTypeId) {
 		
 		IssueType issueType = issueTypeService.getIssueTypeById(issueTypeId);
@@ -62,6 +63,7 @@ public class IssueTypeController {
 	
 	//Get an Issue Type by Name
 	@GetMapping("/issueTypeByName/{issueTypeName}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<IssueType> getIssueTypeByName(@PathVariable String issueTypeName) {
 		
 		IssueType issueTypeByName = issueTypeService.getIssueTypeByName(issueTypeName);
@@ -72,6 +74,7 @@ public class IssueTypeController {
 	
 	//All issue Types 
 	@GetMapping("/allIssueTypes")
+	@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
 	public ResponseEntity<List<IssueType>> getAllIssueTypes(){
 		
 		List<IssueType> issueType = issueTypeService.getAllIssueTypes();
@@ -84,6 +87,7 @@ public class IssueTypeController {
 	// Update an Issue Type 
 	@PutMapping("/updateIssueType/{issueTypeId}/{issueTypeDetails}")
 	@Transactional
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<IssueType> updateIssueType(@PathVariable int issueTypeId, @Valid @RequestBody IssueTypeDto issueTypeDetails) {
 		
 		IssueType updatedIssueType = issueTypeService.updateIssueType(issueTypeId, issueTypeDetails);
@@ -94,6 +98,7 @@ public class IssueTypeController {
 	// Delete an Issue Type using Id
 	@DeleteMapping("/delete/{issueTypeId}")
 	@Transactional
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Void> deleteIssueType(@PathVariable int issueTypeId) {
 		
 		issueTypeService.deleteIssueType(issueTypeId);

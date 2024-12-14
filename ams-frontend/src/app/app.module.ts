@@ -1,7 +1,7 @@
+// app.module.ts
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/authentication/login/login.component';
@@ -14,7 +14,6 @@ import { AssetBorrowingService } from './services/asset-borrowing.service';
 import { AssetService } from './services/asset.service';
 import { EmployeeDashboardComponent } from './components/employee dashboard/employee-dashboard/employee-dashboard.component';
 import { AssignedAssetsComponent } from './components/employee dashboard/assigned-assets/assigned-assets.component';
-import { AssetRequestComponent } from './components/employee dashboard/asset-request/asset-request.component';
 import { ServiceRequestComponent } from './components/employee dashboard/service-request/service-request.component';
 import { ReturnAssetComponent } from './components/employee dashboard/return-asset/return-asset.component';
 import { RegisterComponent } from './components/authentication/register/register.component';
@@ -27,6 +26,16 @@ import { AssetCategoryService } from './services/asset-category.service';
 import { RoleService } from './services/role.service';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
+import { AuthService } from './services/auth.service';
+import { AssetBorrowingComponent } from './components/employee dashboard/asset-borrowing/asset-borrowing.component';
+import { CommonModule } from '@angular/common';
+import { NotFoundComponent } from './components/shared/not-found/not-found.component';
+import { UnauthorizedComponent } from './components/shared/unauthorized/unauthorized.component';
+import { JwtModule } from '@auth0/angular-jwt';
+
+export function tokenGetter() {
+  return localStorage.getItem('token');
+}
 
 @NgModule({
   declarations: [
@@ -38,20 +47,33 @@ import { FooterComponent } from './components/shared/footer/footer.component';
     AssetAuditsComponent,
     EmployeeDashboardComponent,
     AssignedAssetsComponent,
-    AssetRequestComponent,
     ServiceRequestComponent,
     ReturnAssetComponent,
     RegisterComponent,
     HandleServiceRequestsComponent,
     NavbarComponent,
     FooterComponent,
+    AssetBorrowingComponent,
+    NotFoundComponent,
+    UnauthorizedComponent,
     
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    CommonModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ["localhost:8080"], // Your backend domain
+        disallowedRoutes: [
+          "http://localhost:8080/api/auth/authenticate",
+          "http://localhost:8080/api/auth/register" 
+        ]
+      }
+    })
   ],
 
   providers: [
@@ -62,7 +84,8 @@ import { FooterComponent } from './components/shared/footer/footer.component';
     EmployeeService,
     IssueTypeService,
     RoleService,
-    ServiceRequestService
+    ServiceRequestService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

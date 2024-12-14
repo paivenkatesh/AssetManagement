@@ -7,6 +7,7 @@ package com.hexaware.ams.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.hexaware.ams.entity.AssetBorrowing;
@@ -17,4 +18,6 @@ import com.hexaware.ams.entity.Employee;
 public interface IAssetBorrowingRepository extends JpaRepository<AssetBorrowing, Integer>{
 	List<AssetBorrowing> findByEmployee(Employee employee);
 	List<AssetBorrowing> findByStatus(Status status);
+	@Query("SELECT ab FROM AssetBorrowing ab JOIN ab.asset a WHERE ab.employee.employeeId = :employeeId AND a.status = 'Borrowed'")
+    List<AssetBorrowing> findByEmployeeIdAndAssetStatus(int employeeId);
 }

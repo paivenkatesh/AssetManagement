@@ -1,1 +1,93 @@
-<p>service-request works!</p>
+<div class="container mt-4">
+  <h3 class="mb-4">Request Asset Service/Repair</h3>
+
+  <!-- Success Message -->
+  <div *ngIf="successMessage" class="alert alert-success">
+    {{ successMessage }}
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Service Request Form -->
+  <div class="card">
+    <div class="card-header">New Service Request</div>
+    <div class="card-body">
+      <form
+        #serviceForm="ngForm"
+        (ngSubmit)="submitServiceRequest(serviceForm)"
+      >
+        <div class="form-group mb-3">
+          <label for="asset">Asset</label>
+          <select
+            id="asset"
+            name="assetId"
+            class="form-select"
+            required
+            [(ngModel)]="newServiceRequest.assetId"
+          >
+            <option value="">Select Asset</option>
+            <option *ngFor="let asset of assets" [value]="asset.assetId">
+              {{ asset.assetName }}
+            </option>
+          </select>
+          <div
+            *ngIf="serviceForm.submitted && !newServiceRequest.assetId"
+            class="text-danger"
+          >
+            Asset is required.
+          </div>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="issueType">Issue Type</label>
+          <select
+            id="issueType"
+            name="issueTypeId"
+            class="form-select"
+            required
+            [(ngModel)]="newServiceRequest.issueTypeId"
+          >
+            <option value="">Select Issue Type</option>
+            <option
+              *ngFor="let issue of issueTypes"
+              [value]="issue.issueTypeId"
+            >
+              {{ issue.issueTypeName }}
+            </option>
+          </select>
+          <div
+            *ngIf="serviceForm.submitted && !newServiceRequest.issueTypeId"
+            class="text-danger"
+          >
+            Issue Type is required.
+          </div>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="description">Issue Description</label>
+          <textarea
+            id="description"
+            name="description"
+            class="form-control"
+            rows="4"
+            required
+            [(ngModel)]="newServiceRequest.description"
+          ></textarea>
+          <div
+            *ngIf="serviceForm.submitted && !newServiceRequest.description"
+            class="text-danger"
+          >
+            Description is required.
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+          Submit Service Request
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

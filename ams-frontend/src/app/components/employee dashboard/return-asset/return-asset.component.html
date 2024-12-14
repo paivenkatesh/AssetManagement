@@ -1,1 +1,54 @@
-<p>return-asset works!</p>
+<div class="container mt-4">
+  <h3 class="mb-4">Return Assets</h3>
+
+  <!-- Success Message -->
+  <div *ngIf="successMessage" class="alert alert-success">
+    {{ successMessage }}
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Active Borrowings Table -->
+  <div class="card">
+    <div class="card-header">Active Asset Borrowings</div>
+    <div class="card-body">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Borrowing ID</th>
+            <th>Asset Name</th>
+            <th>Borrowed At</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let borrowing of activeBorrowings">
+            <td>{{ borrowing.borrowingId }}</td>
+            <td>{{ borrowing.asset.assetName }}</td>
+            <td>{{ borrowing.borrowedAt | date : "short" }}</td>
+            <td>
+              <span class="badge bg-warning">
+                {{ borrowing.status }}
+              </span>
+            </td>
+            <td>
+              <button
+                class="btn btn-danger btn-sm"
+                (click)="returnAsset(borrowing.borrowingId)"
+              >
+                Return Asset
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="activeBorrowings.length === 0">
+            <td colspan="5" class="text-center">No active borrowings found.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

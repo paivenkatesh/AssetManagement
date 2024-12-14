@@ -5,6 +5,7 @@ package com.hexaware.ams.controller;
  * @Description: Controller for managing asset operations including adding, updating, retrieving, and deleting assets.
  */
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -89,8 +90,14 @@ public class AssetController {
     // Get assets assigned to an employee
     @GetMapping("/assigned/{employeeId}")
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
-    public ResponseEntity<List<AssetBorrowing>> getAssignedAssets(@PathVariable Integer employeeId) {
-        List<AssetBorrowing> assignedAssets = assetBorrowingService.getBorrowingsByEmployee(employeeId);
-        return ResponseEntity.ok(assignedAssets);
+    public ResponseEntity<List<Asset>> getAssignedAssets(@PathVariable Integer employeeId) {
+        List<AssetBorrowing> assignedBorrowings = assetBorrowingService.getBorrowingsByEmployee(employeeId);
+        
+        List<Asset> borrowedAssets = assignedBorrowings.stream()
+                .map(AssetBorrowing::getAsset)
+                .filter(asset -> asset.getStatus() == Asset.Status.Borrowed)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(borrowedAssets);
     }
 }

@@ -98,17 +98,32 @@
             <td>{{ asset.assetId }}</td>
             <td>
               <span *ngIf="!editingAsset || editingAsset.assetId !== asset.assetId">{{ asset.assetName }}</span>
-              <input *ngIf="editingAsset && editingAsset.assetId === asset.assetId" type="text" class="form-control" [(ngModel)]="editingAsset.assetName" name="assetName{{asset.assetId}}" required>
+              <input *ngIf="editingAsset && editingAsset.assetId === asset.assetId" type="text" class="form-control" [(ngModel)]="editingAsset.assetName" name="assetName{{asset.assetId}}" id="assetName{{asset.assetId}}" required>
             </td>
-            <td>{{ asset.category.categoryId }}</td>
+            <td>
+              <span *ngIf="!editingAsset || editingAsset.assetId !== asset.assetId">{{ asset.category.categoryId }}</span>
+              <select *ngIf="editingAsset && editingAsset.assetId === asset.assetId" class="form-select" [(ngModel)]="editingAsset.category.categoryId" name="categoryId{{asset.assetId}}" id="categoryId{{asset.assetId}}" required>
+                <option value="">Select Category</option>
+                <option *ngFor="let category of categories" [value]="category.categoryId">{{ category.categoryName }}</option>
+              </select>
+            </td>
             <td>{{ asset.category.categoryName }}</td>
             <td>
               <span *ngIf="!editingAsset || editingAsset.assetId !== asset.assetId">{{ asset.assetModel }}</span>
-              <input *ngIf="editingAsset && editingAsset.assetId === asset.assetId" type="text" class="form-control" [(ngModel)]="editingAsset.assetModel" name="assetModel{{asset.assetId}}" required>
+              <input *ngIf="editingAsset && editingAsset.assetId === asset.assetId" type="text" class="form-control" [(ngModel)]="editingAsset.assetModel" name="assetModel{{asset.assetId}}" id="assetModel{{asset.assetId}}" required>
             </td>
-            <td>{{ asset.manufacturingDate | date:'shortDate' }}</td>
-            <td>{{ asset.expiryDate | date:'shortDate' }}</td>
-            <td>{{ asset.assetValue | currency }}</td>
+            <td>
+              <span *ngIf="!editingAsset || editingAsset.assetId !== asset.assetId">{{ asset.manufacturingDate | date:'shortDate' }}</span>
+              <input *ngIf="editingAsset && editingAsset.assetId === asset.assetId" type="date" class="form-control" [(ngModel)]="editingAsset.manufacturingDate" name="manufacturingDate{{asset.assetId}}" id="manufacturingDate{{asset.assetId}}" required>
+            </td>
+            <td>
+              <span *ngIf="!editingAsset || editingAsset.assetId !== asset.assetId">{{ asset.expiryDate | date:'shortDate' }}</span>
+              <input *ngIf="editingAsset && editingAsset.assetId === asset.assetId" type="date" class="form-control" [(ngModel)]="editingAsset.expiryDate" name="expiryDate{{asset.assetId}}" id="expiryDate{{asset.assetId}}" required>
+            </td>
+            <td>
+              <span *ngIf="!editingAsset || editingAsset.assetId !== asset.assetId">{{ asset.assetValue | currency }}</span>
+              <input *ngIf="editingAsset && editingAsset.assetId === asset.assetId" type="number" class="form-control" [(ngModel)]="editingAsset.assetValue" name="assetValue{{asset.assetId}}" id="assetValue{{asset.assetId}}" required min="0">
+            </td>
             <td>
               <span class="badge" [ngClass]="{
                 'bg-success': asset.status === 'Available',
@@ -127,7 +142,7 @@
               </button>
 
               <div *ngIf="editingAsset && editingAsset.assetId === asset.assetId" class="mt-2">
-                <button class="btn btn-success btn-sm me-2" (click)="updateAsset(assetForm)">Save</button>
+                <button class="btn btn-success btn-sm me-2" (click)="updateAsset()">Save</button>
                 <button class="btn btn-secondary btn-sm" (click)="cancelEdit()">Cancel</button>
               </div>
             </td>

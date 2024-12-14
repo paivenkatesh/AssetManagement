@@ -1,0 +1,82 @@
+<div class="container mt-4">
+  <h3 class="mb-4">Asset Borrowing</h3>
+
+  <!-- Success Message -->
+  <div *ngIf="successMessage" class="alert alert-success">
+    {{ successMessage }}
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Borrow Asset Form -->
+  <div class="card mb-4">
+    <div class="card-header">
+      Borrow an Asset
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="borrowAsset()">
+        <div class="form-group mb-3">
+          <label for="assetSelect">Select Asset</label>
+          <select id="assetSelect" class="form-select" [(ngModel)]="selectedAssetId" name="assetId" required>
+            <option value="0">-- Select an Asset --</option>
+            <option *ngFor="let asset of allAssets" [value]="asset.assetId">
+              {{ asset.assetName }} ({{ asset.category.categoryName }}) - 
+              <span [ngClass]="{
+                'text-success': isAssetAvailable(asset),
+                'text-danger': !isAssetAvailable(asset)
+              }">
+                {{ asset.status }}
+              </span>
+            </option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="isLoading">
+          {{ isLoading ? 'Borrowing...' : 'Borrow Asset' }}
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Current Borrowings -->
+  <div class="card">
+    <div class="card-header">
+      Your Current Borrowings
+    </div>
+    <div class="card-body">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Borrowing ID</th>
+            <th>Asset Name</th>
+            <th>Category</th>
+            <th>Borrowed At</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let borrowing of employeeBorrowings">
+            <td>{{ borrowing.borrowingId }}</td>
+            <td>{{ borrowing.asset.assetName }}</td>
+            <td>{{ borrowing.asset.category.categoryName }}</td>
+            <td>{{ borrowing.borrowedAt | date:'medium' }}</td>
+            <td>
+              <span class="badge bg-success">{{ borrowing.status }}</span>
+            </td>
+            <td>
+              <button class="btn btn-danger btn-sm" (click)="returnAsset(borrowing.borrowingId)">
+                Return Asset
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="employeeBorrowings.length === 0">
+            <td colspan="6" class="text-center">You have no active borrowings.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

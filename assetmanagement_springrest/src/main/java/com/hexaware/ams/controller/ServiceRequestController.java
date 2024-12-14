@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hexaware.ams.dto.ServiceRequestDto;
@@ -38,10 +39,14 @@ public class ServiceRequestController {
 	//Create a new Service Request
 	@PostMapping("/createServiceRequest/{employeeId}/{assetId}/{issueTypeId}")
 	@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
-	public ResponseEntity<ServiceRequest> createServiceRequest(@PathVariable int employeeId, @PathVariable int assetId, @PathVariable int issueTypeId, @RequestBody String Description) {
-		
-		ServiceRequest newServiceRequest = serviceRequestService.createServiceRequest(employeeId, assetId, issueTypeId, Description);
-		return new ResponseEntity<>(newServiceRequest,HttpStatus.CREATED);
+	public ResponseEntity<ServiceRequest> createServiceRequest(
+	        @PathVariable int employeeId,
+	        @PathVariable int assetId,
+	        @PathVariable int issueTypeId,
+	        @RequestParam("description") String description) {
+
+	    ServiceRequest newServiceRequest = serviceRequestService.createServiceRequest(employeeId, assetId, issueTypeId, description);
+	    return new ResponseEntity<>(newServiceRequest, HttpStatus.CREATED);
 	}
 	
 	//Get Service Request By its Id

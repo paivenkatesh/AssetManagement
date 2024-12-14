@@ -23,7 +23,7 @@ export class IssueTypeService {
 
   getAllIssueTypes(): Observable<IssueType[]> {
 
-    return this.http.get<IssueType[]>(`${this.issueTypeServiceUrl}/allIssueTypes}`);
+    return this.http.get<IssueType[]>(`${this.issueTypeServiceUrl}/allIssueTypes`);
   }
 
   updateIssueType(issueTypeId: number, issueTypeDetailsDto: IssueType) {
