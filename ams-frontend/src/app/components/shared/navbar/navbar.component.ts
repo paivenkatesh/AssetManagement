@@ -11,9 +11,6 @@ export class NavbarComponent {
 
   constructor(public authService: AuthService, private router: Router) { }
 
-  /**
-   * Initiates the logout process with confirmation.
-   */
   logout(): void {
     const confirmation = confirm('Are you sure you want to logout?');
     if (confirmation) {

@@ -21,10 +21,6 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) { }
 
-  /**
-   * Handles the login form submission.
-   * @param form The login form.
-   */
   onLogin(form: any): void {
     if (form.invalid) {
       return;

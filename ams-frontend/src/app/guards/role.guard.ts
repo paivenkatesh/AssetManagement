@@ -10,11 +10,6 @@ export class RoleGuard implements CanActivate {
 
   constructor(private authService: AuthService, private router: Router) { }
 
-  /**
-   * Determines if a route can be activated based on user roles.
-   * @param route The activated route snapshot.
-   * @returns True if user has required roles, else redirects to unauthorized.
-   */
   canActivate(route: ActivatedRouteSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     const expectedRoles: string[] = route.data['roles'];
     const userRoles = this.authService.getUserRoles();

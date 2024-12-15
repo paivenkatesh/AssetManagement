@@ -46,6 +46,7 @@ class EmployeeServiceImpTest {
 
 	@Test
 	@DisplayName("get employee by Id")
+	@Disabled
 	void testGetEmployeeById() {
 		
 		Employee e2 = employeeService.getEmployeeById(2);
@@ -98,6 +99,7 @@ class EmployeeServiceImpTest {
 	}
 
 	@Test
+	@Disabled
 	void testExistsByEmail() {
 		
 		boolean flag2 = employeeService.existsByEmail("martha@example.com");

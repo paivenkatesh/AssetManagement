@@ -28,9 +28,6 @@ export class AssignedAssetsComponent implements OnInit {
     }
   }
 
-  /**
-   * Fetches assets assigned to the logged-in employee.
-   */
   fetchAssignedAssets(): void {
     this.assetService.getAssetsByEmployee(this.employeeId!).subscribe({
       next: (data) => this.assets = data,

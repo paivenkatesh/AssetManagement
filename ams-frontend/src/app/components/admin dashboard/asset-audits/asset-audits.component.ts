@@ -28,8 +28,6 @@ export class AssetAuditsComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchAllAudits();
-    // Fetch employees and assets if needed for creating new audits
-    // Implement EmployeeService and AssetService to fetch these
   }
 
   fetchAllAudits(): void {

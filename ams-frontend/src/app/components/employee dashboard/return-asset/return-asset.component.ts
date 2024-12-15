@@ -30,9 +30,6 @@ export class ReturnAssetComponent implements OnInit {
     }
   }
 
-  /**
-   * Fetches all active borrowings for the employee.
-   */
   fetchActiveBorrowings(): void {
     this.assetBorrowingService.getBorrowingsByEmployee(this.employeeId!).subscribe({
       next: (data) => this.activeBorrowings = data.filter(borrowing => borrowing.status === BorrowingStatus.Active),
@@ -40,10 +37,6 @@ export class ReturnAssetComponent implements OnInit {
     });
   }
 
-  /**
-   * Initiates the return process for an asset.
-   * @param borrowingId The ID of the borrowing record.
-   */
   returnAsset(borrowingId: number): void {
     if (confirm('Are you sure you want to return this asset?')) {
       this.assetBorrowingService.returnAsset(borrowingId).subscribe({

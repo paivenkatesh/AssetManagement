@@ -15,7 +15,7 @@ export class HandleServiceRequestsComponent implements OnInit {
   errorMessage: string = '';
   editingRequest: ServiceRequest | null = null;
 
-  // Optional: For filtering
+  // Filter
   filterStatus: Status | '' = '';
 
   constructor(private serviceRequestService: ServiceRequestService) { }
@@ -24,9 +24,6 @@ export class HandleServiceRequestsComponent implements OnInit {
     this.fetchServiceRequests();
   }
 
-  /**
-   * Fetches all service requests from the backend.
-   */
   fetchServiceRequests(): void {
     this.serviceRequestService.getAllServiceRequests().subscribe({
       next: (data) => this.serviceRequests = data,
@@ -37,11 +34,6 @@ export class HandleServiceRequestsComponent implements OnInit {
     });
   }
 
-  /**
-   * Updates the status of a service request.
-   * @param request The service request to update.
-   * @param newStatus The new status to assign.
-   */
   updateServiceRequestStatus(request: ServiceRequest, newStatus: Status): void {
     this.serviceRequestService.updateServiceRequest(request.serviceRequestId, newStatus).subscribe({
       next: (updatedRequest) => {
@@ -55,18 +47,10 @@ export class HandleServiceRequestsComponent implements OnInit {
     });
   }
 
-  /**
-   * Enables editing mode for a specific service request.
-   * @param request The service request to edit.
-   */
   editServiceRequest(request: ServiceRequest): void {
     this.editingRequest = { ...request };
   }
 
-  /**
-   * Saves the updated service request.
-   * @param request The updated service request.
-   */
   saveServiceRequest(): void {
     if (this.editingRequest) {
       this.serviceRequestService.updateServiceRequest(this.editingRequest.serviceRequestId, this.editingRequest.status).subscribe({
@@ -83,16 +67,10 @@ export class HandleServiceRequestsComponent implements OnInit {
     }
   }
 
-  /**
-   * Cancels the editing mode.
-   */
   cancelEdit(): void {
     this.editingRequest = null;
   }
 
-  /**
-   * Filters service requests based on the selected status.
-   */
   filterServiceRequests(): void {
     if (this.filterStatus) {
       this.serviceRequestService.findByStatus(this.filterStatus).subscribe({

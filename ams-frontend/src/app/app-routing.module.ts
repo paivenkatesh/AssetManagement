@@ -33,7 +33,7 @@ const routes: Routes = [
     path: 'employee-dashboard',
     component: EmployeeDashboardComponent,
     canActivate: [AuthGuard, RoleGuard],
-    data: { roles: ['ROLE_USER'] }, // Assuming 'ROLE_USER' is for employees
+    data: { roles: ['ROLE_USER'] }, 
     children: [
       { path: '', redirectTo: 'assigned-assets', pathMatch: 'full' },
       { path: 'assigned-assets', component: AssignedAssetsComponent },

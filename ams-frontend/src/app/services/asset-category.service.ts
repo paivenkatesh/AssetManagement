@@ -14,12 +14,7 @@ export class AssetCategoryService {
 
   constructor() { }
 
-  /**
-   * Retrieves all asset categories.
-   * @returns Observable of AssetCategory array.
-   */
   getAllCategories(): Observable<AssetCategory[]> {
-    // Replace with HTTP GET request when backend endpoints are available
     return of(this.categories);
   }
 }

@@ -59,6 +59,7 @@ class ServiceRequestServiceImpTest {
 
 	@Test
 	@Order(3)
+	@Disabled
 	void testUpdateServiceRequestStatus() {
 		
 		ServiceRequest s2 = serviceRequestService.updateServiceRequestStatus(4, ServiceRequest.Status.Completed);

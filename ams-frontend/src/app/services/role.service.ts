@@ -13,12 +13,7 @@ export class RoleService {
 
   constructor() { }
 
-  /**
-   * Retrieves all roles.
-   * @returns Observable of Role array.
-   */
   getAllRoles(): Observable<Role[]> {
-    // Replace with HTTP GET request when backend endpoints are available
     return of(this.roles);
   }
 }

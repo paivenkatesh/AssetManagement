@@ -121,7 +121,7 @@
               <input *ngIf="editingAsset && editingAsset.assetId === asset.assetId" type="date" class="form-control" [(ngModel)]="editingAsset.expiryDate" name="expiryDate{{asset.assetId}}" id="expiryDate{{asset.assetId}}" required>
             </td>
             <td>
-              <span *ngIf="!editingAsset || editingAsset.assetId !== asset.assetId">{{ asset.assetValue | currency }}</span>
+              <span *ngIf="!editingAsset || editingAsset.assetId !== asset.assetId">{{ asset.assetValue | currency: 'INR' }}</span>
               <input *ngIf="editingAsset && editingAsset.assetId === asset.assetId" type="number" class="form-control" [(ngModel)]="editingAsset.assetValue" name="assetValue{{asset.assetId}}" id="assetValue{{asset.assetId}}" required min="0">
             </td>
             <td>

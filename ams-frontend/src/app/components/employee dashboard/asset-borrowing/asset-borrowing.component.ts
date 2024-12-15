@@ -35,9 +35,6 @@ export class AssetBorrowingComponent implements OnInit {
     }
   }
 
-  /**
-   * Fetches all assets from the backend.
-   */
   fetchAllAssets(): void {
     this.assetService.getAllAssets().subscribe({
       next: (data) => this.allAssets = data,
@@ -45,9 +42,6 @@ export class AssetBorrowingComponent implements OnInit {
     });
   }
 
-  /**
-   * Fetches borrowings associated with the logged-in employee.
-   */
   fetchEmployeeBorrowings(): void {
     this.assetBorrowingService.getBorrowingsByEmployee(this.employeeId!).subscribe({
       next: (data) => this.employeeBorrowings = data,
@@ -55,9 +49,6 @@ export class AssetBorrowingComponent implements OnInit {
     });
   }
 
-  /**
-   * Submits a new asset borrowing request.
-   */
   borrowAsset(): void {
     if (this.selectedAssetId === 0) {
       this.errorMessage = 'Please select an asset to borrow.';
@@ -83,10 +74,6 @@ export class AssetBorrowingComponent implements OnInit {
     });
   }
 
-  /**
-   * Initiates the return process for a borrowed asset.
-   * @param borrowingId The ID of the borrowing record.
-   */
   returnAsset(borrowingId: number): void {
     if (confirm('Are you sure you want to return this asset?')) {
       this.assetBorrowingService.returnAsset(borrowingId).subscribe({
@@ -100,11 +87,6 @@ export class AssetBorrowingComponent implements OnInit {
     }
   }
 
-  /**
-   * Checks if the asset is available for borrowing.
-   * @param asset The asset to check.
-   * @returns True if available, else false.
-   */
   isAssetAvailable(asset: Asset): boolean {
     return asset.status === 'Available';
   }

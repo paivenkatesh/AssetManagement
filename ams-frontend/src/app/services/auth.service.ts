@@ -8,10 +8,10 @@ import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 interface DecodedToken {
-  sub: string; // 'sub' typically holds the subject (username or email)
+  sub: string;
   employeeId: number;
   name: string;
-  role: string[]; // Now correctly matches the claim name in your JWT
+  role: string[]; 
   exp: number;
   iat: number;
 }
@@ -69,7 +69,7 @@ export class AuthService {
 
   getEmployeeId(): number | null {
     const decoded = this.decodeToken();
-    return decoded ? decoded.employeeId : null; // Correctly access employeeId
+    return decoded ? decoded.employeeId : null; 
   }
 
   getUserRoles(): string[] {
@@ -79,11 +79,10 @@ export class AuthService {
     }
     const roles = decoded.role;
 
-    // Ensure roles is an array
     if (Array.isArray(roles)) {
       return roles;
     } else if (typeof roles === 'string') {
-      return [roles]; // Convert single role string to an array
+      return [roles]; 
     } else {
       return [];
     }

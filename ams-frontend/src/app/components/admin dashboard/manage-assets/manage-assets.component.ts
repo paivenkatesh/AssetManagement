@@ -65,8 +65,7 @@ export class ManageAssetsComponent implements OnInit {
       return;
     }
 
-    // Ensure categoryId is treated as a number
-    const categoryId = +this.newAsset.category.categoryId; // Convert to number
+    const categoryId = +this.newAsset.category.categoryId; 
     const selectedCategory = this.categories.find(cat => cat.categoryId === categoryId);
 
     if (!selectedCategory) {
@@ -134,10 +133,8 @@ export class ManageAssetsComponent implements OnInit {
    * Updates an existing asset.
    */
   updateAsset(): void {
-    // Ensure the category ID is a number
-    const categoryId = +this.editingAsset!.category.categoryId; // Convert to number
+    const categoryId = +this.editingAsset!.category.categoryId;
 
-    // Find the selected category from the categories array using the numeric ID
     const selectedCategory = this.categories.find(cat => cat.categoryId === categoryId);
 
     if (!selectedCategory) {
@@ -145,13 +142,11 @@ export class ManageAssetsComponent implements OnInit {
         return;
     }
 
-    // Create a copy of the asset to update, ensuring category is correctly set
     const assetToUpdate: Asset = {
         ...this.editingAsset!,
         category: selectedCategory
     };
 
-    // Call the asset service to update the asset
     this.assetService.updateAsset(assetToUpdate.assetId, assetToUpdate).subscribe({
         next: () => {
             this.successMessage = 'Asset updated successfully!';
@@ -162,9 +157,6 @@ export class ManageAssetsComponent implements OnInit {
     });
 }
 
-  /**
-   * Cancels the editing mode.
-   */
   cancelEdit(): void {
     this.editingAsset = null;
   }

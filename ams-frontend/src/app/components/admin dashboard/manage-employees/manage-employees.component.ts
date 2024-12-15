@@ -11,7 +11,7 @@ import { RoleService } from '../../../services/role.service';
 })
 export class ManageEmployeesComponent implements OnInit {
   employees: Employee[] = [];
-  roles: Role[] = []; // To store fetched roles
+  roles: Role[] = []; 
   newEmployee: Employee = {
     employeeId: 0,
     name: '',
@@ -36,9 +36,6 @@ export class ManageEmployeesComponent implements OnInit {
     this.fetchAllRoles();
   }
 
-  /**
-   * Fetches all employees from the backend.
-   */
   fetchAllEmployees(): void {
     this.employeeService.getAllEmployee().subscribe({
       next: (data) => this.employees = data,
@@ -46,9 +43,6 @@ export class ManageEmployeesComponent implements OnInit {
     });
   }
 
-  /**
-   * Fetches all roles.
-   */
   fetchAllRoles(): void {
     this.roleService.getAllRoles().subscribe({
       next: (data) => this.roles = data,
@@ -56,16 +50,11 @@ export class ManageEmployeesComponent implements OnInit {
     });
   }
 
-  /**
-   * Adds a new employee.
-   * @param form The form containing employee details.
-   */
   addEmployee(form: any): void {
     if (form.invalid) {
       return;
     }
 
-    // Find the selected role from the roles array
     const selectedRole = this.roles.find(role => role.roleId === this.newEmployee.role.roleId);
 
     if (!selectedRole) {
@@ -99,10 +88,6 @@ export class ManageEmployeesComponent implements OnInit {
     });
   }
 
-  /**
-   * Deletes an employee.
-   * @param employeeId The ID of the employee to delete.
-   */
   deleteEmployee(employeeId: number): void {
     if (confirm('Are you sure you want to delete this employee?')) {
       this.employeeService.deleteEmployee(employeeId).subscribe({
@@ -115,24 +100,15 @@ export class ManageEmployeesComponent implements OnInit {
     }
   }
 
-  /**
-   * Enables editing mode for an employee.
-   * @param employee The employee to edit.
-   */
   editEmployee(employee: Employee): void {
     this.editingEmployee = { ...employee };
   }
 
-  /**
-   * Updates an existing employee.
-   * @param form The form containing updated employee details.
-   */
   updateEmployee(): void {
     if (!this.editingEmployee) {
       return;
   }
 
-    // Find the selected role from the roles array
     const selectedRole = this.roles.find(role => role.roleId === this.editingEmployee?.role.roleId);
 
     if (!selectedRole) {
@@ -155,9 +131,6 @@ export class ManageEmployeesComponent implements OnInit {
   });
   }
 
-  /**
-   * Cancels the editing mode.
-   */
   cancelEdit(): void {
     this.editingEmployee = null;
   }

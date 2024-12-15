@@ -10,10 +10,6 @@ export class AuthGuard implements CanActivate {
 
   constructor(private authService: AuthService, private router: Router) { }
 
-  /**
-   * Determines if a route can be activated based on authentication status.
-   * @returns True if authenticated, else redirects to login.
-   */
   canActivate(): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     if (this.authService.isLoggedIn()) {
       return true;

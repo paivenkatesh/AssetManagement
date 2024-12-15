@@ -40,9 +40,6 @@ export class ServiceRequestComponent implements OnInit {
     }
   }
 
-  /**
-   * Fetches all assets assigned to the employee.
-   */
   fetchAssets(): void {
     this.assetService.getAssetsByEmployee(this.employeeId!).subscribe({
       next: (data) => this.assets = data,
@@ -50,9 +47,6 @@ export class ServiceRequestComponent implements OnInit {
     });
   }
 
-  /**
-   * Fetches all available issue types.
-   */
   fetchIssueTypes(): void {
     this.issueTypeService.getAllIssueTypes().subscribe({
       next: (data) => this.issueTypes = data,
@@ -60,10 +54,6 @@ export class ServiceRequestComponent implements OnInit {
     });
   }
 
-  /**
-   * Submits a new service request.
-   * @param form The form containing service request details.
-   */
   submitServiceRequest(form: any): void {
     if (form.invalid) {
       return;

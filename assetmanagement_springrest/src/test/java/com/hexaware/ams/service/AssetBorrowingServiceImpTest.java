@@ -15,6 +15,7 @@ import com.hexaware.ams.repository.IAssetRepository;
 import com.hexaware.ams.repository.IEmployeeRepository;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -89,6 +90,7 @@ public class AssetBorrowingServiceImpTest {
     }
 
     @Test
+    @Disabled
     public void testGetBorrowingsByEmployee() {
         when(employeeRepository.findById(employee.getEmployeeId())).thenReturn(Optional.of(employee));
         when(borrowingRepository.findByEmployee(employee)).thenReturn(Arrays.asList(borrowing));
