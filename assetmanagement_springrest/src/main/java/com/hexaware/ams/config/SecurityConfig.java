@@ -31,10 +31,11 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .cors(cors -> cors.configurationSource(corsConfigurationSource())) // Apply CORS configuration
+                .cors(cors -> cors.configurationSource(corsConfigurationSource())) 
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/api/auth/authenticate", "/api/auth/register").permitAll() // Explicitly permit login and registration
+                        .requestMatchers("/api/auth/authenticate", "/api/auth/register").permitAll() 
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**", "/webjars/**").permitAll()
                         .requestMatchers("/api/assets/**").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/api/borrowings/**").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/api/audits/**").hasRole("ADMIN")

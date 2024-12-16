@@ -4,13 +4,14 @@ import { Observable } from 'rxjs';
 
 import { Asset } from '../models/asset.model';
 import { AssetCategory } from '../models/asset-category.model';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AssetService {
-  private assetsUrl = 'http://localhost:8080/api/assets';
+  private assetsUrl = `${environment.apiBaseUrl}:8080/api/assets`;
 
   constructor(private http: HttpClient) { }
 

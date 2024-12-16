@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IssueType } from '../models/issue-type.model';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IssueTypeService {
 
-  private issueTypeServiceUrl = 'http://localhost:8080/ams/IssueType'
+  private issueTypeServiceUrl = `${environment.apiBaseUrl}/ams/IssueType`
   constructor(private http: HttpClient) { }
 
   addIssueType(issueTypeDto: IssueType): Observable<IssueType> {

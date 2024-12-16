@@ -350,3 +350,92 @@
 2024-12-15 16:33:35.492 [INFO] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
 2024-12-15 16:33:35.496 [INFO] com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
 2024-12-15 16:33:35.517 [INFO] com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
+2024-12-16 22:12:04.853 [INFO] com.hexaware.ams.AssetmanagementSpringrestApplicationTests [main] Starting AssetmanagementSpringrestApplicationTests using Java 21.0.5 with PID 7040 (started by arghy in C:\Arghya\Java\AssetManagement\assetmanagement_springrest)
+2024-12-16 22:12:04.854 [DEBUG] com.hexaware.ams.AssetmanagementSpringrestApplicationTests [main] Running with Spring Boot v3.2.12-SNAPSHOT, Spring v6.1.15
+2024-12-16 22:12:04.855 [INFO] com.hexaware.ams.AssetmanagementSpringrestApplicationTests [main] No active profile set, falling back to 1 default profile: "default"
+2024-12-16 22:12:05.717 [INFO] org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-16 22:12:05.776 [INFO] org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 52 ms. Found 7 JPA repository interfaces.
+2024-12-16 22:12:06.453 [INFO] org.hibernate.jpa.internal.util.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-16 22:12:06.573 [INFO] org.hibernate.Version [main] HHH000412: Hibernate ORM core version 6.4.10.Final
+2024-12-16 22:12:06.628 [INFO] org.hibernate.cache.internal.RegionFactoryInitiator [main] HHH000026: Second-level cache disabled
+2024-12-16 22:12:06.870 [INFO] org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo [main] No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-16 22:12:06.901 [INFO] com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Starting...
+2024-12-16 22:12:07.194 [INFO] com.zaxxer.hikari.pool.HikariPool [main] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7a62d697
+2024-12-16 22:12:07.196 [INFO] com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Start completed.
+2024-12-16 22:12:07.238 [WARN] org.hibernate.orm.deprecation [main] HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-12-16 22:12:08.059 [INFO] org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [main] HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-16 22:12:08.142 [INFO] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-16 22:12:08.713 [INFO] org.springframework.data.jpa.repository.query.QueryEnhancerFactory [main] Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-12-16 22:12:09.553 [WARN] org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-16 22:12:09.989 [INFO] org.springframework.security.web.DefaultSecurityFilterChain [main] Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1f3c3291, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1a0c384d, org.springframework.security.web.context.SecurityContextHolderFilter@134ccb03, com.hexaware.ams.config.CorsFilter@3e8cf854, org.springframework.security.web.header.HeaderWriterFilter@7f3616d2, org.springframework.web.filter.CorsFilter@5c937c92, org.springframework.security.web.authentication.logout.LogoutFilter@5da61ee2, com.hexaware.ams.config.JwtAuthenticationFilter@5a2297d7, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@12e25b4b, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@173a86ad, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@22c5652b, org.springframework.security.web.session.SessionManagementFilter@316a682b, org.springframework.security.web.access.ExceptionTranslationFilter@4dba2d07, org.springframework.security.web.access.intercept.AuthorizationFilter@9918487]
+2024-12-16 22:12:10.409 [INFO] com.hexaware.ams.AssetmanagementSpringrestApplicationTests [main] Started AssetmanagementSpringrestApplicationTests in 5.777 seconds (process running for 6.592)
+2024-12-16 22:12:11.313 [INFO] com.hexaware.ams.service.AssetAuditServiceImp [main] Audits of employee with id: 1 returned.
+2024-12-16 22:12:11.355 [INFO] com.hexaware.ams.service.AssetAuditServiceImp [main] Asset audit request sent.
+2024-12-16 22:12:11.368 [INFO] com.hexaware.ams.service.AssetAuditServiceImp [main] All audits returned.
+2024-12-16 22:12:11.372 [INFO] com.hexaware.ams.service.AssetAuditServiceImp [main] Returning audit request with id: 1
+2024-12-16 22:12:11.463 [INFO] com.hexaware.ams.service.AssetBorrowingServiceImp [main] Returning all active borrowings.
+2024-12-16 22:12:11.478 [INFO] com.hexaware.ams.service.AssetBorrowingServiceImp [main] Laptop with id: 1 is borrowed by employee with id: 1
+2024-12-16 22:12:11.483 [INFO] com.hexaware.ams.service.AssetBorrowingServiceImp [main] Returning borrowings of employee with id: 1
+2024-12-16 22:12:11.507 [INFO] com.hexaware.ams.service.AssetBorrowingServiceImp [main] Attempting to return asset for borrowing ID: 1
+2024-12-16 22:12:11.508 [INFO] com.hexaware.ams.service.AssetBorrowingServiceImp [main] Found borrowing record. Current status: Active
+2024-12-16 22:12:11.508 [INFO] com.hexaware.ams.service.AssetBorrowingServiceImp [main] Updating asset status for asset ID: 1. Current status: Available
+2024-12-16 22:12:11.508 [INFO] com.hexaware.ams.service.AssetBorrowingServiceImp [main] Successfully updated asset status to Available
+2024-12-16 22:12:11.508 [INFO] com.hexaware.ams.service.AssetBorrowingServiceImp [main] Successfully updated borrowing record to Returned
+2024-12-16 22:12:11.517 [INFO] com.hexaware.ams.service.AssetServiceImp [main] Trying to get asset with id: 1
+2024-12-16 22:12:11.523 [WARN] com.hexaware.ams.service.AssetServiceImp [main] Asset with id: 1 is deleted.
+2024-12-16 22:12:11.528 [INFO] com.hexaware.ams.service.AssetServiceImp [main] Asset updated with id: 1
+2024-12-16 22:12:11.528 [INFO] com.hexaware.ams.service.AssetServiceImp [main] Asset updated with ID: 1
+2024-12-16 22:12:11.531 [INFO] com.hexaware.ams.service.AssetServiceImp [main] Asset added with ID: 1
+2024-12-16 22:12:11.534 [INFO] com.hexaware.ams.service.AssetServiceImp [main] Returning all the asset details.
+2024-12-16 22:12:11.540 [INFO] com.hexaware.ams.service.AssetServiceImp [main] Returning list of assets with category: AssetCategory [categoryId=1, categoryName=Electronics]
+2024-12-16 22:12:11.547 [INFO] org.springframework.test.context.support.AnnotationConfigContextLoaderUtils [main] Could not detect default configuration classes for test class [com.hexaware.ams.service.EmployeeServiceImpTest]: EmployeeServiceImpTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-12-16 22:12:11.572 [INFO] org.springframework.boot.test.context.SpringBootTestContextBootstrapper [main] Found @SpringBootConfiguration com.hexaware.ams.AssetmanagementSpringrestApplication for test class com.hexaware.ams.service.EmployeeServiceImpTest
+2024-12-16 22:12:11.927 [INFO] com.hexaware.ams.service.EmployeeServiceImp [main] Employee list retrieved successfully
+2024-12-16 22:12:11.940 [INFO] org.springframework.test.context.support.AnnotationConfigContextLoaderUtils [main] Could not detect default configuration classes for test class [com.hexaware.ams.service.IssueTypeServiceImpTest]: IssueTypeServiceImpTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-12-16 22:12:11.942 [INFO] org.springframework.boot.test.context.SpringBootTestContextBootstrapper [main] Found @SpringBootConfiguration com.hexaware.ams.AssetmanagementSpringrestApplication for test class com.hexaware.ams.service.IssueTypeServiceImpTest
+2024-12-16 22:12:12.028 [INFO] com.hexaware.ams.service.EmployeeServiceImp [main] Adding a new Issue Type
+2024-12-16 22:12:12.141 [INFO] com.hexaware.ams.service.EmployeeServiceImp [main] Finding Issue with given Id
+2024-12-16 22:12:12.150 [INFO] com.hexaware.ams.service.EmployeeServiceImp [main] Trying to find Issue Type with given name 
+2024-12-16 22:12:12.196 [WARN] com.hexaware.ams.service.EmployeeServiceImp [main] Issue will be deleted
+2024-12-16 22:12:12.204 [INFO] org.springframework.test.context.support.AnnotationConfigContextLoaderUtils [main] Could not detect default configuration classes for test class [com.hexaware.ams.service.ServiceRequestServiceImpTest]: ServiceRequestServiceImpTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-12-16 22:12:12.207 [INFO] org.springframework.boot.test.context.SpringBootTestContextBootstrapper [main] Found @SpringBootConfiguration com.hexaware.ams.AssetmanagementSpringrestApplication for test class com.hexaware.ams.service.ServiceRequestServiceImpTest
+2024-12-16 22:12:12.214 [INFO] com.hexaware.ams.service.ServiceRequestServiceImp [main] Trying to find service request by Id
+2024-12-16 22:12:12.250 [INFO] com.hexaware.ams.service.ServiceRequestServiceImp [main] Getting Service Requests by Employee Id
+2024-12-16 22:12:12.365 [INFO] com.hexaware.ams.service.ServiceRequestServiceImp [main] Getting List of all Service Requests
+2024-12-16 22:12:12.406 [INFO] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-12-16 22:12:12.411 [INFO] com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2024-12-16 22:12:12.430 [INFO] com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
+[32m2024-12-16 22:44:47.868[0;39m [INFO] com.hexaware.ams.AssetmanagementSpringrestApplication [main] Starting AssetmanagementSpringrestApplication using Java 21.0.4 with PID 5460 (C:\Arghya\Java\AssetManagement\assetmanagement_springrest\target\classes started by arghy in C:\Arghya\Java\AssetManagement\assetmanagement_springrest)
+[32m2024-12-16 22:44:47.869[0;39m [DEBUG] com.hexaware.ams.AssetmanagementSpringrestApplication [main] Running with Spring Boot v3.2.12-SNAPSHOT, Spring v6.1.15
+[32m2024-12-16 22:44:47.870[0;39m [INFO] com.hexaware.ams.AssetmanagementSpringrestApplication [main] No active profile set, falling back to 1 default profile: "default"
+[32m2024-12-16 22:44:48.433[0;39m [INFO] org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[32m2024-12-16 22:44:48.483[0;39m [INFO] org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 44 ms. Found 7 JPA repository interfaces.
+[32m2024-12-16 22:44:48.849[0;39m [INFO] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port 8080 (http)
+[32m2024-12-16 22:44:48.858[0;39m [INFO] org.apache.catalina.core.StandardService [main] Starting service [Tomcat]
+[32m2024-12-16 22:44:48.858[0;39m [INFO] org.apache.catalina.core.StandardEngine [main] Starting Servlet engine: [Apache Tomcat/10.1.33]
+[32m2024-12-16 22:44:48.900[0;39m [INFO] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [main] Initializing Spring embedded WebApplicationContext
+[32m2024-12-16 22:44:48.900[0;39m [INFO] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1000 ms
+[32m2024-12-16 22:44:48.996[0;39m [INFO] org.hibernate.jpa.internal.util.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+[32m2024-12-16 22:44:49.033[0;39m [INFO] org.hibernate.Version [main] HHH000412: Hibernate ORM core version 6.4.10.Final
+[32m2024-12-16 22:44:49.055[0;39m [INFO] org.hibernate.cache.internal.RegionFactoryInitiator [main] HHH000026: Second-level cache disabled
+[32m2024-12-16 22:44:49.204[0;39m [INFO] org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo [main] No LoadTimeWeaver setup: ignoring JPA class transformer
+[32m2024-12-16 22:44:49.223[0;39m [INFO] com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Starting...
+[32m2024-12-16 22:44:49.474[0;39m [INFO] com.zaxxer.hikari.pool.HikariPool [main] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@36cf16a6
+[32m2024-12-16 22:44:49.476[0;39m [INFO] com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Start completed.
+[32m2024-12-16 22:44:49.512[0;39m [WARN] org.hibernate.orm.deprecation [main] HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+[32m2024-12-16 22:44:50.216[0;39m [INFO] org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [main] HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[32m2024-12-16 22:44:50.294[0;39m [INFO] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+[32m2024-12-16 22:44:50.510[0;39m [DEBUG] com.hexaware.ams.config.JwtAuthenticationFilter [main] Filter 'jwtAuthenticationFilter' configured for use
+[32m2024-12-16 22:44:50.580[0;39m [INFO] org.springframework.data.jpa.repository.query.QueryEnhancerFactory [main] Hibernate is in classpath; If applicable, HQL parser will be used.
+[32m2024-12-16 22:44:51.017[0;39m [WARN] org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[32m2024-12-16 22:44:51.246[0;39m [INFO] org.springframework.security.web.DefaultSecurityFilterChain [main] Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@676b85f3, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@42fa1554, org.springframework.security.web.context.SecurityContextHolderFilter@6fb9dab6, com.hexaware.ams.config.CorsFilter@544502d6, org.springframework.security.web.header.HeaderWriterFilter@4483e237, org.springframework.web.filter.CorsFilter@382e7f70, org.springframework.security.web.authentication.logout.LogoutFilter@2d1ef2fc, com.hexaware.ams.config.JwtAuthenticationFilter@7c855ef0, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3ab87cac, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@71a9e31b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3d1319b, org.springframework.security.web.session.SessionManagementFilter@627a1c77, org.springframework.security.web.access.ExceptionTranslationFilter@30d4d6fb, org.springframework.security.web.access.intercept.AuthorizationFilter@18f7a872]
+[32m2024-12-16 22:44:51.497[0;39m [INFO] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port 8080 (http) with context path ''
+[32m2024-12-16 22:44:51.503[0;39m [INFO] com.hexaware.ams.AssetmanagementSpringrestApplication [main] Started AssetmanagementSpringrestApplication in 3.929 seconds (process running for 4.434)
+[32m2024-12-16 22:45:19.961[0;39m [INFO] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+[32m2024-12-16 22:45:19.961[0;39m [INFO] org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+[32m2024-12-16 22:45:19.961[0;39m [INFO] org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-1] Completed initialization in 0 ms
+[32m2024-12-16 22:45:20.390[0;39m [INFO] com.hexaware.ams.service.EmployeeServiceImp [http-nio-8080-exec-3] Employee list retrieved successfully
+[32m2024-12-16 22:45:42.460[0;39m [INFO] org.springframework.boot.admin.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin [RMI TCP Connection(10)-127.0.0.1] Application shutdown requested.
+[32m2024-12-16 22:45:42.471[0;39m [INFO] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean [RMI TCP Connection(10)-127.0.0.1] Closing JPA EntityManagerFactory for persistence unit 'default'
+[32m2024-12-16 22:45:42.471[0;39m [INFO] com.zaxxer.hikari.HikariDataSource [RMI TCP Connection(10)-127.0.0.1] HikariPool-1 - Shutdown initiated...
+[32m2024-12-16 22:45:42.483[0;39m [INFO] com.zaxxer.hikari.HikariDataSource [RMI TCP Connection(10)-127.0.0.1] HikariPool-1 - Shutdown completed.

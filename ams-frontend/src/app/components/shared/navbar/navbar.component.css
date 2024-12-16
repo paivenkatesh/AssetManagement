@@ -1,27 +1,34 @@
 .navbar {
-  background-color: #212529; /* Dark background, adjust as needed */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  padding: 0.5rem 1rem; /* Adjust padding */
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
+  background-color: #212529; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  padding: 0.5rem 1rem; 
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
 }
 
 .navbar-brand {
+  display: flex; 
+  align-items: center; 
   font-weight: 600;
-  font-size: 1.5rem; /* Increase brand size */
-  color: #f8f9fa; /* Light text color */
-  transition: color 0.2s ease-in-out; /* Smooth color transition on hover */
+  font-size: 1.5rem; 
+  color: #f8f9fa; 
+  transition: color 0.2s ease-in-out; 
+}
+
+.logo {
+  height: 30px; 
+  margin-right: 10px; 
 }
 
 .navbar-brand:hover {
-  color: #007bff; /* Change color on hover (example: blue) */
+  color: #007bff; 
 }
 
 .navbar-toggler {
-  border: none; /* Remove default border */
+  border: none; 
 }
 
 .navbar-toggler:focus {
-  outline: none; /* Remove focus outline */
+  outline: none; 
   box-shadow: none;
 }
 
@@ -30,22 +37,22 @@
 }
 
 .navbar-nav .nav-link {
-  color: #f8f9fa; /* Light text color */
+  color: #f8f9fa; 
   font-weight: 500;
-  margin-left: 1rem; /* Spacing between links */
-  transition: color 0.2s ease-in-out; /* Smooth color transition on hover */
+  margin-left: 1rem; 
+  transition: color 0.2s ease-in-out; 
 }
 
 .navbar-nav .nav-link:hover {
-  color: #007bff; /* Change color on hover */
+  color: #007bff; 
 }
 
 .navbar-nav .nav-link:focus {
-  outline: none; /* Remove focus outline */
+  outline: none;
 }
 
-/* Active link style (optional) */
+
 .navbar-nav .nav-item.active .nav-link {
-  color: #007bff; /* Example: blue color for active link */
+  color: #007bff; 
   font-weight: bold;
 }

@@ -90,15 +90,19 @@ public class AssetBorrowingServiceImpTest {
     }
 
     @Test
-    @Disabled
     public void testGetBorrowingsByEmployee() {
         when(employeeRepository.findById(employee.getEmployeeId())).thenReturn(Optional.of(employee));
-        when(borrowingRepository.findByEmployee(employee)).thenReturn(Arrays.asList(borrowing));
+
+        when(borrowingRepository.findByEmployeeIdAndAssetStatus(employee.getEmployeeId())).thenReturn(Arrays.asList(borrowing));
 
         List<AssetBorrowing> borrowings = borrowingService.getBorrowingsByEmployee(employee.getEmployeeId());
 
         assertNotNull(borrowings);
         assertFalse(borrowings.isEmpty());
+        assertEquals(1, borrowings.size());
+        assertEquals(borrowing, borrowings.get(0));
+
+        verify(borrowingRepository).findByEmployeeIdAndAssetStatus(employee.getEmployeeId());
     }
 
     @Test

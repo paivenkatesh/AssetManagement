@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { AssetBorrowing} from '../models/asset-borrowing.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AssetBorrowingService {
-  private borrowingsUrl = 'http://localhost:8080/api/borrowings';
+  private borrowingsUrl = `${environment.apiBaseUrl}/api/borrowings`;
 
   constructor(private http: HttpClient) { }
 

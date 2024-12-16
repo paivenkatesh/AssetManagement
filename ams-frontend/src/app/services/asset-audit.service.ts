@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { AssetAudit, AuditStatus } from '../models/asset-audit.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AssetAuditService {
-  private auditsUrl = 'http://localhost:8080/api/audits';
+  private auditsUrl = `${environment.apiBaseUrl}/api/audits`;
 
   constructor(private http: HttpClient) { }
 

@@ -6,6 +6,7 @@ import { AuthenticationResponse } from '../models/authentication-response.model'
 import { RegisterRequest } from '../models/register-request.model';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { environment } from 'src/environments/environment';
 
 interface DecodedToken {
   sub: string;
@@ -21,7 +22,7 @@ interface DecodedToken {
 })
 export class AuthService {
 
-  private apiUrl = 'http://localhost:8080/api/auth';
+  private apiUrl = `${environment.apiBaseUrl}/api/auth`;
   private jwtHelper = new JwtHelperService();
 
   constructor(private http: HttpClient, private router: Router) { }
