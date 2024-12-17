@@ -23,7 +23,7 @@ export class HandleServiceRequestsComponent implements OnInit {
   ngOnInit(): void {
     this.fetchServiceRequests();
   }
-
+// method to fetch all service requests
   fetchServiceRequests(): void {
     this.serviceRequestService.getAllServiceRequests().subscribe({
       next: (data) => this.serviceRequests = data,
@@ -33,6 +33,7 @@ export class HandleServiceRequestsComponent implements OnInit {
       }
     });
   }
+
 
   updateServiceRequestStatus(request: ServiceRequest, newStatus: Status): void {
     this.serviceRequestService.updateServiceRequest(request.serviceRequestId, newStatus).subscribe({
@@ -47,10 +48,12 @@ export class HandleServiceRequestsComponent implements OnInit {
     });
   }
 
+  // edit service requests
   editServiceRequest(request: ServiceRequest): void {
     this.editingRequest = { ...request };
   }
 
+  // update service requests
   saveServiceRequest(): void {
     if (this.editingRequest) {
       this.serviceRequestService.updateServiceRequest(this.editingRequest.serviceRequestId, this.editingRequest.status).subscribe({
@@ -70,7 +73,7 @@ export class HandleServiceRequestsComponent implements OnInit {
   cancelEdit(): void {
     this.editingRequest = null;
   }
-
+  // method to fetch service requests by status
   filterServiceRequests(): void {
     if (this.filterStatus) {
       this.serviceRequestService.findByStatus(this.filterStatus).subscribe({

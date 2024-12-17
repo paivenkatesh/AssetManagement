@@ -39,21 +39,21 @@ export class ServiceRequestComponent implements OnInit {
       this.errorMessage = 'Invalid employee ID.';
     }
   }
-
+  // method to fetch assets assigned to the employee
   fetchAssets(): void {
     this.assetService.getAssetsByEmployee(this.employeeId!).subscribe({
       next: (data) => this.assets = data,
       error: (err) => this.errorMessage = 'Failed to load assets.'
     });
   }
-
+  // method to fetch all the issue types
   fetchIssueTypes(): void {
     this.issueTypeService.getAllIssueTypes().subscribe({
       next: (data) => this.issueTypes = data,
       error: (err) => this.errorMessage = 'Failed to load issue types.'
     });
   }
-
+  // method to submit service requests
   submitServiceRequest(form: any): void {
     if (form.invalid) {
       return;

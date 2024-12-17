@@ -27,7 +27,7 @@ export class AssignedAssetsComponent implements OnInit {
       this.errorMessage = 'Invalid employee ID.';
     }
   }
-
+  // method to fetch all assigned assets to the employee
   fetchAssignedAssets(): void {
     this.assetService.getAssetsByEmployee(this.employeeId!).subscribe({
       next: (data) => this.assets = data,

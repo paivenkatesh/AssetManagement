@@ -34,21 +34,21 @@ export class AssetBorrowingComponent implements OnInit {
       this.errorMessage = 'Invalid employee ID.';
     }
   }
-
+  // method to fetch all assets
   fetchAllAssets(): void {
     this.assetService.getAllAssets().subscribe({
       next: (data) => this.allAssets = data,
       error: (err) => this.errorMessage = 'Failed to load assets.'
     });
   }
-
+  // method to fetch current employee borrowings
   fetchEmployeeBorrowings(): void {
     this.assetBorrowingService.getBorrowingsByEmployee(this.employeeId!).subscribe({
       next: (data) => this.employeeBorrowings = data,
       error: (err) => this.errorMessage = 'Failed to load your borrowings.'
     });
   }
-
+  // method to borrow asset
   borrowAsset(): void {
     if (this.selectedAssetId === 0) {
       this.errorMessage = 'Please select an asset to borrow.';
@@ -73,7 +73,7 @@ export class AssetBorrowingComponent implements OnInit {
       }
     });
   }
-
+// method to return the borrowed asset
   returnAsset(borrowingId: number): void {
     if (confirm('Are you sure you want to return this asset?')) {
       this.assetBorrowingService.returnAsset(borrowingId).subscribe({

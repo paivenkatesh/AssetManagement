@@ -11,7 +11,7 @@ import { AssetCategoryService } from '../../../services/asset-category.service';
 })
 export class ManageAssetsComponent implements OnInit {
   assets: Asset[] = [];
-  categories: AssetCategory[] = []; // To store fetched categories
+  categories: AssetCategory[] = []; 
   newAsset: Asset = {
     assetId: 0,
     assetName: '',
@@ -36,9 +36,8 @@ export class ManageAssetsComponent implements OnInit {
     this.fetchAllCategories();
   }
 
-  /**
-   * Fetches all assets from the backend.
-   */
+  
+  //Fetches all assets from the backend.
   fetchAllAssets(): void {
     this.assetService.getAllAssets().subscribe({
       next: (data) => this.assets = data,
@@ -46,9 +45,8 @@ export class ManageAssetsComponent implements OnInit {
     });
   }
 
-  /**
-   * Fetches all asset categories.
-   */
+  //Fetches all asset categories.
+
   fetchAllCategories(): void {
     this.assetCategoryService.getAllCategories().subscribe({
       next: (data) => this.categories = data,
@@ -56,10 +54,9 @@ export class ManageAssetsComponent implements OnInit {
     });
   }
 
-  /**
-   * Adds a new asset.
-   * @param form The form containing asset details.
-   */
+
+  //Adds a new asset.
+   
   addAsset(form: any): void {
     if (form.invalid) {
       return;
@@ -99,10 +96,8 @@ export class ManageAssetsComponent implements OnInit {
     });
   }
 
-  /**
-   * Deletes an asset if it's available.
-   * @param assetId The ID of the asset to delete.
-   */
+
+//Deletes an asset if it's available.
   deleteAsset(assetId: number): void {
     const asset = this.assets.find(a => a.assetId === assetId);
     if (asset && asset.status !== AssetStatus.Available) {
@@ -121,17 +116,13 @@ export class ManageAssetsComponent implements OnInit {
     }
   }
 
-  /**
-   * Enables editing mode for an asset.
-   * @param asset The asset to edit.
-   */
+//Enables editing mode for an asset.
   editAsset(asset: Asset): void {
     this.editingAsset = { ...asset };
   }
 
-  /**
-   * Updates an existing asset.
-   */
+  //Updates an existing asset.
+
   updateAsset(): void {
     const categoryId = +this.editingAsset!.category.categoryId;
 

@@ -35,21 +35,21 @@ export class ManageEmployeesComponent implements OnInit {
     this.fetchAllEmployees();
     this.fetchAllRoles();
   }
-
+  // fetch all employees
   fetchAllEmployees(): void {
     this.employeeService.getAllEmployee().subscribe({
       next: (data) => this.employees = data,
       error: (err) => this.errorMessage = 'Failed to load employees.'
     });
   }
-
+  // fetch available roles
   fetchAllRoles(): void {
     this.roleService.getAllRoles().subscribe({
       next: (data) => this.roles = data,
       error: (err) => this.errorMessage = 'Failed to load roles.'
     });
   }
-
+// method to add new employee
   addEmployee(form: any): void {
     if (form.invalid) {
       return;
@@ -87,7 +87,7 @@ export class ManageEmployeesComponent implements OnInit {
       error: (err) => this.errorMessage = 'Failed to add employee.'
     });
   }
-
+  // method to delete employee
   deleteEmployee(employeeId: number): void {
     if (confirm('Are you sure you want to delete this employee?')) {
       this.employeeService.deleteEmployee(employeeId).subscribe({
@@ -103,7 +103,7 @@ export class ManageEmployeesComponent implements OnInit {
   editEmployee(employee: Employee): void {
     this.editingEmployee = { ...employee };
   }
-
+  // method to update employee details
   updateEmployee(): void {
     if (!this.editingEmployee) {
       return;

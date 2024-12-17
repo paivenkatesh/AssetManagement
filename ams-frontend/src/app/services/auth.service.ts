@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, of, tap } from 'rxjs'; 
 import { AuthenticationRequest } from '../models/authentication-request.model';
 import { AuthenticationResponse } from '../models/authentication-response.model';
 import { RegisterRequest } from '../models/register-request.model';
@@ -12,7 +12,7 @@ interface DecodedToken {
   sub: string;
   employeeId: number;
   name: string;
-  role: string[]; 
+  role: string[];
   exp: number;
   iat: number;
 }
@@ -32,11 +32,19 @@ export class AuthService {
   }
 
   authenticate(authenticationRequest: AuthenticationRequest): Observable<AuthenticationResponse> {
-    return this.http.post<AuthenticationResponse>(`${this.apiUrl}/authenticate`, authenticationRequest);
+    return this.http.post<AuthenticationResponse>(`${this.apiUrl}/authenticate`, authenticationRequest)
+      .pipe(
+        tap(response => {
+          this.setToken(response.token);
+          console.log("Token set in local storage:", response.token); 
+        })
+      );
   }
 
+
   isLoggedIn(): boolean {
-    return !!localStorage.getItem('token');
+    const token = this.getToken();
+    return token !== null && !this.jwtHelper.isTokenExpired(token);
   }
 
   getToken(): string | null {
@@ -70,7 +78,7 @@ export class AuthService {
 
   getEmployeeId(): number | null {
     const decoded = this.decodeToken();
-    return decoded ? decoded.employeeId : null; 
+    return decoded ? decoded.employeeId : null;
   }
 
   getUserRoles(): string[] {
@@ -83,7 +91,7 @@ export class AuthService {
     if (Array.isArray(roles)) {
       return roles;
     } else if (typeof roles === 'string') {
-      return [roles]; 
+      return [roles];
     } else {
       return [];
     }

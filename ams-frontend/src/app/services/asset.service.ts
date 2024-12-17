@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class AssetService {
-  private assetsUrl = `${environment.apiBaseUrl}:8080/api/assets`;
+  private assetsUrl = `${environment.apiBaseUrl}/api/assets`;
 
   constructor(private http: HttpClient) { }
 

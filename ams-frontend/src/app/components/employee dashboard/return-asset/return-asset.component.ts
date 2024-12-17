@@ -29,14 +29,14 @@ export class ReturnAssetComponent implements OnInit {
       this.errorMessage = 'Invalid employee ID.';
     }
   }
-
+  // method to fetch active borrowings
   fetchActiveBorrowings(): void {
     this.assetBorrowingService.getBorrowingsByEmployee(this.employeeId!).subscribe({
       next: (data) => this.activeBorrowings = data.filter(borrowing => borrowing.status === BorrowingStatus.Active),
       error: (err) => this.errorMessage = 'Failed to load active borrowings.'
     });
   }
-
+  // method to return assets
   returnAsset(borrowingId: number): void {
     if (confirm('Are you sure you want to return this asset?')) {
       this.assetBorrowingService.returnAsset(borrowingId).subscribe({

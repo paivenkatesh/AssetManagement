@@ -30,6 +30,7 @@ export class AssetAuditsComponent implements OnInit {
     this.fetchAllAudits();
   }
 
+  // fetch all audits
   fetchAllAudits(): void {
     this.assetAuditService.getAllAudits().subscribe({
       next: (data) => this.audits = data,

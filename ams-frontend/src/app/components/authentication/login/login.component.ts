@@ -34,7 +34,7 @@ export class LoginComponent {
         this.authService.setToken(response.token);
         this.isLoading = false;
 
-        // Determine redirect based on user role
+        // Determines redirect based on user role
         const roles = this.authService.getUserRoles();
         if (roles.includes('ROLE_ADMIN')) {
           this.router.navigate(['/admin-dashboard']);

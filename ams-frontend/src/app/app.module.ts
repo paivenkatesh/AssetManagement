@@ -1,7 +1,6 @@
-// app.module.ts
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/authentication/login/login.component';
@@ -32,6 +31,7 @@ import { CommonModule } from '@angular/common';
 import { NotFoundComponent } from './components/shared/not-found/not-found.component';
 import { UnauthorizedComponent } from './components/shared/unauthorized/unauthorized.component';
 import { JwtModule } from '@auth0/angular-jwt';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -67,7 +67,7 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ["localhost:8080"], 
+        allowedDomains: ["localhost:8080", "13.234.201.247:8080"], 
         disallowedRoutes: [
           "http://localhost:8080/api/auth/authenticate",
           "http://localhost:8080/api/auth/register" 
@@ -85,6 +85,7 @@ export function tokenGetter() {
     IssueTypeService,
     RoleService,
     ServiceRequestService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     AuthService
   ],
   bootstrap: [AppComponent]
